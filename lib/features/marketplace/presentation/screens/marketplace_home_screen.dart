@@ -207,6 +207,12 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                             widget.controller.selectedCategory == 'Exterior',
                             categoryKey: 'Exterior',
                           ),
+                          _category(
+                            'Interior',
+                            Icons.airline_seat_recline_extra_rounded,
+                            widget.controller.selectedCategory == 'Interior',
+                            categoryKey: 'Interior',
+                          ),
                         ],
                       ),
                     ),

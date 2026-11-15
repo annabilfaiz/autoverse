@@ -32,6 +32,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     {'key': 'Suspension', 'label': 'Suspensi'},
     {'key': 'Brakes', 'label': 'Rem'},
     {'key': 'Exterior', 'label': 'Eksterior'},
+    {'key': 'Interior', 'label': 'Interior'},
   ];
 
   final List<Map<String, String>> _conditions = [

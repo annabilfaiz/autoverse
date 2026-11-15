@@ -174,9 +174,9 @@ assets/
 │   │       ├── post_mazda_rx7_thumbnail.jpg            # Frame poster video Mazda RX-7 workshop
 │   │       └── post_porsche_gt3_thumbnail.jpg          # Frame poster video Porsche GT3 tunnel
 │   ├── products/
-│   │   ├── product_carbon_ceramic_brake.jpg            # Foto rem Brembo Carbon-Ceramic
+│   │   ├── product_carbon_ceramic_brake.jpg            # Foto kit rem Carbon-Ceramic Big Brake Kit
 │   │   ├── product_forged_wheel.jpg                    # Foto velg BBS FI-R monoblock
-│   │   ├── product_performance_coilover.jpg            # Foto coilover KW Clubsport
+│   │   ├── product_performance_coilover.jpg            # Foto coilover ClubSport spec (yellow spring/purple collar)
 │   │   ├── product_placeholder.jpg                     # Placeholder netral suku cadang tanpa foto khusus
 │   │   └── product_titanium_exhaust.jpg                # Foto knalpot Akrapovic Titanium
 │   └── vehicles/

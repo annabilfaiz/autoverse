@@ -26,6 +26,7 @@ class MarketplaceController extends ChangeNotifier {
     'Suspension',
     'Brakes',
     'Exterior',
+    'Interior',
   ];
 
   List<ProductModel> get filteredProducts {

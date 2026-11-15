@@ -23,13 +23,55 @@ void main() {
       expect(controller.sortOrder, MarketplaceSortOrder.newest);
     });
 
-    test('Filter by category works', () {
+    test('Filter by category works including Interior', () {
       controller.setCategory('Exhaust');
       expect(controller.selectedCategory, 'Exhaust');
       for (final p in controller.filteredProducts) {
         expect(p.category, 'Exhaust');
       }
+
+      controller.setCategory('Interior');
+      expect(controller.selectedCategory, 'Interior');
+      expect(controller.filteredProducts.isNotEmpty, true);
+      for (final p in controller.filteredProducts) {
+        expect(p.category, 'Interior');
+      }
+      expect(controller.filteredProducts.any((p) => p.id == 'prod_07'), true);
     });
+
+    test(
+      'Data consistency: prod_03, prod_04, and prod_07 match specifications',
+      () {
+        final prod03 = controller.getById('prod_03')!;
+        expect(prod03.name, 'Performance Adjustable Coilover Kit');
+        expect(prod03.brand, 'ClubSport Spec');
+        expect(prod03.category, 'Suspension');
+        expect(
+          prod03.imageAsset,
+          'assets/images/products/product_performance_coilover.jpg',
+        );
+        expect(prod03.brand.contains('HKS'), false);
+
+        final prod04 = controller.getById('prod_04')!;
+        expect(prod04.name, 'Carbon-Ceramic Big Brake Kit');
+        expect(prod04.brand, 'Monobloc Racing');
+        expect(prod04.category, 'Brakes');
+        expect(prod04.priceIdr, 87500000);
+        expect(
+          prod04.imageAsset,
+          'assets/images/products/product_carbon_ceramic_brake.jpg',
+        );
+        expect(prod04.brand.contains('Brembo'), false);
+
+        final prod07 = controller.getById('prod_07')!;
+        expect(prod07.name, 'OMP WRC Bucket Racing Seat');
+        expect(prod07.category, 'Interior');
+        expect(
+          prod07.imageAsset,
+          'assets/images/products/product_placeholder.jpg',
+        );
+      },
+    );
 
     test('Search query filters by part name or brand', () {
       controller.setSearchQuery('Akrapovič');
@@ -144,6 +186,7 @@ void main() {
       expect(find.text('Mesin'), findsWidgets);
       expect(find.text('Knalpot'), findsWidgets);
       expect(find.text('Velg'), findsWidgets);
+      expect(find.text('Interior', skipOffstage: false), findsWidgets);
 
       // Verify featured section
       expect(find.text('Komponen Unggulan'), findsOneWidget);

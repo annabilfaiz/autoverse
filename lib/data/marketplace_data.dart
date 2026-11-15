@@ -65,23 +65,23 @@ class MarketplaceData {
       ),
       ProductModel(
         id: 'prod_03',
-        name: 'HKS Hipermax S Street Coilover Kit',
-        brand: 'HKS',
+        name: 'Performance Adjustable Coilover Kit',
+        brand: 'ClubSport Spec',
         category: 'Suspension',
         priceIdr: 22500000,
         sellerName: 'JDM Garage BDG',
         sellerUsername: '@jdm_bdg',
         description:
-            'Full coilover system with continuous damping adjustment. '
+            'Full coilover system with continuous damping adjustment and external piggyback reservoirs. '
             'Separated bump and rebound knobs allow precise setup for street and circuit use. '
-            'Available in full anodized aluminum. Compatible with Mazda RX-7 FD3S.',
+            'Premium anodized aluminium body with linear yellow motorsport springs. Compatible with Mazda RX-7 FD3S.',
         specifications: {
-          'Adjustment': '32-step Rebound',
+          'Adjustment': '2-Way Bump & Rebound',
           'Spring Rate (Front)': '6 kg/mm',
           'Spring Rate (Rear)': '5 kg/mm',
           'Ride Height': '-15mm to -50mm',
-          'Material': 'Anodized Aluminium Body',
-          'Warranty': '1 Year HKS ID',
+          'Material': 'Anodized Aluminium + Linear Springs',
+          'Warranty': '1 Year Motorsport ID',
         },
         compatibleVehicles: ['Mazda RX-7 FD3S (1992–2002)'],
         imageAsset: 'assets/images/products/product_performance_coilover.jpg',
@@ -90,22 +90,23 @@ class MarketplaceData {
       ),
       ProductModel(
         id: 'prod_04',
-        name: 'Brembo Racing Carbon-Ceramic Brake Pad Set',
-        brand: 'Brembo',
+        name: 'Carbon-Ceramic Big Brake Kit',
+        brand: 'Monobloc Racing',
         category: 'Brakes',
-        priceIdr: 8750000,
+        priceIdr: 87500000,
         sellerName: 'Track Parts ID',
         sellerUsername: '@trackparts_id',
         description:
-            'High-performance Carbon-Ceramic compound brake pads for the Brembo 6-piston GT caliper. '
-            'Optimal fade resistance from 300–900°C. Direct OEM replacement for Porsche CCM system.',
+            'Complete high-performance carbon-ceramic brake system. '
+            'Includes cross-drilled carbon-ceramic composite rotors and lightweight monobloc 6-piston red racing calipers. '
+            'Optimal fade resistance up to 900°C with massive weight savings over cast-iron systems. Compatible with Porsche 911 GT3.',
         specifications: {
-          'Compound': 'Carbon-Ceramic Racing',
+          'Rotor Material': 'Carbon-Ceramic Composite (410mm)',
+          'Caliper Spec': '6-Piston Monobloc Red Finish',
           'Temp Range': '300°C – 900°C',
-          'Fitment': 'Brembo 6P GT Caliper',
-          'Contents': '8 pads (Front + Rear)',
-          'Dust Level': 'Low',
-          'Noise Level': 'Medium',
+          'Contents': '2 Rotors, 2 Calipers, Pads, Mounting Kit',
+          'Dust Level': 'Ultra Low',
+          'Weight Saving': '-18 kg vs Cast Iron',
         },
         compatibleVehicles: [
           'Porsche 911 GT3 992 (2021–2024)',
@@ -114,7 +115,7 @@ class MarketplaceData {
         ],
         imageAsset: 'assets/images/products/product_carbon_ceramic_brake.jpg',
         condition: 'New',
-        stock: 5,
+        stock: 2,
       ),
       ProductModel(
         id: 'prod_05',
@@ -173,7 +174,7 @@ class MarketplaceData {
         id: 'prod_07',
         name: 'OMP WRC Bucket Racing Seat',
         brand: 'OMP',
-        category: 'Exterior',
+        category: 'Interior',
         priceIdr: 12000000,
         sellerName: 'Speed Shop BSD',
         sellerUsername: '@speedshop_bsd',
