@@ -46,7 +46,7 @@ class ChatMessageComposer extends StatelessWidget {
                   fontSize: 14,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'Type an automotive message...',
+                  hintText: 'Tulis pesan...',
                   hintStyle: AppTypography.body.copyWith(
                     color: AppColors.mutedSteel,
                     fontSize: 14,

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -78,39 +79,41 @@ class _RightActionRailState extends State<RightActionRail>
                 ),
               ),
               Text(
-                'Share Post',
+                'Bagikan Postingan',
                 style: AppTypography.headlineH3.copyWith(color: AppColors.iceWhite),
               ),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _shareItem(Icons.link, 'Copy Link', () {
+                  _shareItem(Icons.link, 'Salin Tautan', () async {
                     Navigator.pop(ctx);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Post link copied to clipboard!'),
-                        backgroundColor: AppColors.carbon,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
+                    final postUrl = 'https://autoverse.app/p/${widget.post.id}';
+                    await Clipboard.setData(ClipboardData(text: postUrl));
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Row(
+                            children: const [
+                              Icon(Icons.check_circle_rounded, color: AppColors.performanceLime, size: 18),
+                              SizedBox(width: 8),
+                              Text('Tautan postingan berhasil disalin ke papan klip!'),
+                            ],
+                          ),
+                          backgroundColor: AppColors.carbon,
+                          behavior: SnackBarBehavior.floating,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: const BorderSide(color: AppColors.steel),
+                          ),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    }
                   }),
-                  _shareItem(Icons.send, 'Direct Message', () {
-                    Navigator.pop(ctx);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Shared to messages!'),
-                        backgroundColor: AppColors.carbon,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  }),
-                  _shareItem(Icons.bookmark_add, 'Add to Garage', () {
+                  _shareItem(Icons.bookmark_add, 'Simpan', () {
                     Navigator.pop(ctx);
                     widget.controller.toggleSave(widget.post.id);
-                  }),
-                  _shareItem(Icons.qr_code, 'QR Code', () {
-                    Navigator.pop(ctx);
                   }),
                 ],
               ),

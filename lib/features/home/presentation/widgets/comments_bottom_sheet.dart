@@ -87,7 +87,7 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${widget.post.commentCount} Comments',
+                      '${widget.post.commentCount} Komentar',
                       style: AppTypography.headlineH3.copyWith(
                         fontSize: 15,
                         color: AppColors.iceWhite,
@@ -110,7 +110,7 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                 child: comments.isEmpty
                     ? Center(
                         child: Text(
-                          'No comments yet. Be the first to comment!',
+                          'Belum ada komentar. Jadilah yang pertama berkomentar!',
                           style: AppTypography.caption.copyWith(color: AppColors.mutedSteel),
                         ),
                       )
@@ -223,7 +223,7 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                             focusNode: _focusNode,
                             style: AppTypography.body.copyWith(color: AppColors.iceWhite),
                             decoration: InputDecoration(
-                              hintText: 'Add an enthusiast comment...',
+                              hintText: 'Tulis komentar...',
                               hintStyle: AppTypography.body.copyWith(color: AppColors.mutedSteel),
                               border: InputBorder.none,
                               isDense: true,

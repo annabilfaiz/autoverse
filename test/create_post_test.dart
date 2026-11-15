@@ -18,6 +18,7 @@ PostModel _buildTestPost({
   String linkedVehicleChip = '',
   String mediaAsset = 'assets/images/feed_porsche_dusk.png',
   int likeCount = 0,
+  int viewCount = 0,
 }) {
   return PostModel(
     id: id,
@@ -32,6 +33,7 @@ PostModel _buildTestPost({
     linkedVehicleChip: linkedVehicleChip,
     mediaAsset: mediaAsset,
     likeCount: likeCount,
+    viewCount: viewCount,
     commentCount: 0,
     saveCount: 0,
     shareCount: 0,
@@ -153,18 +155,18 @@ void main() {
       await tester.pumpAndSettle();
 
       // Top bar
-      expect(find.text('Create Post'), findsOneWidget);
-      expect(find.text('Share'), findsOneWidget);
+      expect(find.text('Buat Postingan'), findsOneWidget);
+      expect(find.text('Bagikan'), findsOneWidget);
 
       // Media selection preview
-      expect(find.text('MEDIA LIBRARY'), findsOneWidget);
+      expect(find.text('GALERI MEDIA'), findsOneWidget);
 
       // Caption composer
-      expect(find.text('CAPTION *'), findsOneWidget);
+      expect(find.text('KETERANGAN *'), findsOneWidget);
       expect(find.byType(TextField), findsOneWidget);
 
       // Vehicle linkage section
-      expect(find.text('LINK TO VEHICLE'), findsOneWidget);
+      expect(find.text('HUBUNGKAN KE KENDARAAN'), findsOneWidget);
       expect(find.textContaining('Porsche 911 GT3'), findsOneWidget);
       expect(find.textContaining('Mazda RX-7'), findsOneWidget);
       expect(find.textContaining('Civic Type R'), findsOneWidget);
@@ -186,18 +188,18 @@ void main() {
       await tester.pumpAndSettle();
 
       // Tap Share without caption
-      await tester.tap(find.text('Share'));
+      await tester.tap(find.text('Bagikan'));
       await tester.pumpAndSettle();
 
       // Validation error message appears
-      expect(find.text('Please enter a caption for your post.'), findsOneWidget);
+      expect(find.text('Masukkan keterangan untuk postingan Anda.'), findsOneWidget);
 
       // Enter only whitespace
       await tester.enterText(find.byType(TextField), '    ');
-      await tester.tap(find.text('Share'));
+      await tester.tap(find.text('Bagikan'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Please enter a caption for your post.'), findsOneWidget);
+      expect(find.text('Masukkan keterangan untuk postingan Anda.'), findsOneWidget);
     });
 
     testWidgets('Allows selecting and deselecting garage vehicle', (tester) async {
@@ -219,14 +221,14 @@ void main() {
       await tester.tap(find.textContaining('Porsche 911 GT3'));
       await tester.pumpAndSettle();
 
-      // Check that "Clear Link" action button appears
-      expect(find.text('Clear Link'), findsOneWidget);
+      // Check that "Hapus Tautan" action button appears
+      expect(find.text('Hapus Tautan'), findsOneWidget);
 
-      // Deselect by tapping Clear Link
-      await tester.tap(find.text('Clear Link'));
+      // Deselect by tapping Hapus Tautan
+      await tester.tap(find.text('Hapus Tautan'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Clear Link'), findsNothing);
+      expect(find.text('Hapus Tautan'), findsNothing);
     });
 
     testWidgets('Publishing creates a valid post and invokes callback', (tester) async {
@@ -258,8 +260,8 @@ void main() {
       await tester.enterText(find.byType(TextField), 'Apex seals renewed! Ready for Sentul hot laps.');
       await tester.pumpAndSettle();
 
-      // Tap Share
-      await tester.tap(find.text('Share'));
+      // Tap Bagikan
+      await tester.tap(find.text('Bagikan'));
       await tester.pump(const Duration(milliseconds: 500));
       await tester.pumpAndSettle();
 
@@ -303,16 +305,16 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Scroll down until the BUILD POSTS & UPDATES section is visible
+      // Scroll down until the POSTINGAN MODIFIKASI section is visible
       await tester.scrollUntilVisible(
-        find.text('BUILD POSTS & UPDATES'),
+        find.text('POSTINGAN MODIFIKASI'),
         400,
         scrollable: find.byType(Scrollable).first,
       );
       await tester.pumpAndSettle();
 
       // Verify section header and post caption are rendered
-      expect(find.text('BUILD POSTS & UPDATES'), findsOneWidget);
+      expect(find.text('POSTINGAN MODIFIKASI'), findsOneWidget);
       expect(find.text('Akrapovič evolution full titanium exhaust installed!'), findsOneWidget);
     });
 
@@ -330,6 +332,7 @@ void main() {
         linkedVehicleId: 'veh_porsche_gt3',
         linkedVehicleChip: '🏎️ Porsche 911 GT3 (992)',
         likeCount: 520,
+        viewCount: 1540,
       );
       controller.addPost(testPost);
 
@@ -346,16 +349,16 @@ void main() {
       // Post count in profile header updated
       expect(find.text('${initialCount + 1}'), findsOneWidget);
 
-      // Verify the first item in the grid represents our post with 520 likes
-      expect(find.text('520'), findsOneWidget);
+      // Verify the first item in the grid represents our post with 1.5k views
+      expect(find.text('1.5k'), findsOneWidget);
 
       // Tap on the post item in the grid to open post detail modal
-      await tester.tap(find.text('520'));
+      await tester.tap(find.text('1.5k'));
       await tester.pumpAndSettle();
 
       // Verify detail modal opened showing full caption and stats
       expect(find.text('Sentul Circuit Lap Time: 1:41.22 on Cup 2R tires!'), findsOneWidget);
-      expect(find.text('520 Likes'), findsOneWidget);
+      expect(find.text('520 Suka'), findsOneWidget);
     });
 
     testWidgets('MainShell Create flow navigates to CreatePostScreen and preserves state across tabs', (tester) async {
@@ -377,17 +380,17 @@ void main() {
       await tester.pump(const Duration(milliseconds: 500));
 
       // Modal bottom sheet opens
-      expect(find.text('Create on AutoVerse'), findsOneWidget);
-      expect(find.text('Create Post & Build Update'), findsOneWidget);
+      expect(find.text('Buat di AutoVerse'), findsOneWidget);
+      expect(find.text('Buat Postingan'), findsOneWidget);
 
-      // Tap "Create Post & Build Update"
-      await tester.tap(find.text('Create Post & Build Update'));
+      // Tap "Buat Postingan"
+      await tester.tap(find.text('Buat Postingan'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
 
       // CreatePostScreen opens
-      expect(find.text('Create Post'), findsOneWidget);
-      expect(find.text('LINK TO VEHICLE'), findsOneWidget);
+      expect(find.text('Buat Postingan'), findsOneWidget);
+      expect(find.text('HUBUNGKAN KE KENDARAAN'), findsOneWidget);
 
       // Enter caption and link Porsche
       await tester.enterText(find.byType(TextField), 'Full carbon bucket seats installed today.');
@@ -395,7 +398,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 200));
 
       // Share post
-      await tester.tap(find.text('Share'));
+      await tester.tap(find.text('Bagikan'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
       await tester.pump();
@@ -408,14 +411,14 @@ void main() {
       );
 
       // Switch to Profile tab (Index 4)
-      await tester.tap(find.text('Profile'));
+      await tester.tap(find.text('Profil'));
       await tester.pump(const Duration(milliseconds: 300));
 
       // Profile shows updated post count and grid
       expect(find.byType(MyProfileScreen), findsOneWidget);
 
       // Switch back to Home tab (Index 0)
-      await tester.tap(find.text('Home'));
+      await tester.tap(find.text('Beranda'));
       await tester.pump(const Duration(milliseconds: 300));
 
       // State is preserved in Home tab!

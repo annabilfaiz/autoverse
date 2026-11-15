@@ -147,8 +147,8 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text('Messages'), findsOneWidget);
-      expect(find.text('Direct enthusiast & parts seller chats'), findsOneWidget);
+      expect(find.text('Pesan'), findsOneWidget);
+      expect(find.text('Obrolan langsung sesama antusias & penjual komponen'), findsOneWidget);
       expect(find.text('Kevin Mahendra'), findsOneWidget);
       expect(find.text('Daniel Wijaya'), findsOneWidget);
     });
@@ -200,7 +200,7 @@ void main() {
 
       // Verify Product Reference Card is pinned
       expect(find.byType(ProductReferenceCard), findsOneWidget);
-      expect(find.text('View Part'), findsOneWidget);
+      expect(find.text('Lihat Komponen'), findsOneWidget);
 
       // Verify input and send interaction
       final inputFinder = find.byType(TextField);
@@ -229,7 +229,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 200));
 
       // Tab 3 is Messages
-      await tester.tap(find.text('Messages'));
+      await tester.tap(find.text('Pesan'));
       await tester.pump(const Duration(milliseconds: 200));
 
       expect(find.text('Kevin Mahendra'), findsOneWidget);
@@ -240,7 +240,7 @@ void main() {
       expect(find.text('Marketplace'), findsWidgets);
 
       // Switch back to Messages tab
-      await tester.tap(find.text('Messages'));
+      await tester.tap(find.text('Pesan'));
       await tester.pump(const Duration(milliseconds: 200));
 
       // State is preserved!

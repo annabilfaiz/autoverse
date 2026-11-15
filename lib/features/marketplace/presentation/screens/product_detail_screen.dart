@@ -55,7 +55,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'Opening chat with ${product.sellerName}...',
+                  'Membuka percakapan dengan ${product.sellerName}...',
                   style: AppTypography.body.copyWith(color: AppColors.iceWhite),
                 ),
               ),
@@ -78,7 +78,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             backgroundColor: AppColors.voidBlack,
             appBar: AppBar(backgroundColor: AppColors.voidBlack),
             body: const Center(
-              child: Text('Product not found.',
+              child: Text('Komponen tidak ditemukan.',
                   style: TextStyle(color: AppColors.titanium)),
             ),
           );
@@ -177,14 +177,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   AppColors.warning.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Text('Used',
+                            child: Text('Bekas',
                                 style: AppTypography.micro.copyWith(
                                     color: AppColors.warning,
                                     fontWeight: FontWeight.w700)),
                           ),
                         ],
                         const Spacer(),
-                        Text('${product.stock} in stock',
+                        Text('${product.stock} tersedia',
                             style: AppTypography.caption.copyWith(
                                 color: product.stock > 0
                                     ? AppColors.success
@@ -272,7 +272,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                     // Description
                     const SizedBox(height: 16),
-                    Text('Description',
+                    Text('Deskripsi',
                         style: AppTypography.headlineH3
                             .copyWith(fontSize: 15)),
                     const SizedBox(height: 8),
@@ -285,7 +285,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                     // Specifications
                     const SizedBox(height: 16),
-                    Text('Specifications',
+                    Text('Spesifikasi',
                         style: AppTypography.headlineH3
                             .copyWith(fontSize: 15)),
                     const SizedBox(height: 10),
@@ -333,7 +333,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                     // Compatibility
                     const SizedBox(height: 16),
-                    Text('Vehicle Compatibility',
+                    Text('Kompatibilitas Kendaraan',
                         style: AppTypography.headlineH3
                             .copyWith(fontSize: 15)),
                     const SizedBox(height: 10),
@@ -417,7 +417,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             const Icon(Icons.chat_rounded,
                                 size: 18, color: AppColors.voidBlack),
                             const SizedBox(width: 8),
-                            Text('Chat Seller',
+                            Text('Hubungi Penjual',
                                 style: AppTypography.button.copyWith(
                                     color: AppColors.voidBlack,
                                     fontWeight: FontWeight.w700)),

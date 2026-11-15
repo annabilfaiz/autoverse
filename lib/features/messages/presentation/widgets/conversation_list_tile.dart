@@ -187,9 +187,9 @@ class ConversationListTile extends StatelessWidget {
                           child: Text(
                             lastMessage != null
                                 ? (lastMessage.isMe
-                                    ? 'You: ${lastMessage.text}'
+                                    ? 'Anda: ${lastMessage.text}'
                                     : lastMessage.text)
-                                : 'No messages yet',
+                                : 'Belum ada pesan',
                             style: AppTypography.body.copyWith(
                               color: hasUnread
                                   ? AppColors.iceWhite

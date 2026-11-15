@@ -4,14 +4,17 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../data/vehicles_data.dart';
 import '../../../home/state/feed_controller.dart';
 import '../../../showcase/presentation/screens/featured_vehicle_showcase_screen.dart';
+import '../../state/saved_items_controller.dart';
 
 /// Renders the user's signature featured vehicle card and garage vehicle items.
 class ProfileGarageSection extends StatelessWidget {
   final FeedController? feedController;
+  final SavedItemsController? savedController;
 
   const ProfileGarageSection({
     super.key,
     this.feedController,
+    this.savedController,
   });
 
   @override
@@ -29,7 +32,7 @@ class ProfileGarageSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'FEATURED VEHICLE',
+                    'KENDARAAN UNGGULAN',
                     style: AppTypography.micro.copyWith(
                       letterSpacing: 1.5,
                       fontWeight: FontWeight.w700,
@@ -37,7 +40,7 @@ class ProfileGarageSection extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Signature Build',
+                    'Modifikasi Utama',
                     style: AppTypography.caption.copyWith(color: AppColors.titanium, fontSize: 11),
                   ),
                 ],
@@ -58,7 +61,7 @@ class ProfileGarageSection extends StatelessWidget {
                       height: 180,
                       width: double.infinity,
                       child: Image.asset(
-                        'assets/images/feed_porsche_dusk.png',
+                        'assets/images/vehicles/vehicle_porsche_911_gt3_hero.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -97,6 +100,7 @@ class ProfileGarageSection extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (_) => FeaturedVehicleShowcaseScreen(
                                       feedController: feedController,
+                                      savedController: savedController,
                                     ),
                                   ),
                                 );
@@ -105,14 +109,14 @@ class ProfileGarageSection extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Explore Full Showcase',
+                                    'Lihat Detail Kendaraan',
                                     style: AppTypography.button.copyWith(
                                       color: AppColors.voidBlack,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                   const SizedBox(width: 6),
-                                  const Icon(Icons.arrow_forward, size: 16, color: AppColors.voidBlack),
+                                  const Icon(Icons.arrow_forward_rounded, size: 16, color: AppColors.voidBlack),
                                 ],
                               ),
                             ),
@@ -133,27 +137,15 @@ class ProfileGarageSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'My Garage (3)',
-                    style: AppTypography.headlineH3.copyWith(fontSize: 16, color: AppColors.iceWhite),
-                  ),
-                  Text(
-                    'View All >',
-                    style: AppTypography.caption.copyWith(
-                      color: AppColors.performanceLime,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+              Text(
+                'Garasi Saya',
+                style: AppTypography.headlineH3.copyWith(fontSize: 16, color: AppColors.iceWhite),
               ),
               const SizedBox(height: 10),
               _garageRow(
                 '1994 Mazda RX-7 FD3S',
-                'Twin-Turbo 13B-REW · Build in Progress',
-                'In Progress',
+                'Twin-Turbo 13B-REW · Dalam Proses',
+                'Dalam Proses',
                 onTap: () {
                   final rx7 = VehiclesData.getAdityaGarageVehicles()
                       .firstWhere((v) => v.id == 'veh_mazda_rx7');
@@ -163,6 +155,7 @@ class ProfileGarageSection extends StatelessWidget {
                       builder: (_) => FeaturedVehicleShowcaseScreen(
                         vehicle: rx7,
                         feedController: feedController,
+                        savedController: savedController,
                       ),
                     ),
                   );
@@ -172,7 +165,7 @@ class ProfileGarageSection extends StatelessWidget {
               _garageRow(
                 '2018 Honda Civic Type R FK8',
                 'Daily Track Spec · 306 HP · K20C1',
-                'Active Daily',
+                'Harian',
                 onTap: () {
                   final civic = VehiclesData.getAdityaGarageVehicles()
                       .firstWhere((v) => v.id == 'veh_civic_fk8');
@@ -182,6 +175,7 @@ class ProfileGarageSection extends StatelessWidget {
                       builder: (_) => FeaturedVehicleShowcaseScreen(
                         vehicle: civic,
                         feedController: feedController,
+                        savedController: savedController,
                       ),
                     ),
                   );

@@ -30,7 +30,7 @@ class CreatePostVehicleSelector extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'LINK TO VEHICLE',
+                  'HUBUNGKAN KE KENDARAAN',
                   style: AppTypography.micro.copyWith(
                     color: AppColors.mutedSteel,
                     fontWeight: FontWeight.w700,
@@ -48,7 +48,7 @@ class CreatePostVehicleSelector extends StatelessWidget {
                     border: Border.all(color: AppColors.steel),
                   ),
                   child: Text(
-                    'OPTIONAL',
+                    'OPSIONAL',
                     style: AppTypography.micro.copyWith(
                       color: AppColors.titanium,
                       fontSize: 9,
@@ -62,7 +62,7 @@ class CreatePostVehicleSelector extends StatelessWidget {
               GestureDetector(
                 onTap: onClearVehicle,
                 child: Text(
-                  'Clear Link',
+                  'Hapus Tautan',
                   style: AppTypography.caption.copyWith(
                     color: AppColors.performanceLime,
                     fontSize: 11,
@@ -74,7 +74,7 @@ class CreatePostVehicleSelector extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Text(
-          'Attach this update to your signature build or garage car showcase.',
+          'Tautkan pembaruan ini ke kendaraan di garasi Anda.',
           style: AppTypography.caption.copyWith(
             color: AppColors.mutedSteel,
             fontSize: 11,
@@ -148,7 +148,7 @@ class CreatePostVehicleSelector extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
-                                  '(${vehicle.generation})',
+                                  vehicle.generation,
                                   style: AppTypography.caption.copyWith(
                                     color: AppColors.mutedSteel,
                                     fontSize: 11,
@@ -158,7 +158,7 @@ class CreatePostVehicleSelector extends StatelessWidget {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              '${vehicle.nickname} • ${vehicle.status}',
+                              '${vehicle.nickname} • ${_statusLabel(vehicle.status)}',
                               style: AppTypography.caption.copyWith(
                                 color: AppColors.titanium,
                                 fontSize: 11,
@@ -203,5 +203,18 @@ class CreatePostVehicleSelector extends StatelessWidget {
         }),
       ],
     );
+  }
+
+  String _statusLabel(String status) {
+    switch (status) {
+      case 'Active Build':
+        return 'Sedang Dimodifikasi';
+      case 'In Progress':
+        return 'Dalam Proses';
+      case 'Active Daily':
+        return 'Harian';
+      default:
+        return status;
+    }
   }
 }

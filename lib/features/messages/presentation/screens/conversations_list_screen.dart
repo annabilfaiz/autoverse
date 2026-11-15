@@ -84,7 +84,7 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Messages',
+                                'Pesan',
                                 style: AppTypography.headlineH1.copyWith(
                                   letterSpacing: -0.5,
                                   color: AppColors.iceWhite,
@@ -92,7 +92,7 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                'Direct enthusiast & parts seller chats',
+                                'Obrolan langsung sesama antusias & penjual komponen',
                                 style: AppTypography.caption.copyWith(
                                   color: AppColors.mutedSteel,
                                 ),
@@ -126,7 +126,7 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
-                                  '$unreadCount Unread',
+                                  '$unreadCount Belum Dibaca',
                                   style: AppTypography.micro.copyWith(
                                     color: AppColors.performanceLime,
                                     fontWeight: FontWeight.w700,
@@ -158,7 +158,7 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                           fontSize: 14,
                         ),
                         decoration: InputDecoration(
-                          hintText: 'Search chats, sellers, or parts...',
+                          hintText: 'Cari percakapan, penjual, atau komponen...',
                           hintStyle: AppTypography.body.copyWith(
                             color: AppColors.mutedSteel,
                             fontSize: 14,
@@ -245,8 +245,8 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
             const SizedBox(height: 18),
             Text(
               _filterQuery.isNotEmpty
-                  ? 'No Conversations Found'
-                  : 'No Messages Yet',
+                  ? 'Tidak Ada Percakapan'
+                  : 'Belum Ada Pesan',
               style: AppTypography.headlineH3.copyWith(
                 color: AppColors.iceWhite,
               ),
@@ -254,8 +254,8 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
             const SizedBox(height: 6),
             Text(
               _filterQuery.isNotEmpty
-                  ? 'Try searching with a different name or part query.'
-                  : 'Inquire about performance parts in the Marketplace or connect with local car builders.',
+                  ? 'Coba cari dengan nama atau komponen yang berbeda.'
+                  : 'Tanyakan ketersediaan komponen di Marketplace atau terhubung dengan sesama modifikator.',
               style: AppTypography.caption.copyWith(
                 color: AppColors.mutedSteel,
               ),

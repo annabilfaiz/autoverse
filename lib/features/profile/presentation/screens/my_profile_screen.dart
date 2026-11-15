@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../home/state/feed_controller.dart';
+import '../../../marketplace/state/marketplace_controller.dart';
+import '../../../messages/state/messages_controller.dart';
+import '../../state/saved_items_controller.dart';
 import '../widgets/profile_garage_section.dart';
 import '../widgets/profile_header_section.dart';
 import '../widgets/profile_tabs_section.dart';
@@ -10,11 +13,17 @@ import '../widgets/profile_tabs_section.dart';
 class MyProfileScreen extends StatefulWidget {
   final VoidCallback? onBackToHome;
   final FeedController? feedController;
+  final SavedItemsController? savedController;
+  final MarketplaceController? marketplaceController;
+  final MessagesController? messagesController;
 
   const MyProfileScreen({
     super.key,
     this.onBackToHome,
     this.feedController,
+    this.savedController,
+    this.marketplaceController,
+    this.messagesController,
   });
 
   @override
@@ -25,6 +34,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   int _selectedTab = 0; // 0: Posts, 1: Builds, 2: Saved
   late final FeedController _controller;
   late final bool _internalController;
+  late final SavedItemsController _savedController;
+  late final bool _internalSavedController;
 
   @override
   void initState() {
@@ -36,12 +47,26 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       _controller = FeedController();
       _internalController = true;
     }
+
+    if (widget.savedController != null) {
+      _savedController = widget.savedController!;
+      _internalSavedController = false;
+    } else {
+      _savedController = SavedItemsController(
+        feedController: _controller,
+        marketplaceController: widget.marketplaceController ?? MarketplaceController(),
+      );
+      _internalSavedController = true;
+    }
   }
 
   @override
   void dispose() {
     if (_internalController) {
       _controller.dispose();
+    }
+    if (_internalSavedController) {
+      _savedController.dispose();
     }
     super.dispose();
   }
@@ -72,6 +97,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 SliverToBoxAdapter(
                   child: ProfileGarageSection(
                     feedController: _controller,
+                    savedController: _savedController,
                   ),
                 ),
 
@@ -86,6 +112,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     },
                     authorPosts: authorPosts,
                     feedController: _controller,
+                    savedController: _savedController,
+                    marketplaceController: widget.marketplaceController,
+                    messagesController: widget.messagesController,
                   ),
                 ),
               ],

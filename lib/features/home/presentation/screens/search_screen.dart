@@ -94,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               autofocus: true,
                               style: AppTypography.body.copyWith(color: AppColors.iceWhite),
                               decoration: InputDecoration(
-                                hintText: 'Search builds, vehicles, parts, sounds...',
+                                hintText: 'Cari modifikasi, kendaraan, komponen...',
                                 hintStyle: AppTypography.body.copyWith(color: AppColors.mutedSteel, fontSize: 13),
                                 border: InputBorder.none,
                                 isDense: true,
@@ -132,7 +132,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: [
                   // Trending Tags
                   Text(
-                    'Trending Automotive Tags',
+                    'Tag Otomotif Populer',
                     style: AppTypography.headlineH3.copyWith(fontSize: 15, color: AppColors.iceWhite),
                   ),
                   const SizedBox(height: 12),
@@ -170,7 +170,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                   // Suggested Builds
                   Text(
-                    'Featured Community Builds',
+                    'Rekomendasi Modifikasi Komunitas',
                     style: AppTypography.headlineH3.copyWith(fontSize: 15, color: AppColors.iceWhite),
                   ),
                   const SizedBox(height: 12),

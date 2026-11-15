@@ -32,7 +32,7 @@ class ShowcaseHeroSection extends StatelessWidget {
               child: Image.asset(
                 vehicle.imageAsset.isNotEmpty
                     ? vehicle.imageAsset
-                    : 'assets/images/feed_porsche_gt3.png',
+                    : 'assets/images/vehicles/vehicle_porsche_911_gt3_hero.jpg',
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) => Container(
                   color: AppColors.carbon,
@@ -61,83 +61,83 @@ class ShowcaseHeroSection extends StatelessWidget {
               ),
             ),
 
-            // Callout A: Wheels & Tires
+            // Callout A: Velg & Ban
             Positioned(
               top: 60,
               left: 16,
               child: _buildCalloutChip(
                 context,
-                category: 'WHEELS & TIRES',
+                category: 'VELG & BAN',
                 title: wheelsTitle,
                 alignRight: false,
                 description: isPorsche
-                    ? 'Ultra-lightweight aerospace-grade forged aluminum monobloc wheels engineered for track endurance.'
-                    : 'Forged monobloc track wheels offering maximum rigidity and unsprung mass reduction.',
+                    ? 'Velg tempa aluminium monobloc berbobot sangat ringan berstandar dirgantara, dirancang untuk ketahanan di sirkuit.'
+                    : 'Velg tempa monobloc untuk sirkuit yang memberikan kekakuan maksimal dan mereduksi bobot unsprung mass.',
                 specs: isPorsche
                     ? {
-                        'Size': '20" x 9.5J front, 21" x 12J rear',
-                        'Material': 'Forged Aluminum Alloy',
-                        'Weight': '7.9 kg / wheel',
-                        'Tire Spec': 'Michelin Pilot Sport Cup 2 R',
+                        'Ukuran': '20" x 9.5J depan, 21" x 12J belakang',
+                        'Material': 'Paduan Aluminium Tempa (Forged)',
+                        'Bobot': '7.9 kg / velg',
+                        'Spesifikasi Ban': 'Michelin Pilot Sport Cup 2 R',
                       }
                     : {
-                        'Size': '18" x 9.5J track spec',
-                        'Material': 'Forged 6061-T6 Aluminum',
-                        'Weight': '8.2 kg',
+                        'Ukuran': '18" x 9.5J track spec',
+                        'Material': 'Aluminium Tempa 6061-T6',
+                        'Bobot': '8.2 kg',
                       },
               ),
             ),
 
-            // Callout B: Exhaust & Aero
+            // Callout B: Knalpot & Performa
             Positioned(
               top: 70,
               right: 16,
               child: _buildCalloutChip(
                 context,
-                category: 'EXHAUST & PERFORMANCE',
+                category: 'KNALPOT & PERFORMA',
                 title: exhaustTitle,
                 alignRight: true,
                 description: isPorsche
-                    ? 'Full titanium sport exhaust system with tuned headers and active valvetronic flaps.'
-                    : 'Performance tuned exhaust system maximizing flow and acoustic resonance.',
+                    ? 'Sistem knalpot sport titanium murni dengan header khusus dan katup valvetronic aktif.'
+                    : 'Sistem knalpot performa tinggi untuk memaksimalkan aliran gas buang dan resonansi akustik.',
                 specs: isPorsche
                     ? {
                         'Material': 'Full Grade 1 Titanium',
-                        'Power Gain': '+22 HP @ 8,400 RPM',
-                        'Weight Savings': '-11.2 kg',
-                        'Sound Output': '108 dB Track Mode',
+                        'Peningkatan Tenaga': '+22 HP @ 8.400 RPM',
+                        'Reduksi Bobot': '-11.2 kg',
+                        'Karakter Suara': '108 dB (Mode Sirkuit)',
                       }
                     : {
-                        'Material': 'SUS304 Stainless Steel',
-                        'Diameter': '76mm to 115mm tip',
-                        'Power Gain': '+14 WHP',
+                        'Material': 'Stainless Steel SUS304',
+                        'Diameter': '76 mm ke ujung tip 115 mm',
+                        'Peningkatan Tenaga': '+14 WHP',
                       },
               ),
             ),
 
-            // Callout C: Braking
+            // Callout C: Pengereman
             Positioned(
               bottom: 30,
               left: 24,
               child: _buildCalloutChip(
                 context,
-                category: 'BRAKING',
+                category: 'PENGEREMAN',
                 title: brakesTitle,
                 alignRight: false,
                 description: isPorsche
-                    ? 'Carbon-ceramic 6-piston monobloc front brake setup with racing compound pads.'
-                    : 'High performance multi-piston caliper system with slotted floating heat-treated rotors.',
+                    ? 'Sistem rem keramik karbon 6-piston monobloc dengan kampas rem balap tahan suhu ekstrem.'
+                    : 'Sistem kaliper rem multi-piston berperforma tinggi dengan piringan rotor slotted floating.',
                 specs: isPorsche
                     ? {
-                        'Diameter': '410mm front / 390mm rear',
-                        'Caliper': '6-Piston Monobloc',
-                        'Fluid': 'Motul RBF 660 Factory Line',
-                        'Max Temp': '900°C Thermal Limit',
+                        'Diameter Rotor': '410 mm depan / 390 mm belakang',
+                        'Kaliper': '6-Piston Monobloc Brembo',
+                        'Minyak Rem': 'Motul RBF 660 Factory Line',
+                        'Batas Suhu': '900°C Thermal Limit',
                       }
                     : {
-                        'Diameter': '355mm floating rotor',
-                        'Caliper': '6-Piston Radi-CAL',
-                        'Pads': 'Endless ME20 Compound',
+                        'Diameter Rotor': '355 mm floating rotor',
+                        'Kaliper': '6-Piston Radi-CAL',
+                        'Kampas Rem': 'Endless ME20 Compound',
                       },
               ),
             ),

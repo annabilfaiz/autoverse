@@ -28,7 +28,7 @@ class MarketplaceFilterPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Vehicle Compatibility',
+            'Kompatibilitas Kendaraan',
             style: AppTypography.caption.copyWith(
               color: AppColors.titanium,
               fontWeight: FontWeight.w600,
@@ -40,7 +40,7 @@ class MarketplaceFilterPanel extends StatelessWidget {
             runSpacing: 8,
             children: compatOptions.map((opt) {
               final isSelected = controller.compatibilityFilter == opt;
-              final label = opt.isEmpty ? 'All Vehicles' : opt;
+              final label = opt.isEmpty ? 'Semua Kendaraan' : opt;
               return GestureDetector(
                 onTap: () => controller.setCompatibilityFilter(opt),
                 behavior: HitTestBehavior.opaque,

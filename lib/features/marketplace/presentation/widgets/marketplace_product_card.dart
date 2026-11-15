@@ -74,7 +74,7 @@ class MarketplaceProductCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
-                              'Used',
+                              'Bekas',
                               style: AppTypography.micro.copyWith(
                                 color: AppColors.warning,
                                 fontWeight: FontWeight.w700,
@@ -91,7 +91,7 @@ class MarketplaceProductCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
-                              'New Listing',
+                              'Iklan Baru',
                               style: AppTypography.micro.copyWith(
                                 color: AppColors.performanceLime,
                                 fontWeight: FontWeight.w700,

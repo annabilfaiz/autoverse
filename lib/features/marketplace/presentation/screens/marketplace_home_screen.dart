@@ -90,13 +90,13 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                           icon: Icons.tune_rounded,
                           isActive: hasFilters,
                           onTap: () => setState(() => _showFilters = !_showFilters),
-                          tooltip: 'Filters',
+                          tooltip: 'Filter',
                         ),
                         const SizedBox(width: 10),
                         _iconButton(
                           icon: Icons.add_circle_outline_rounded,
                           onTap: _openCreateListing,
-                          tooltip: 'List a Part',
+                          tooltip: 'Jual Komponen',
                         ),
                       ],
                     ),
@@ -117,7 +117,7 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                         controller: _searchCtrl,
                         style: AppTypography.body.copyWith(color: AppColors.iceWhite),
                         decoration: InputDecoration(
-                          hintText: 'Search parts, brands, vehicles...',
+                          hintText: 'Cari komponen, merek, kendaraan...',
                           hintStyle: AppTypography.body.copyWith(color: AppColors.titanium),
                           prefixIcon: const Icon(Icons.search, color: AppColors.titanium, size: 20),
                           suffixIcon: _searchCtrl.text.isNotEmpty
@@ -153,34 +153,40 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         children: [
                           _category(
-                            'Engine',
+                            'Mesin',
                             Icons.settings_outlined,
                             widget.controller.selectedCategory == 'Engine',
+                            categoryKey: 'Engine',
                           ),
                           _category(
-                            'Exhaust',
+                            'Knalpot',
                             Icons.air_rounded,
                             widget.controller.selectedCategory == 'Exhaust',
+                            categoryKey: 'Exhaust',
                           ),
                           _category(
-                            'Wheels',
+                            'Velg',
                             Icons.radio_button_checked_rounded,
                             widget.controller.selectedCategory == 'Wheels',
+                            categoryKey: 'Wheels',
                           ),
                           _category(
-                            'Suspension',
+                            'Suspensi',
                             Icons.swap_vert_rounded,
                             widget.controller.selectedCategory == 'Suspension',
+                            categoryKey: 'Suspension',
                           ),
                           _category(
-                            'Brakes',
+                            'Rem',
                             Icons.front_hand_rounded,
                             widget.controller.selectedCategory == 'Brakes',
+                            categoryKey: 'Brakes',
                           ),
                           _category(
-                            'Exterior',
+                            'Eksterior',
                             Icons.directions_car_outlined,
                             widget.controller.selectedCategory == 'Exterior',
+                            categoryKey: 'Exterior',
                           ),
                         ],
                       ),
@@ -200,7 +206,7 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
                       child: Text(
-                        'Featured Parts',
+                        'Komponen Unggulan',
                         style: AppTypography.headlineH3.copyWith(fontSize: 18),
                       ),
                     ),
@@ -231,8 +237,8 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                       children: [
                         Text(
                           widget.controller.hasActiveFilters
-                              ? 'Filtered Results (${products.length})'
-                              : 'All Parts & Listings',
+                              ? 'Hasil Filter (${products.length})'
+                              : 'Semua Komponen',
                           style: AppTypography.headlineH3.copyWith(fontSize: 18),
                         ),
                         GestureDetector(
@@ -290,12 +296,18 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
     );
   }
 
-  Widget _category(String label, IconData icon, bool isSelected) {
+  Widget _category(
+    String label,
+    IconData icon,
+    bool isSelected, {
+    String? categoryKey,
+  }) {
+    final key = categoryKey ?? label;
     return MarketplaceCategoryChip(
       label: label,
       icon: icon,
       isSelected: isSelected,
-      onTap: () => widget.controller.setCategory(isSelected ? 'All' : label),
+      onTap: () => widget.controller.setCategory(isSelected ? 'All' : key),
     );
   }
 
@@ -348,9 +360,9 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              _sortTile(context, 'Newest', MarketplaceSortOrder.newest),
-              _sortTile(context, 'Price: Low to High', MarketplaceSortOrder.priceLowToHigh),
-              _sortTile(context, 'Price: High to Low', MarketplaceSortOrder.priceHighToLow),
+              _sortTile(context, 'Terbaru', MarketplaceSortOrder.newest),
+              _sortTile(context, 'Harga: Terendah ke Tertinggi', MarketplaceSortOrder.priceLowToHigh),
+              _sortTile(context, 'Harga: Tertinggi ke Terendah', MarketplaceSortOrder.priceHighToLow),
               const SizedBox(height: 8),
             ],
           ),
@@ -380,11 +392,11 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
   String _sortLabel(MarketplaceSortOrder opt) {
     switch (opt) {
       case MarketplaceSortOrder.newest:
-        return 'Newest';
+        return 'Terbaru';
       case MarketplaceSortOrder.priceLowToHigh:
-        return 'Price: Low';
+        return 'Harga Terendah';
       case MarketplaceSortOrder.priceHighToLow:
-        return 'Price: High';
+        return 'Harga Tertinggi';
     }
   }
 
@@ -398,12 +410,12 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
             const Icon(Icons.search_off_rounded, size: 54, color: AppColors.mutedSteel),
             const SizedBox(height: 16),
             Text(
-              'No parts found',
+              'Tidak ada komponen ditemukan',
               style: AppTypography.headlineH3.copyWith(color: AppColors.titanium),
             ),
             const SizedBox(height: 8),
             Text(
-              'Try different keywords or clear all filters.',
+              'Coba kata kunci lain atau hapus semua filter.',
               style: AppTypography.body.copyWith(color: AppColors.mutedSteel),
               textAlign: TextAlign.center,
             ),
@@ -422,7 +434,7 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                   border: Border.all(color: AppColors.steel),
                 ),
                 child: Text(
-                  'Clear Filters',
+                  'Hapus Filter',
                   style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite),
                 ),
               ),

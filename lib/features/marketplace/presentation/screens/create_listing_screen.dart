@@ -24,16 +24,19 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
   String _selectedCondition = 'New';
   bool _isPublishing = false;
 
-  final List<String> _categories = [
-    'Engine',
-    'Exhaust',
-    'Wheels',
-    'Suspension',
-    'Brakes',
-    'Exterior',
+  final List<Map<String, String>> _categories = [
+    {'key': 'Engine', 'label': 'Mesin'},
+    {'key': 'Exhaust', 'label': 'Knalpot'},
+    {'key': 'Wheels', 'label': 'Velg'},
+    {'key': 'Suspension', 'label': 'Suspensi'},
+    {'key': 'Brakes', 'label': 'Rem'},
+    {'key': 'Exterior', 'label': 'Eksterior'},
   ];
 
-  final List<String> _conditions = ['New', 'Used'];
+  final List<Map<String, String>> _conditions = [
+    {'key': 'New', 'label': 'Baru'},
+    {'key': 'Used', 'label': 'Bekas'},
+  ];
 
   @override
   void dispose() {
@@ -51,7 +54,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     final rawPrice = _priceCtrl.text.replaceAll(RegExp(r'[^0-9]'), '');
     final price = int.tryParse(rawPrice) ?? 0;
     if (price <= 0) {
-      _showError('Please enter a valid price in IDR.');
+      _showError('Masukkan harga yang valid dalam Rupiah.');
       return;
     }
 
@@ -61,7 +64,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
         .where((s) => s.isNotEmpty)
         .toList();
     if (compatList.isEmpty) {
-      _showError('Enter at least one compatible vehicle.');
+      _showError('Masukkan minimal satu kendaraan yang kompatibel.');
       return;
     }
 
@@ -79,7 +82,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
       description: _descCtrl.text.trim(),
       specifications: {'Condition': _selectedCondition},
       compatibleVehicles: compatList,
-      imageAsset: 'assets/images/feed_porsche_dusk.png',
+      imageAsset: 'assets/images/products/product_titanium_exhaust.jpg',
       isNewListing: true,
       condition: _selectedCondition,
     );
@@ -101,7 +104,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                   size: 18, color: AppColors.performanceLime),
               const SizedBox(width: 10),
               Expanded(
-                child: Text('Your listing is now live!',
+                child: Text('Iklan komponen Anda berhasil diterbitkan!',
                     style: AppTypography.body
                         .copyWith(color: AppColors.iceWhite)),
               ),
@@ -147,7 +150,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                 size: 18, color: AppColors.iceWhite),
           ),
         ),
-        title: Text('List a Part',
+        title: Text('Buat Iklan Komponen',
             style: AppTypography.headlineH3
                 .copyWith(color: AppColors.iceWhite)),
         centerTitle: true,
@@ -159,7 +162,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
           children: [
             // Image placeholder
             Container(
-              height: 160,
+              height: 140,
               decoration: BoxDecoration(
                 color: AppColors.carbon,
                 borderRadius: BorderRadius.circular(14),
@@ -170,37 +173,43 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.add_photo_alternate_rounded,
-                      size: 36, color: AppColors.mutedSteel),
+                  const Icon(Icons.photo_library_outlined,
+                      size: 32, color: AppColors.mutedSteel),
                   const SizedBox(height: 8),
-                  Text('Add Product Photos',
-                      style: AppTypography.caption
-                          .copyWith(color: AppColors.titanium)),
+                  Text('Foto Komponen (Katalog Bawaan)',
+                      style: AppTypography.bodyStrong
+                          .copyWith(color: AppColors.titanium, fontSize: 13)),
                   const SizedBox(height: 4),
-                  Text('(Placeholder – photo selection coming soon)',
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Text(
+                      'Unggah foto kustom belum tersedia. Foto katalog akan disematkan secara otomatis saat diterbitkan.',
                       style: AppTypography.micro
-                          .copyWith(color: AppColors.mutedSteel)),
+                          .copyWith(color: AppColors.mutedSteel),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
 
-            _sectionLabel('Category'),
+            _sectionLabel('Kategori'),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: _categories.map((cat) {
-                final sel = _selectedCategory == cat;
+                final sel = _selectedCategory == cat['key'];
                 return GestureDetector(
-                  onTap: () => setState(() => _selectedCategory = cat),
+                  onTap: () => setState(() => _selectedCategory = cat['key']!),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 14, vertical: 7),
                     decoration: BoxDecoration(
                       color: sel
                           ? AppColors.performanceLime
-                              .withValues(alpha: 0.15)
+                          .withValues(alpha: 0.15)
                           : AppColors.carbon,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
@@ -208,7 +217,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                               ? AppColors.performanceLime
                               : AppColors.steel),
                     ),
-                    child: Text(cat,
+                    child: Text(cat['label']!,
                         style: AppTypography.caption.copyWith(
                             color: sel
                                 ? AppColors.performanceLime
@@ -220,23 +229,23 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
             ),
             const SizedBox(height: 20),
 
-            _sectionLabel('Condition'),
+            _sectionLabel('Kondisi'),
             const SizedBox(height: 8),
             Row(
               children: _conditions.map((cond) {
-                final sel = _selectedCondition == cond;
+                final sel = _selectedCondition == cond['key'];
                 return Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: GestureDetector(
                     onTap: () =>
-                        setState(() => _selectedCondition = cond),
+                        setState(() => _selectedCondition = cond['key']!),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 18, vertical: 8),
                       decoration: BoxDecoration(
                         color: sel
                             ? AppColors.performanceLime
-                                .withValues(alpha: 0.15)
+                            .withValues(alpha: 0.15)
                             : AppColors.carbon,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
@@ -244,7 +253,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                                 ? AppColors.performanceLime
                                 : AppColors.steel),
                       ),
-                      child: Text(cond,
+                      child: Text(cond['label']!,
                           style: AppTypography.body.copyWith(
                               color: sel
                                   ? AppColors.performanceLime
@@ -258,56 +267,56 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
             const SizedBox(height: 20),
 
             _field(
-              label: 'Product Name *',
+              label: 'Nama Komponen *',
               controller: _nameCtrl,
-              hint: 'e.g. Akrapovič Titanium Exhaust',
+              hint: 'Contoh: Akrapovič Titanium Exhaust',
               validator: (v) =>
-                  (v == null || v.trim().isEmpty) ? 'Required' : null,
+                  (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
             ),
             const SizedBox(height: 16),
 
             _field(
-              label: 'Brand *',
+              label: 'Merek *',
               controller: _brandCtrl,
-              hint: 'e.g. Akrapovič',
+              hint: 'Contoh: Akrapovič',
               validator: (v) =>
-                  (v == null || v.trim().isEmpty) ? 'Required' : null,
+                  (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
             ),
             const SizedBox(height: 16),
 
             _field(
-              label: 'Price (IDR) *',
+              label: 'Harga (Rp) *',
               controller: _priceCtrl,
-              hint: 'e.g. 48500000',
+              hint: 'Contoh: 48500000',
               keyboardType: TextInputType.number,
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'Required';
+                if (v == null || v.trim().isEmpty) return 'Wajib diisi';
                 final raw = v.replaceAll(RegExp(r'[^0-9]'), '');
-                if (int.tryParse(raw) == null) return 'Enter a valid number';
+                if (int.tryParse(raw) == null) return 'Masukkan angka yang valid';
                 return null;
               },
             ),
             const SizedBox(height: 16),
 
             _field(
-              label: 'Description *',
+              label: 'Deskripsi *',
               controller: _descCtrl,
-              hint: 'Describe the part, its condition, and what is included...',
+              hint: 'Jelaskan kondisi komponen dan kelengkapannya...',
               maxLines: 4,
               validator: (v) =>
-                  (v == null || v.trim().isEmpty) ? 'Required' : null,
+                  (v == null || v.trim().isEmpty) ? 'Wajib diisi' : null,
             ),
             const SizedBox(height: 16),
 
             _field(
-              label: 'Compatible Vehicles *',
+              label: 'Kompatibilitas Kendaraan *',
               controller: _compatCtrl,
-              hint: 'e.g. Porsche 911 GT3 992, Mazda RX-7 FD3S',
-              hint2: 'Separate multiple vehicles with commas',
+              hint: 'Contoh: Porsche 911 GT3, Mazda RX-7 FD3S',
+              hint2: 'Pisahkan beberapa kendaraan dengan tanda koma',
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'Required';
+                if (v == null || v.trim().isEmpty) return 'Wajib diisi';
                 final parts = v.split(',').where((s) => s.trim().isNotEmpty);
-                if (parts.isEmpty) return 'Enter at least one vehicle';
+                if (parts.isEmpty) return 'Masukkan minimal satu kendaraan';
                 return null;
               },
             ),
@@ -341,7 +350,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                           color: AppColors.voidBlack,
                         ),
                       )
-                    : Text('Publish Listing',
+                    : Text('Terbitkan Iklan',
                         style: AppTypography.button.copyWith(
                             color: AppColors.voidBlack,
                             fontWeight: FontWeight.w700)),

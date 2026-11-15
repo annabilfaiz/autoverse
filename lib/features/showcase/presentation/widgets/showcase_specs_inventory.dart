@@ -36,7 +36,7 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'FACTORY SPECIFICATIONS',
+                      'SPESIFIKASI PABRIK',
                       style: AppTypography.micro.copyWith(
                         letterSpacing: 1.5,
                         fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    Expanded(child: _specItem('Manufacturer', vehicle.manufacturer)),
+                    Expanded(child: _specItem('Pabrikan', vehicle.manufacturer)),
                     Expanded(child: _specItem('Model', vehicle.model)),
                   ],
                 ),
@@ -60,13 +60,13 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _specItem(
-                        'Engine',
+                        'Mesin',
                         vehicle.specs['Engine'] ?? 'High Performance Spec',
                       ),
                     ),
                     Expanded(
                       child: _specItem(
-                        'Power Spec',
+                        'Tenaga',
                         vehicle.specs['Power'] ?? 'Track Spec',
                       ),
                     ),
@@ -85,50 +85,48 @@ class ShowcaseSpecsInventory extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Build Inventory (14 Installed)',
-                      style: AppTypography.headlineH3.copyWith(
-                        fontSize: 16,
-                        color: AppColors.iceWhite,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'View All (14) >',
-                    style: AppTypography.caption.copyWith(
-                      color: AppColors.performanceLime,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+              Text(
+                'Daftar Modifikasi',
+                style: AppTypography.headlineH3.copyWith(
+                  fontSize: 16,
+                  color: AppColors.iceWhite,
+                ),
               ),
               const SizedBox(height: 12),
               _inventoryRow(
                 context: context,
                 icon: Icons.air,
-                category: 'ENGINE & EXHAUST',
+                category: 'MESIN & KNALPOT',
                 title: 'Akrapovič Titanium Full System',
                 delta: '+22 HP · -11 kg',
+                imageAsset: 'assets/images/products/product_titanium_exhaust.jpg',
               ),
               const SizedBox(height: 8),
               _inventoryRow(
                 context: context,
                 icon: Icons.speed,
-                category: 'SUSPENSION & CHASSIS',
+                category: 'SUSPENSI & SASIS',
                 title: 'KW Clubsport 3-Way Coilovers',
-                delta: 'Corner Balanced Track Spec',
+                delta: 'Setelan Seimbang untuk Lintasan',
+                imageAsset: 'assets/images/products/product_performance_coilover.jpg',
               ),
               const SizedBox(height: 8),
               _inventoryRow(
                 context: context,
                 icon: Icons.radio_button_checked,
-                category: 'WHEELS & TIRES',
+                category: 'VELG & BAN',
                 title: 'BBS FI-R Monobloc 20" / Michelin Cup 2',
-                delta: 'Lightweight Forged',
+                delta: 'Velg Tempa Ringan',
+                imageAsset: 'assets/images/products/product_forged_wheel.jpg',
+              ),
+              const SizedBox(height: 8),
+              _inventoryRow(
+                context: context,
+                icon: Icons.album_outlined,
+                category: 'SISTEM PENGEREMAN',
+                title: 'Brembo Carbon-Ceramic 410mm',
+                delta: 'Rotor Karbon & Kaliper Monobloc',
+                imageAsset: 'assets/images/products/product_carbon_ceramic_brake.jpg',
               ),
             ],
           ),
@@ -160,19 +158,21 @@ class ShowcaseSpecsInventory extends StatelessWidget {
     required String category,
     required String title,
     required String delta,
+    String? imageAsset,
   }) {
     return GestureDetector(
       onTap: () => ComponentDetailModal.show(
         context,
         category: category,
         title: title,
-        description: 'Installed component telemetry and upgrade specifications.',
+        description: 'Telemetri komponen modifikasi terpasang dan rincian peningkatan performa.',
         specs: {
-          'Category': category,
-          'Component': title,
-          'Performance Delta': delta,
-          'Installation': 'Sentul Speed Lab Verified',
+          'Kategori': category,
+          'Komponen': title,
+          'Peningkatan Performa': delta,
+          'Instalasi': 'Terverifikasi Sentul Speed Lab',
         },
+        imageAsset: imageAsset,
       ),
       behavior: HitTestBehavior.opaque,
       child: Container(

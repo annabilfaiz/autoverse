@@ -33,8 +33,12 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
   @override
   void initState() {
     super.initState();
-    // Mark messages as read when entering the chat room
-    widget.controller.markAsRead(widget.conversationId);
+    // Mark messages as read after initial layout build
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        widget.controller.markAsRead(widget.conversationId);
+      }
+    });
 
     _textController.addListener(() {
       final canSend = _textController.text.trim().isNotEmpty;
@@ -114,7 +118,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
             ),
             body: const Center(
               child: Text(
-                'Conversation not found',
+                'Percakapan tidak ditemukan',
                 style: TextStyle(color: AppColors.titanium),
               ),
             ),
@@ -280,7 +284,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                   ],
                 ),
                 Text(
-                  username.isNotEmpty ? username : 'Active now',
+                  username.isNotEmpty ? username : 'Aktif sekarang',
                   style: AppTypography.micro.copyWith(
                     color: AppColors.mutedSteel,
                     fontSize: 11,
@@ -326,7 +330,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Start the Conversation',
+              'Mulai Percakapan',
               style: AppTypography.headlineH3.copyWith(
                 color: AppColors.iceWhite,
                 fontSize: 16,
@@ -334,7 +338,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              'Ask about vehicle parts, fitment details, or garage projects.',
+              'Tanyakan ketersediaan komponen, kecocokan, atau proyek modifikasi.',
               style: AppTypography.caption.copyWith(
                 color: AppColors.mutedSteel,
               ),

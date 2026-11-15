@@ -12,7 +12,7 @@ class VehiclesData {
         year: 2022,
         generation: '992.1',
         nickname: 'Signature Build',
-        imageAsset: 'assets/images/feed_porsche_dusk.png',
+        imageAsset: 'assets/images/vehicles/vehicle_porsche_911_gt3_hero.jpg',
         status: 'Active Build',
         specs: {
           'Engine': '4.0L Naturally Aspirated Boxer-6',
@@ -29,7 +29,7 @@ class VehiclesData {
         year: 1994,
         generation: 'FD3S',
         nickname: 'Rotary Track Spec',
-        imageAsset: 'assets/images/feed_rx7_track.png',
+        imageAsset: 'assets/images/vehicles/vehicle_mazda_rx7_fd3s_hero.jpg',
         status: 'In Progress',
         specs: {
           'Engine': '13B-REW Twin-Rotary Bridge Port',
@@ -44,7 +44,7 @@ class VehiclesData {
         year: 2018,
         generation: 'FK8',
         nickname: 'Daily Track Spec',
-        imageAsset: 'assets/images/feed_porsche_gt3.png',
+        imageAsset: 'assets/images/vehicles/vehicle_honda_civic_type_r_fk8_hero.jpg',
         status: 'Active Daily',
         specs: {
           'Engine': '2.0L Turbocharged K20C1',

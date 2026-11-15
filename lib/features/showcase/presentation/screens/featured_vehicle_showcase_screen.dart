@@ -4,6 +4,8 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/vehicle_model.dart';
 import '../../../../data/vehicles_data.dart';
 import '../../../home/state/feed_controller.dart';
+import '../../../marketplace/state/marketplace_controller.dart';
+import '../../../profile/state/saved_items_controller.dart';
 import '../widgets/showcase_build_posts_section.dart';
 import '../widgets/showcase_hero_section.dart';
 import '../widgets/showcase_specs_inventory.dart';
@@ -14,11 +16,13 @@ import '../widgets/showcase_specs_inventory.dart';
 class FeaturedVehicleShowcaseScreen extends StatefulWidget {
   final VehicleModel? vehicle;
   final FeedController? feedController;
+  final SavedItemsController? savedController;
 
   const FeaturedVehicleShowcaseScreen({
     super.key,
     this.vehicle,
     this.feedController,
+    this.savedController,
   });
 
   @override
@@ -28,7 +32,8 @@ class FeaturedVehicleShowcaseScreen extends StatefulWidget {
 class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseScreen> {
   late final FeedController _controller;
   late final bool _internalController;
-  bool _isSaved = false;
+  late final SavedItemsController _savedController;
+  late final bool _internalSavedController;
 
   @override
   void initState() {
@@ -40,12 +45,26 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
       _controller = FeedController();
       _internalController = true;
     }
+
+    if (widget.savedController != null) {
+      _savedController = widget.savedController!;
+      _internalSavedController = false;
+    } else {
+      _savedController = SavedItemsController(
+        feedController: _controller,
+        marketplaceController: MarketplaceController(),
+      );
+      _internalSavedController = true;
+    }
   }
 
   @override
   void dispose() {
     if (_internalController) {
       _controller.dispose();
+    }
+    if (_internalSavedController) {
+      _savedController.dispose();
     }
     super.dispose();
   }
@@ -79,7 +98,7 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
             ),
             centerTitle: true,
             title: Text(
-              'FEATURED VEHICLE',
+              'DETAIL KENDARAAN',
               style: AppTypography.micro.copyWith(
                 letterSpacing: 2.0,
                 fontWeight: FontWeight.w700,
@@ -87,48 +106,36 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
               ),
             ),
             actions: [
-              IconButton(
-                icon: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: AppColors.graphite,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.steel),
-                  ),
-                  child: const Icon(Icons.share_outlined, size: 18, color: AppColors.iceWhite),
-                ),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Vehicle showcase link copied'),
-                      backgroundColor: AppColors.carbon,
+              ListenableBuilder(
+                listenable: _savedController,
+                builder: (context, _) {
+                  final isSaved = _savedController.isVehicleSaved(currentVehicle.id);
+                  return IconButton(
+                    icon: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: AppColors.graphite,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: isSaved ? AppColors.performanceLime : AppColors.steel),
+                      ),
+                      child: Icon(
+                        isSaved ? Icons.bookmark : Icons.bookmark_outline,
+                        size: 18,
+                        color: isSaved ? AppColors.performanceLime : AppColors.iceWhite,
+                      ),
                     ),
-                  );
-                },
-              ),
-              IconButton(
-                icon: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: AppColors.graphite,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: _isSaved ? AppColors.performanceLime : AppColors.steel),
-                  ),
-                  child: Icon(
-                    _isSaved ? Icons.bookmark : Icons.bookmark_outline,
-                    size: 18,
-                    color: _isSaved ? AppColors.performanceLime : AppColors.iceWhite,
-                  ),
-                ),
-                onPressed: () {
-                  setState(() => _isSaved = !_isSaved);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(_isSaved ? 'Vehicle saved to garage bookmarks' : 'Vehicle removed from bookmarks'),
-                      backgroundColor: AppColors.carbon,
-                    ),
+                    onPressed: () {
+                      _savedController.toggleSaveVehicle(currentVehicle.id);
+                      final nowSaved = _savedController.isVehicleSaved(currentVehicle.id);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(nowSaved ? 'Kendaraan disimpan ke favorit' : 'Kendaraan dihapus dari favorit'),
+                          backgroundColor: AppColors.carbon,
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
@@ -147,7 +154,7 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'FEATURED VEHICLE',
+                    'KENDARAAN UNGGULAN',
                     style: AppTypography.micro.copyWith(
                       color: AppColors.performanceLime,
                       letterSpacing: 1.5,
@@ -165,7 +172,7 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Generation ${currentVehicle.generation} · Signature Build · ${currentVehicle.status}',
+                    'Generasi ${currentVehicle.generation} • Modifikasi Utama • ${_statusLabel(currentVehicle.status)}',
                     style: AppTypography.body.copyWith(
                       color: AppColors.titanium,
                       fontSize: 13,
@@ -202,29 +209,29 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: AppColors.steel),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: Text(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
                             isPorsche
-                                ? '502 HP (+22 HP Akrapovič)'
+                                ? '502 HP • Akrapovič Race'
                                 : (currentVehicle.specs['Power'] ?? '300+ HP Track Tune'),
                             style: AppTypography.bodyStrong.copyWith(
                               color: AppColors.performanceLime,
                               fontSize: 13,
                             ),
-                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                        Text(
-                          ' • ${currentVehicle.status} • ${linkedPosts.length} Updates',
-                          style: AppTypography.caption.copyWith(
-                            color: AppColors.titanium,
-                            fontSize: 13,
+                          Text(
+                            ' • ${_statusLabel(currentVehicle.status)} • ${linkedPosts.length} Pembaruan',
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.titanium,
+                              fontSize: 13,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -243,8 +250,28 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
           SliverToBoxAdapter(
             child: ShowcaseBuildPostsSection(linkedPosts: linkedPosts),
           ),
+
+          // Safe area bottom inset spacing
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: MediaQuery.of(context).padding.bottom + 24,
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  String _statusLabel(String status) {
+    switch (status) {
+      case 'Active Build':
+        return 'Sedang Dimodifikasi';
+      case 'In Progress':
+        return 'Dalam Proses';
+      case 'Active Daily':
+        return 'Harian';
+      default:
+        return status;
+    }
   }
 }

@@ -40,11 +40,11 @@ class GlobalBottomNavBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // 1. Home
+              // 1. Beranda
               _navItem(
                 index: 0,
                 icon: Icons.home_rounded,
-                label: 'Home',
+                label: 'Beranda',
               ),
 
               // 2. Marketplace
@@ -82,19 +82,19 @@ class GlobalBottomNavBar extends StatelessWidget {
                 ),
               ),
 
-              // 4. Messages
+              // 4. Pesan
               _navItem(
                 index: 3,
                 icon: Icons.chat_bubble_outline_rounded,
-                label: 'Messages',
+                label: 'Pesan',
                 badgeCount: unreadMessagesCount,
               ),
 
-              // 5. Profile
+              // 5. Profil
               _navItem(
                 index: 4,
                 icon: Icons.person_rounded,
-                label: 'Profile',
+                label: 'Profil',
               ),
             ],
           ),
@@ -123,28 +123,34 @@ class GlobalBottomNavBar extends StatelessWidget {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Icon(icon, color: color, size: 24),
+                Icon(
+                  icon,
+                  size: 22,
+                  color: color,
+                ),
                 if (badgeCount > 0)
                   Positioned(
-                    top: -4,
                     right: -8,
+                    top: -4,
                     child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4,
+                        vertical: 1,
+                      ),
+                      decoration: BoxDecoration(
                         color: AppColors.performanceLime,
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       constraints: const BoxConstraints(
-                        minWidth: 16,
-                        minHeight: 16,
+                        minWidth: 14,
+                        minHeight: 14,
                       ),
                       child: Text(
-                        badgeCount > 9 ? '9+' : '$badgeCount',
+                        '$badgeCount',
                         style: const TextStyle(
                           color: AppColors.voidBlack,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          height: 1,
+                          fontSize: 9,
+                          fontWeight: FontWeight.w800,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -157,17 +163,8 @@ class GlobalBottomNavBar extends StatelessWidget {
               label,
               style: AppTypography.micro.copyWith(
                 color: color,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                 fontSize: 10,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Container(
-              width: 4,
-              height: 4,
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.performanceLime : Colors.transparent,
-                shape: BoxShape.circle,
               ),
             ),
           ],

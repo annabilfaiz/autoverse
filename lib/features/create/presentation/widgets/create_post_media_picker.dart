@@ -66,7 +66,7 @@ class CreatePostMediaPicker extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                'Select Vehicle Media',
+                'Pilih Foto Kendaraan',
                 style: AppTypography.bodyStrong.copyWith(
                   color: AppColors.iceWhite,
                   fontSize: 14,
@@ -74,7 +74,7 @@ class CreatePostMediaPicker extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                'Tap to pick an automotive photo below',
+                'Ketuk untuk memilih foto otomotif di bawah',
                 style: AppTypography.caption.copyWith(
                   color: AppColors.mutedSteel,
                   fontSize: 12,
@@ -152,7 +152,7 @@ class CreatePostMediaPicker extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  'Automotive Photo',
+                  'Foto Otomotif',
                   style: AppTypography.micro.copyWith(
                     color: AppColors.iceWhite,
                     fontSize: 10,
@@ -174,7 +174,7 @@ class CreatePostMediaPicker extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'MEDIA LIBRARY',
+              'GALERI MEDIA',
               style: AppTypography.micro.copyWith(
                 color: AppColors.mutedSteel,
                 fontWeight: FontWeight.w700,
@@ -183,7 +183,7 @@ class CreatePostMediaPicker extends StatelessWidget {
               ),
             ),
             Text(
-              '${mediaGallery.length} Photos available',
+              '${mediaGallery.length} foto tersedia',
               style: AppTypography.micro.copyWith(
                 color: AppColors.mutedSteel,
                 fontSize: 10,

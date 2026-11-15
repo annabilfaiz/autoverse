@@ -9,6 +9,7 @@ class ComponentDetailModal extends StatelessWidget {
   final String title;
   final String description;
   final Map<String, String> specs;
+  final String? imageAsset;
 
   const ComponentDetailModal({
     super.key,
@@ -16,6 +17,7 @@ class ComponentDetailModal extends StatelessWidget {
     required this.title,
     required this.description,
     required this.specs,
+    this.imageAsset,
   });
 
   static void show(
@@ -24,6 +26,7 @@ class ComponentDetailModal extends StatelessWidget {
     required String title,
     required String description,
     required Map<String, String> specs,
+    String? imageAsset,
   }) {
     showModalBottomSheet(
       context: context,
@@ -33,6 +36,7 @@ class ComponentDetailModal extends StatelessWidget {
         title: title,
         description: description,
         specs: specs,
+        imageAsset: imageAsset,
       ),
     );
   }
@@ -62,6 +66,22 @@ class ComponentDetailModal extends StatelessWidget {
                 ),
               ),
             ),
+            if (imageAsset != null && imageAsset!.isNotEmpty) ...[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  height: 140,
+                  width: double.infinity,
+                  color: AppColors.graphite,
+                  child: Image.asset(
+                    imageAsset!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
             Row(
               children: [
                 Container(
@@ -83,7 +103,7 @@ class ComponentDetailModal extends StatelessWidget {
                 const Icon(Icons.verified, size: 16, color: AppColors.performanceLime),
                 const SizedBox(width: 4),
                 Text(
-                  'Verified Upgrade',
+                  'Modifikasi Terverifikasi',
                   style: AppTypography.micro.copyWith(color: AppColors.titanium),
                 ),
               ],
@@ -116,16 +136,21 @@ class ComponentDetailModal extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               e.key,
                               style: AppTypography.caption.copyWith(color: AppColors.titanium),
                             ),
-                            Text(
-                              e.value,
-                              style: AppTypography.bodyStrong.copyWith(
-                                color: AppColors.iceWhite,
-                                fontSize: 12,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                e.value,
+                                textAlign: TextAlign.right,
+                                style: AppTypography.bodyStrong.copyWith(
+                                  color: AppColors.iceWhite,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                           ],

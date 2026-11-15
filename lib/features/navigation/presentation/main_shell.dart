@@ -7,6 +7,7 @@ import '../../marketplace/state/marketplace_controller.dart';
 import '../../messages/presentation/screens/conversations_list_screen.dart';
 import '../../messages/state/messages_controller.dart';
 import '../../profile/presentation/screens/my_profile_screen.dart';
+import '../../profile/state/saved_items_controller.dart';
 import 'widgets/create_action_modal.dart';
 import 'widgets/global_bottom_nav_bar.dart';
 
@@ -31,6 +32,7 @@ class _MainShellState extends State<MainShell> {
   late final FeedController _feedController;
   late final MarketplaceController _marketplaceController;
   late final MessagesController _messagesController;
+  late final SavedItemsController _savedController;
 
   @override
   void initState() {
@@ -39,6 +41,19 @@ class _MainShellState extends State<MainShell> {
     _feedController = FeedController();
     _marketplaceController = MarketplaceController();
     _messagesController = MessagesController();
+    _savedController = SavedItemsController(
+      feedController: _feedController,
+      marketplaceController: _marketplaceController,
+    );
+  }
+
+  @override
+  void dispose() {
+    _savedController.dispose();
+    _messagesController.dispose();
+    _marketplaceController.dispose();
+    _feedController.dispose();
+    super.dispose();
   }
 
   void _onTabSelected(int index) {
@@ -76,6 +91,10 @@ class _MainShellState extends State<MainShell> {
               HomeFypScreen(
                 controller: _feedController,
                 onOpenProfileTab: () => _onTabSelected(4),
+                savedController: _savedController,
+                marketplaceController: _marketplaceController,
+                messagesController: _messagesController,
+                isActiveTab: _currentIndex == 0,
               ),
 
               // 1: Marketplace
@@ -97,6 +116,9 @@ class _MainShellState extends State<MainShell> {
               MyProfileScreen(
                 onBackToHome: () => _onTabSelected(0),
                 feedController: _feedController,
+                savedController: _savedController,
+                marketplaceController: _marketplaceController,
+                messagesController: _messagesController,
               ),
             ],
           ),

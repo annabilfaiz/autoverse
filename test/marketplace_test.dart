@@ -140,12 +140,12 @@ void main() {
       expect(find.text('Marketplace'), findsOneWidget);
 
       // Verify category chips exist
-      expect(find.text('Engine'), findsWidgets);
-      expect(find.text('Exhaust'), findsWidgets);
-      expect(find.text('Wheels'), findsWidgets);
+      expect(find.text('Mesin'), findsWidgets);
+      expect(find.text('Knalpot'), findsWidgets);
+      expect(find.text('Velg'), findsWidgets);
 
       // Verify featured section
-      expect(find.text('Featured Parts'), findsOneWidget);
+      expect(find.text('Komponen Unggulan'), findsOneWidget);
     });
 
     testWidgets('ProductDetailScreen renders product info and specifications',
@@ -171,13 +171,13 @@ void main() {
       expect(find.text(product.name), findsOneWidget);
       expect(find.text(product.formattedPrice), findsOneWidget);
       expect(find.text(product.sellerName), findsOneWidget);
-      expect(find.text('Specifications'), findsOneWidget);
-      expect(find.text('Chat Seller'), findsOneWidget);
+      expect(find.text('Spesifikasi'), findsOneWidget);
+      expect(find.text('Hubungi Penjual'), findsOneWidget);
 
       // Scroll to view Vehicle Compatibility
       await tester.drag(find.byType(CustomScrollView), const Offset(0, -400));
       await tester.pumpAndSettle();
-      expect(find.text('Vehicle Compatibility'), findsOneWidget);
+      expect(find.text('Kompatibilitas Kendaraan'), findsOneWidget);
     });
 
     testWidgets('CreateListingScreen validates form fields', (tester) async {
@@ -195,16 +195,16 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text('List a Part'), findsOneWidget);
-      expect(find.text('Publish Listing'), findsOneWidget);
+      expect(find.text('Buat Iklan Komponen'), findsOneWidget);
+      expect(find.text('Terbitkan Iklan'), findsOneWidget);
 
       // Scroll to and tap publish without filling fields to trigger validation
-      await tester.ensureVisible(find.text('Publish Listing'));
-      await tester.tap(find.text('Publish Listing'));
+      await tester.ensureVisible(find.text('Terbitkan Iklan'));
+      await tester.tap(find.text('Terbitkan Iklan'));
       await tester.pumpAndSettle();
 
       // Required validators triggered
-      expect(find.text('Required'), findsWidgets);
+      expect(find.text('Wajib diisi'), findsWidgets);
     });
   });
 }

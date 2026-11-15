@@ -29,12 +29,12 @@ void main() {
       await tester.pump(const Duration(milliseconds: 200));
 
       // Verify Home tab is initially active
-      expect(find.text('For You'), findsOneWidget);
+      expect(find.text('Untuk Anda'), findsOneWidget);
 
       // Navigate to Marketplace (Tab 1)
       await tester.tap(find.text('Marketplace'));
       await tester.pump(const Duration(milliseconds: 200));
-      expect(find.text('Featured Parts'), findsOneWidget);
+      expect(find.text('Komponen Unggulan'), findsOneWidget);
 
       // Search for Akrapovic in marketplace
       await tester.enterText(find.byType(TextField).first, 'Akrapovič');
@@ -42,12 +42,12 @@ void main() {
       expect(find.textContaining('Akrapovič'), findsWidgets);
 
       // Navigate to Messages (Tab 3)
-      await tester.tap(find.text('Messages'));
+      await tester.tap(find.text('Pesan'));
       await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Kevin Mahendra'), findsOneWidget);
 
       // Navigate to Profile (Tab 4)
-      await tester.tap(find.text('Profile'));
+      await tester.tap(find.text('Profil'));
       await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Aditya Pratama'), findsOneWidget);
 
@@ -57,9 +57,9 @@ void main() {
       expect(find.textContaining('Akrapovič'), findsWidgets);
 
       // Switch back to Home (Tab 0)
-      await tester.tap(find.text('Home'));
+      await tester.tap(find.text('Beranda'));
       await tester.pump(const Duration(milliseconds: 200));
-      expect(find.text('For You'), findsOneWidget);
+      expect(find.text('Untuk Anda'), findsOneWidget);
     });
 
     testWidgets('2. Home FYP Like and Save Interactions', (tester) async {
@@ -96,17 +96,17 @@ void main() {
       await tester.pumpAndSettle();
 
       // Posts tab is default
-      expect(find.text('Posts'), findsWidgets);
-      expect(find.text('Builds'), findsOneWidget);
-      expect(find.text('Saved'), findsOneWidget);
+      expect(find.text('Postingan'), findsWidgets);
+      expect(find.text('Modifikasi'), findsOneWidget);
+      expect(find.text('Tersimpan'), findsOneWidget);
 
       // Tap Builds tab
-      await tester.tap(find.text('Builds'));
+      await tester.tap(find.text('Modifikasi'));
       await tester.pumpAndSettle();
-      expect(find.text('View Vehicle Showcase'), findsWidgets);
+      expect(find.text('Lihat Detail Kendaraan'), findsWidgets);
 
       // Tap Saved tab
-      await tester.tap(find.text('Saved'));
+      await tester.tap(find.text('Tersimpan'));
       await tester.pumpAndSettle();
       // post_02 is saved by default in initial dummy data
       expect(find.byIcon(Icons.bookmark_rounded), findsWidgets);
@@ -114,7 +114,7 @@ void main() {
       // Untoggle save on post_02 to test empty state
       feedController.toggleSave('post_02');
       await tester.pumpAndSettle();
-      expect(find.text('No Saved Posts Yet'), findsOneWidget);
+      expect(find.text('Belum ada postingan tersimpan.'), findsOneWidget);
 
       // Toggle save back on first post
       feedController.toggleSave(feedController.allPosts.first.id);
@@ -143,8 +143,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Component detail sheet opens
-      expect(find.text('Verified Upgrade'), findsOneWidget);
-      expect(find.text('WHEELS & TIRES'), findsWidgets);
+      expect(find.text('Modifikasi Terverifikasi'), findsOneWidget);
+      expect(find.text('VELG & BAN'), findsWidgets);
     });
 
     testWidgets('5. Marketplace -> Product Detail -> Chat Seller -> Send Message Flow', (tester) async {
@@ -168,7 +168,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // 2. Filter by Exhaust (tap category chip)
-      await tester.tap(find.text('Exhaust').first);
+      await tester.tap(find.text('Knalpot').first);
       await tester.pumpAndSettle();
       expect(find.textContaining('Akrapovič'), findsWidgets);
 
@@ -186,7 +186,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text('Chat Seller'), findsOneWidget);
+      expect(find.text('Hubungi Penjual'), findsOneWidget);
 
       // 4. Tap Chat Seller -> Opens ChatRoomScreen
       final conv = messagesController.getOrCreateSellerConversation(product: product);
@@ -241,6 +241,118 @@ void main() {
       expect(marketController.filteredProducts.length, initialCount + 1);
       expect(marketController.filteredProducts.first.name, 'Garrett G35-1050 Turbocharger');
       expect(marketController.getById('prod_custom_turbo')?.brand, 'Garrett');
+    });
+
+    testWidgets('7. Screen Rotation & Orientation Change State Retention (End-to-End)', (tester) async {
+      // ── Step 1: Start in Portrait ──
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(() => tester.view.resetPhysicalSize());
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.darkTheme,
+          home: const MainShell(),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+
+      // ── Step 2: Like & Save initial post on Home FYP ──
+      expect(find.text('Untuk Anda'), findsOneWidget);
+      // Tap like button on right rail
+      await tester.tap(find.byIcon(Icons.favorite_border));
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(find.byIcon(Icons.favorite), findsOneWidget);
+
+      // Tap save button on right rail
+      await tester.tap(find.byIcon(Icons.bookmark_border_rounded).first);
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(find.byIcon(Icons.bookmark), findsWidgets);
+
+      // ── Step 3: Create & Publish a new post ──
+      await tester.tap(find.byIcon(Icons.add_rounded));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(find.text('Buat di AutoVerse'), findsOneWidget);
+      await tester.tap(find.text('Buat Postingan'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      // Enter caption & link vehicle
+      const testCaption = 'Verifikasi Retensi State Rotasi Layar #AutoVerse';
+      await tester.enterText(find.byType(TextField), testCaption);
+      await tester.tap(find.textContaining('Porsche 911 GT3'));
+      await tester.pump(const Duration(milliseconds: 200));
+
+      // Publish post
+      await tester.tap(find.text('Bagikan'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      // Assert post appears in Home feed
+      expect(find.textContaining(testCaption, findRichText: true), findsOneWidget);
+
+      // ── Step 4: Send message in existing conversation ──
+      await tester.tap(find.text('Pesan'));
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(find.text('Kevin Mahendra'), findsOneWidget);
+
+      await tester.tap(find.text('Kevin Mahendra'));
+      await tester.pumpAndSettle();
+
+      const chatText = 'Halo Kevin, cek verifikasi rotasi layar.';
+      await tester.enterText(find.byType(TextField), chatText);
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.tap(find.byIcon(Icons.arrow_upward_rounded));
+      await tester.pumpAndSettle();
+
+      expect(find.text(chatText), findsOneWidget);
+
+      // Pop back to conversations list
+      await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(find.text('Anda: $chatText'), findsOneWidget);
+
+      // ── Step 5 & 6: Rotate Emulator to Landscape (2400 x 1080) ──
+      tester.view.physicalSize = const Size(2400, 1080);
+      await tester.pump(const Duration(milliseconds: 300));
+
+      // Verify chat state in landscape
+      expect(find.text('Anda: $chatText'), findsOneWidget);
+
+      // Navigate to Profil tab in landscape
+      await tester.tap(find.text('Profil'));
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.text('Aditya Pratama'), findsOneWidget);
+      // Initial author post count (38) + newly published post (1) = 39 posts
+      expect(find.text('39'), findsOneWidget);
+
+      // Navigate back to Beranda in landscape
+      await tester.tap(find.text('Beranda'));
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.textContaining(testCaption, findRichText: true), findsOneWidget);
+
+      // ── Step 7 & 8: Rotate Back to Portrait (1080 x 2400) ──
+      tester.view.physicalSize = const Size(1080, 2400);
+      await tester.pump(const Duration(milliseconds: 300));
+
+      // Verify published post on Beranda
+      expect(find.textContaining(testCaption, findRichText: true), findsOneWidget);
+
+      // Navigate to Pesan in portrait and verify message
+      await tester.tap(find.text('Pesan'));
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.text('Anda: $chatText'), findsOneWidget);
+
+      // Navigate to Profil in portrait and verify post count & grid
+      await tester.tap(find.text('Profil'));
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.text('39'), findsOneWidget);
+      expect(find.text('Aditya Pratama'), findsOneWidget);
     });
   });
 }

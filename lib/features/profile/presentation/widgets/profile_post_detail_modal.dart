@@ -156,11 +156,11 @@ class ProfilePostDetailModal extends StatelessWidget {
                   // Engagement Counters
                   Row(
                     children: [
-                      _modalStat(Icons.favorite_rounded, '${post.likeCount} Likes', AppColors.error),
+                      _modalStat(Icons.favorite_rounded, '${post.likeCount} Suka', AppColors.error),
                       const SizedBox(width: 20),
-                      _modalStat(Icons.chat_bubble_rounded, '${post.commentCount} Comments', AppColors.titanium),
+                      _modalStat(Icons.chat_bubble_rounded, '${post.commentCount} Komentar', AppColors.titanium),
                       const SizedBox(width: 20),
-                      _modalStat(Icons.share_rounded, '${post.shareCount} Shares', AppColors.titanium),
+                      _modalStat(Icons.share_rounded, '${post.shareCount} Dibagikan', AppColors.titanium),
                     ],
                   ),
                 ],

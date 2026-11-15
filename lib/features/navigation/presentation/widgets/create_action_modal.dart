@@ -62,7 +62,7 @@ class CreateActionModal extends StatelessWidget {
               ),
 
               Text(
-                'Create on AutoVerse',
+                'Buat di AutoVerse',
                 style: AppTypography.headlineH3.copyWith(
                   color: AppColors.iceWhite,
                   letterSpacing: -0.3,
@@ -70,11 +70,11 @@ class CreateActionModal extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Option 1: Create Post & Build Update
+              // Option 1: Buat Postingan
               _createActionOption(
                 icon: Icons.post_add_rounded,
-                title: 'Create Post & Build Update',
-                subtitle: 'Share photos, link garage builds & log upgrades',
+                title: 'Buat Postingan',
+                subtitle: 'Bagikan foto dan pembaruan modifikasi kendaraan',
                 color: AppColors.performanceLime,
                 onTap: () {
                   Navigator.pop(context);
@@ -90,29 +90,11 @@ class CreateActionModal extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
-              // Option 2: Add Vehicle to Garage
-              _createActionOption(
-                icon: Icons.directions_car,
-                title: 'Add Vehicle to Garage',
-                subtitle: 'Register your build and track component upgrades',
-                color: AppColors.iceWhite,
-                onTap: () {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Add vehicle flow opening...'),
-                      backgroundColor: AppColors.carbon,
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 12),
-
-              // Option 3: List Automotive Part
+              // Option 2: Jual Komponen Otomotif
               _createActionOption(
                 icon: Icons.storefront_rounded,
-                title: 'List Automotive Part',
-                subtitle: 'Sell wheels, exhausts, and performance gear',
+                title: 'Jual Komponen Otomotif',
+                subtitle: 'Jual velg, knalpot, dan perlengkapan performa',
                 color: AppColors.iceWhite,
                 onTap: () {
                   Navigator.pop(context);
@@ -157,14 +139,11 @@ class CreateActionModal extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: color == AppColors.performanceLime
-                    ? AppColors.performanceLime.withValues(alpha: 0.15)
-                    : AppColors.carbon,
-                borderRadius: BorderRadius.circular(10),
+                color: AppColors.carbon,
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.steel),
               ),
-              child: Center(
-                child: Icon(icon, color: color, size: 22),
-              ),
+              child: Icon(icon, color: color, size: 22),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -175,6 +154,7 @@ class CreateActionModal extends StatelessWidget {
                     title,
                     style: AppTypography.bodyStrong.copyWith(
                       color: AppColors.iceWhite,
+                      fontSize: 14,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -182,13 +162,17 @@ class CreateActionModal extends StatelessWidget {
                     subtitle,
                     style: AppTypography.caption.copyWith(
                       color: AppColors.titanium,
-                      fontSize: 12,
+                      fontSize: 11,
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, size: 18, color: AppColors.titanium),
+            const Icon(
+              Icons.chevron_right_rounded,
+              color: AppColors.titanium,
+              size: 20,
+            ),
           ],
         ),
       ),

@@ -34,10 +34,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   // Curated automotive media assets for enthusiast post creation
   final List<String> _mediaGallery = const [
-    'assets/images/feed_porsche_dusk.png',
-    'assets/images/feed_rx7_track.png',
-    'assets/images/feed_porsche_gt3.png',
-    'assets/images/feed_porsche_911.png',
+    'assets/images/vehicles/vehicle_porsche_911_gt3_hero.jpg',
+    'assets/images/vehicles/vehicle_mazda_rx7_fd3s_hero.jpg',
+    'assets/images/vehicles/vehicle_honda_civic_type_r_fk8_hero.jpg',
+    'assets/images/products/product_titanium_exhaust.jpg',
   ];
 
   @override
@@ -90,14 +90,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
     if (_selectedMediaAsset == null) {
       setState(() {
-        _errorMessage = 'Please select a photo for your automotive post.';
+        _errorMessage = 'Pilih foto untuk postingan modifikasi Anda.';
       });
       return;
     }
 
     if (caption.isEmpty) {
       setState(() {
-        _errorMessage = 'Please enter a caption for your post.';
+        _errorMessage = 'Masukkan keterangan untuk postingan Anda.';
       });
       return;
     }
@@ -116,7 +116,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       creatorAvatarAsset: 'assets/images/avatar_aditya.png',
       isVerified: true,
       isFollowing: false,
-      timeAgo: 'Just now',
+      timeAgo: 'Baru saja',
       caption: caption,
       hashtags: _extractHashtags(caption),
       musicTitle: 'Original Sound - aditya_gt3',
@@ -129,6 +129,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       mediaAsset: _selectedMediaAsset!,
       isVideo: false,
       likeCount: 0,
+      viewCount: 1,
       commentCount: 0,
       saveCount: 0,
       shareCount: 0,
@@ -161,8 +162,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               Expanded(
                 child: Text(
                   _selectedVehicle != null
-                      ? 'Post published to FYP and ${_selectedVehicle!.displayName} showcase!'
-                      : 'Post published to FYP and your profile!',
+                      ? 'Postingan berhasil dibagikan ke Beranda dan showcase ${_selectedVehicle!.displayName}!'
+                      : 'Postingan berhasil dibagikan ke Beranda dan profil Anda!',
                   style: AppTypography.body.copyWith(
                     color: AppColors.iceWhite,
                     fontSize: 13,
@@ -194,7 +195,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Create Post',
+          'Buat Postingan',
           style: AppTypography.headlineH3.copyWith(
             color: AppColors.iceWhite,
             fontSize: 16,
@@ -228,7 +229,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         )
                       : Text(
-                          'Share',
+                          'Bagikan',
                           style: AppTypography.button.copyWith(
                             color: AppColors.voidBlack,
                             fontWeight: FontWeight.w700,
@@ -326,7 +327,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'CAPTION *',
+              'KETERANGAN *',
               style: AppTypography.micro.copyWith(
                 color: AppColors.mutedSteel,
                 fontWeight: FontWeight.w700,
@@ -369,7 +370,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             ),
             decoration: InputDecoration(
               hintText:
-                  'Share what is new with your build, track day telemetry, or garage project... #Porsche #GT3 #Sentul',
+                  'Bagikan modifikasi terbaru, catatan sirkuit, atau proyek garasi Anda... #Porsche #GT3 #Sentul',
               hintStyle: AppTypography.body.copyWith(
                 color: AppColors.mutedSteel,
                 fontSize: 13,

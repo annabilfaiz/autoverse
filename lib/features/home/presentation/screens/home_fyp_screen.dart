@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/vehicles_data.dart';
+import '../../../marketplace/state/marketplace_controller.dart';
+import '../../../messages/state/messages_controller.dart';
 import '../../../profile/presentation/screens/my_profile_screen.dart';
+import '../../../profile/state/saved_items_controller.dart';
 import '../../../showcase/presentation/screens/featured_vehicle_showcase_screen.dart';
 import '../../state/feed_controller.dart';
 import '../widgets/video_feed_item.dart';
@@ -11,11 +14,19 @@ import 'search_screen.dart';
 class HomeFypScreen extends StatefulWidget {
   final FeedController controller;
   final VoidCallback onOpenProfileTab;
+  final SavedItemsController? savedController;
+  final MarketplaceController? marketplaceController;
+  final MessagesController? messagesController;
+  final bool isActiveTab;
 
   const HomeFypScreen({
     super.key,
     required this.controller,
     required this.onOpenProfileTab,
+    this.savedController,
+    this.marketplaceController,
+    this.messagesController,
+    this.isActiveTab = true,
   });
 
   @override
@@ -52,6 +63,7 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
         builder: (_) => FeaturedVehicleShowcaseScreen(
           vehicle: vehicle,
           feedController: widget.controller,
+          savedController: widget.savedController,
         ),
       ),
     );
@@ -64,6 +76,9 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
         builder: (_) => MyProfileScreen(
           onBackToHome: () => Navigator.pop(context),
           feedController: widget.controller,
+          savedController: widget.savedController,
+          marketplaceController: widget.marketplaceController,
+          messagesController: widget.messagesController,
         ),
       ),
     );
@@ -102,7 +117,7 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                           const Icon(Icons.people_outline, size: 54, color: AppColors.mutedSteel),
                           const SizedBox(height: 12),
                           Text(
-                            'No posts from creators you follow yet.',
+                            'Belum ada postingan dari kreator yang Anda ikuti',
                             style: AppTypography.headlineH3.copyWith(color: AppColors.titanium),
                           ),
                           const SizedBox(height: 8),
@@ -112,7 +127,7 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                               foregroundColor: AppColors.voidBlack,
                             ),
                             onPressed: () => widget.controller.setActiveTab(FeedTab.forYou),
-                            child: const Text('Explore For You Feed'),
+                            child: const Text('Jelajahi Beranda'),
                           ),
                         ],
                       ),
@@ -126,10 +141,13 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                       },
                       itemBuilder: (context, index) {
                         final post = posts[index];
+                        final isCurrent = index == widget.controller.activePostIndex;
                         return VideoFeedItem(
                           key: ValueKey(post.id),
                           post: post,
                           controller: widget.controller,
+                          isCurrentPost: isCurrent,
+                          isActiveTab: widget.isActiveTab,
                           onProfileTap: _navigateToProfile,
                           onVehicleTap: () =>
                               _navigateToVehicleShowcase(post.linkedVehicleId),
@@ -148,21 +166,8 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Left: Live badge / Video Camera icon
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: AppColors.voidBlack.withValues(alpha: 0.35),
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
-                          ),
-                          child: const Icon(
-                            Icons.live_tv_rounded,
-                            size: 20,
-                            color: AppColors.iceWhite,
-                          ),
-                        ),
+                        // Left placeholder for balanced centering
+                        const SizedBox(width: 40),
 
                         // Center: Segmented Feed Switcher
                         Row(
@@ -178,7 +183,7 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 child: Text(
-                                  'Following',
+                                  'Mengikuti',
                                   style: AppTypography.headlineH3.copyWith(
                                     fontSize: 16,
                                     fontWeight: widget.controller.activeTab == FeedTab.following
@@ -208,7 +213,7 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      'For You',
+                                      'Untuk Anda',
                                       style: AppTypography.headlineH3.copyWith(
                                         fontSize: 16,
                                         fontWeight: widget.controller.activeTab == FeedTab.forYou

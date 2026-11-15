@@ -24,7 +24,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Latest Build Milestone',
+                'Catatan Modifikasi Terkini',
                 style: AppTypography.headlineH3.copyWith(
                   fontSize: 16,
                   color: AppColors.iceWhite,
@@ -60,7 +60,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Oct 18, 2026',
+                            '18 Okt 2026',
                             style: AppTypography.micro.copyWith(
                               color: AppColors.performanceLime,
                               fontWeight: FontWeight.w700,
@@ -73,7 +73,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Installed full titanium headers and race cats at Sentul Speed Lab. Dyno verified.',
+                            'Pemasangan header titanium dan race cat di Sentul Speed Lab. Hasil dyno terverifikasi.',
                             style: AppTypography.caption.copyWith(color: AppColors.titanium),
                           ),
                         ],
@@ -99,7 +99,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'BUILD POSTS & UPDATES',
+                      'POSTINGAN MODIFIKASI',
                       style: AppTypography.micro.copyWith(
                         letterSpacing: 1.5,
                         fontWeight: FontWeight.w700,
@@ -114,7 +114,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      '${linkedPosts.length} Updates',
+                      '${linkedPosts.length} Pembaruan',
                       style: AppTypography.micro.copyWith(
                         color: AppColors.performanceLime,
                         fontWeight: FontWeight.w700,
@@ -143,7 +143,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'No posts linked to this vehicle yet',
+                        'Belum ada postingan untuk kendaraan ini',
                         style: AppTypography.bodyStrong.copyWith(
                           color: AppColors.iceWhite,
                           fontSize: 13,
@@ -151,7 +151,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Create a post and select this car to display dyno pulls and track updates.',
+                        'Buat postingan dan pilih kendaraan ini untuk membagikan pembaruan.',
                         style: AppTypography.caption.copyWith(
                           color: AppColors.mutedSteel,
                           fontSize: 11,
@@ -275,39 +275,7 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 16),
-
-        // View Full Build Timeline CTA
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.graphite,
-                foregroundColor: AppColors.iceWhite,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: const BorderSide(color: AppColors.steel),
-                ),
-              ),
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Opening full build timeline...'),
-                    backgroundColor: AppColors.carbon,
-                  ),
-                );
-              },
-              child: Text(
-                'View Full Build Timeline',
-                style: AppTypography.button.copyWith(color: AppColors.iceWhite),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 24),
       ],
     );
   }

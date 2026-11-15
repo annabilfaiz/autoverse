@@ -129,7 +129,7 @@ class ProductReferenceCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'View Part',
+                        'Lihat Komponen',
                         style: AppTypography.micro.copyWith(
                           color: AppColors.titanium,
                           fontWeight: FontWeight.w600,

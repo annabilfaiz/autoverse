@@ -20,10 +20,13 @@ class PostModel {
   final DateTime? createdAt;
 
   final String mediaAsset;
+  final String? videoAsset;
   final bool isVideo;
 
   int likeCount;
   bool isLiked;
+
+  final int viewCount;
 
   int commentCount;
   int saveCount;
@@ -50,9 +53,11 @@ class PostModel {
     this.linkedVehicleId,
     this.createdAt,
     required this.mediaAsset,
+    this.videoAsset,
     this.isVideo = false,
     required this.likeCount,
     this.isLiked = false,
+    this.viewCount = 0,
     required this.commentCount,
     required this.saveCount,
     this.isSaved = false,
@@ -77,9 +82,11 @@ class PostModel {
     String? linkedVehicleId,
     DateTime? createdAt,
     String? mediaAsset,
+    String? videoAsset,
     bool? isVideo,
     int? likeCount,
     bool? isLiked,
+    int? viewCount,
     int? commentCount,
     int? saveCount,
     bool? isSaved,
@@ -103,9 +110,11 @@ class PostModel {
       linkedVehicleId: linkedVehicleId ?? this.linkedVehicleId,
       createdAt: createdAt ?? this.createdAt,
       mediaAsset: mediaAsset ?? this.mediaAsset,
+      videoAsset: videoAsset ?? this.videoAsset,
       isVideo: isVideo ?? this.isVideo,
       likeCount: likeCount ?? this.likeCount,
       isLiked: isLiked ?? this.isLiked,
+      viewCount: viewCount ?? this.viewCount,
       commentCount: commentCount ?? this.commentCount,
       saveCount: saveCount ?? this.saveCount,
       isSaved: isSaved ?? this.isSaved,
