@@ -5,6 +5,8 @@ import '../../../../data/models/message_model.dart';
 import '../../../../features/marketplace/presentation/screens/product_detail_screen.dart';
 import '../../../../features/marketplace/state/marketplace_controller.dart';
 import '../../state/messages_controller.dart';
+import '../widgets/chat_message_bubble.dart';
+import '../widgets/chat_message_composer.dart';
 import '../widgets/product_reference_card.dart';
 
 class ChatRoomScreen extends StatefulWidget {
@@ -85,6 +87,12 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     }
   }
 
+  bool _shouldShowDateHeader(MessageModel prev, MessageModel current) {
+    return prev.timestamp.day != current.timestamp.day ||
+        prev.timestamp.month != current.timestamp.month ||
+        prev.timestamp.year != current.timestamp.year;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -118,8 +126,11 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
 
         return Scaffold(
           backgroundColor: AppColors.voidBlack,
-          appBar: _buildAppBar(conversation.participantName,
-              conversation.participantUsername, conversation.participantRole),
+          appBar: _buildAppBar(
+            conversation.participantName,
+            conversation.participantUsername,
+            conversation.participantRole,
+          ),
           body: SafeArea(
             child: Column(
               children: [
@@ -159,18 +170,20 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                                   message,
                                 );
 
-                            return Column(
-                              children: [
-                                if (showDateHeader) _buildDateChip(message),
-                                _buildMessageBubble(message),
-                              ],
+                            return ChatMessageBubble(
+                              message: message,
+                              showDateHeader: showDateHeader,
                             );
                           },
                         ),
                 ),
 
                 // Input Composer
-                _buildMessageComposer(),
+                ChatMessageComposer(
+                  controller: _textController,
+                  canSend: _canSend,
+                  onSend: _sendMessage,
+                ),
               ],
             ),
           ),
@@ -329,185 +342,6 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  bool _shouldShowDateHeader(MessageModel prev, MessageModel current) {
-    return prev.timestamp.day != current.timestamp.day ||
-        prev.timestamp.month != current.timestamp.month ||
-        prev.timestamp.year != current.timestamp.year;
-  }
-
-  Widget _buildDateChip(MessageModel message) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      child: Center(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(
-            color: AppColors.carbon,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColors.steel.withValues(alpha: 0.6)),
-          ),
-          child: Text(
-            '${message.timestamp.day}/${message.timestamp.month}/${message.timestamp.year}',
-            style: AppTypography.micro.copyWith(
-              color: AppColors.mutedSteel,
-              fontSize: 10,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMessageBubble(MessageModel message) {
-    final isMe = message.isMe;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment:
-            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Container(
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.76,
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-            decoration: BoxDecoration(
-              color: isMe ? AppColors.carbon : AppColors.graphite,
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(16),
-                topRight: const Radius.circular(16),
-                bottomLeft: Radius.circular(isMe ? 16 : 4),
-                bottomRight: Radius.circular(isMe ? 4 : 16),
-              ),
-              border: Border.all(
-                color: isMe
-                    ? AppColors.performanceLime.withValues(alpha: 0.35)
-                    : AppColors.steel,
-                width: 1,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment:
-                  isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-              children: [
-                Text(
-                  message.text,
-                  style: AppTypography.body.copyWith(
-                    color: AppColors.iceWhite,
-                    fontSize: 14,
-                    height: 1.4,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      message.formattedTime,
-                      style: AppTypography.micro.copyWith(
-                        color: isMe
-                            ? AppColors.performanceLime.withValues(alpha: 0.8)
-                            : AppColors.mutedSteel,
-                        fontSize: 10,
-                      ),
-                    ),
-                    if (isMe) ...[
-                      const SizedBox(width: 4),
-                      const Icon(
-                        Icons.done_all_rounded,
-                        size: 13,
-                        color: AppColors.performanceLime,
-                      ),
-                    ],
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMessageComposer() {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-      decoration: BoxDecoration(
-        color: AppColors.carbon,
-        border: const Border(
-          top: BorderSide(color: AppColors.steel, width: 0.8),
-        ),
-      ),
-      child: Row(
-        children: [
-          // Text input
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: AppColors.voidBlack,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: AppColors.steel),
-              ),
-              child: TextField(
-                controller: _textController,
-                textCapitalization: TextCapitalization.sentences,
-                keyboardType: TextInputType.multiline,
-                maxLines: 4,
-                minLines: 1,
-                style: AppTypography.body.copyWith(
-                  color: AppColors.iceWhite,
-                  fontSize: 14,
-                ),
-                decoration: InputDecoration(
-                  hintText: 'Type an automotive message...',
-                  hintStyle: AppTypography.body.copyWith(
-                    color: AppColors.mutedSteel,
-                    fontSize: 14,
-                  ),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                ),
-                onSubmitted: (_) => _sendMessage(),
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-
-          // Send button
-          GestureDetector(
-            onTap: _canSend ? _sendMessage : null,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: _canSend
-                    ? AppColors.performanceLime
-                    : AppColors.graphite,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: _canSend
-                      ? AppColors.performanceLime
-                      : AppColors.steel,
-                ),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.arrow_upward_rounded,
-                  size: 20,
-                  color: _canSend ? AppColors.voidBlack : AppColors.mutedSteel,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
