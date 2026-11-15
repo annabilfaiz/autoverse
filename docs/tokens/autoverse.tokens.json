@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "name": "AUTOVERSE Design Tokens",
+    "version": "1.0.0",
+    "status": "working semantic mirror of approved Figma foundation",
+    "note": "This JSON contains the explicit values known from the project. The existing Figma Foundations page remains authoritative for its full 47-variable and 9-text-style set."
+  },
+  "color": {
+    "background": {
+      "void": {"value": "#0A0D10", "type": "color"}
+    },
+    "surface": {
+      "carbon": {"value": "#11171D", "type": "color"},
+      "graphite": {"value": "#192129", "type": "color"},
+      "steel": {"value": "#28343F", "type": "color"}
+    },
+    "accent": {
+      "performanceLime": {"value": "#C7F36B", "type": "color"},
+      "limeSoft": {"value": "#263426", "type": "color"}
+    },
+    "text": {
+      "primary": {"value": "#F4F6F2", "type": "color"},
+      "secondary": {"value": "#A0AAB4", "type": "color"},
+      "muted": {"value": "#687582", "type": "color"}
+    },
+    "semantic": {
+      "success": {"value": "#65D69A", "type": "color"},
+      "warning": {"value": "#FFBE69", "type": "color"},
+      "error": {"value": "#FF7272", "type": "color"},
+      "info": {"value": "#70B9FF", "type": "color"}
+    }
+  },
+  "font": {
+    "family": {"value": "Inter", "type": "fontFamily"},
+    "weight": {
+      "regular": {"value": 400, "type": "fontWeight"},
+      "medium": {"value": 500, "type": "fontWeight"},
+      "semibold": {"value": 600, "type": "fontWeight"},
+      "bold": {"value": 700, "type": "fontWeight"}
+    },
+    "size": {
+      "micro": {"value": 10, "unit": "px"},
+      "caption": {"value": 12, "unit": "px"},
+      "body": {"value": 14, "unit": "px"},
+      "h3": {"value": 16, "unit": "px"},
+      "h2": {"value": 20, "unit": "px"},
+      "h1": {"value": 24, "unit": "px"},
+      "display": {"value": 32, "unit": "px"}
+    },
+    "lineHeight": {
+      "micro": {"value": 14, "unit": "px"},
+      "caption": {"value": 16, "unit": "px"},
+      "body": {"value": 20, "unit": "px"},
+      "h3": {"value": 22, "unit": "px"},
+      "h2": {"value": 26, "unit": "px"},
+      "h1": {"value": 30, "unit": "px"},
+      "display": {"value": 38, "unit": "px"}
+    }
+  },
+  "spacing": {
+    "base": {"value": 4, "unit": "px"},
+    "xs": {"value": 4, "unit": "px"},
+    "sm": {"value": 8, "unit": "px"},
+    "md": {"value": 12, "unit": "px"},
+    "lg": {"value": 16, "unit": "px"},
+    "pageMargin": {"value": 20, "unit": "px"},
+    "xl": {"value": 24, "unit": "px"},
+    "2xl": {"value": 32, "unit": "px"},
+    "3xl": {"value": 40, "unit": "px"}
+  },
+  "radius": {
+    "badge": {"value": 8, "unit": "px"},
+    "input": {"value": 12, "unit": "px"},
+    "card": {"value": 16, "unit": "px"},
+    "hero": {"value": 20, "unit": "px"},
+    "heroLarge": {"value": 24, "unit": "px"},
+    "pill": {"value": 999, "unit": "px"}
+  },
+  "layout": {
+    "baseFrame": {"width": 390, "height": 844},
+    "compactFrame": {"width": 360, "height": 800},
+    "largeFrame": {"width": 430, "height": 932},
+    "minTouchTarget": {"width": 44, "height": 44},
+    "bottomNavigationHeight": {"min": 64, "max": 72, "unit": "px", "note": "Add dynamic system safe area separately."}
+  }
+}

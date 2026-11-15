@@ -1,0 +1,34 @@
+{
+  "product": "AUTOVERSE",
+  "design_tool": "Google Stitch",
+  "existing_project": {
+    "title": "AutoVerse Platform",
+    "resource_name": "projects/217030135943957931",
+    "project_id": "217030135943957931",
+    "device_type": "MOBILE",
+    "visibility": "RESTRICTED",
+    "role": "OWNER",
+    "last_user_reported_screen_count": 0
+  },
+  "platform_targets": ["Android", "iOS"],
+  "implementation_target": "Flutter / Dart",
+  "mvp_data_mode": "local dummy data; no backend or database",
+  "primary_pillars": [
+    "Home / For You video feed",
+    "Marketplace",
+    "Messaging",
+    "Profile + Vehicle Showcase"
+  ],
+  "primary_navigation": ["Home", "Marketplace", "Messages", "Profile"],
+  "central_create_is_destination": false,
+  "base_frame": {"width": 390, "height": 844},
+  "responsive_frames": [
+    {"width": 360, "height": 800},
+    {"width": 430, "height": 932}
+  ],
+  "working_brand_line": "Drive. Connect. Explore.",
+  "design_direction": "Dark Premium / Modern Automotive Editorial",
+  "accent_color": "#C7F36B",
+  "project_creation_allowed": false,
+  "work_mode": "phased, one module at a time"
+}
