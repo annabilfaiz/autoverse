@@ -214,5 +214,63 @@ void main() {
       expect(porschePosts.isNotEmpty, true);
       expect(porschePosts.first.id, 'post_01');
     });
+
+    testWidgets(
+      '11. FYP Search and Volume buttons positioning and separation (Volume on top-left, Search on top-right)',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
+
+        await tester.pumpWidget(
+          const MaterialApp(home: MainShell(initialIndex: 0)),
+        );
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 200));
+
+        // Find Search button (Icons.search_rounded) and Volume button (Icons.volume_up_rounded / Icons.volume_off_rounded)
+        final searchFinder = find.byIcon(Icons.search_rounded);
+        final volumeFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is Icon &&
+              (widget.icon == Icons.volume_up_rounded ||
+                  widget.icon == Icons.volume_off_rounded),
+        );
+
+        expect(searchFinder, findsOneWidget);
+        expect(volumeFinder, findsOneWidget);
+
+        final searchRect = tester.getRect(searchFinder);
+        final volumeRect = tester.getRect(volumeFinder);
+
+        // Verify Search is on the right half of the screen (> 270 dp)
+        expect(searchRect.center.dx > 270, true);
+
+        // Verify Volume is on the left half of the screen (< 270 dp)
+        expect(volumeRect.center.dx < 270, true);
+
+        // Verify they are completely separated horizontally and do not overlap
+        expect(searchRect.left > volumeRect.right + 200, true);
+
+        // Verify Volume button toggles mute state
+        expect(find.byIcon(Icons.volume_up_rounded), findsOneWidget);
+        await tester.tap(volumeFinder);
+        await tester.pump(const Duration(milliseconds: 350));
+        expect(find.byIcon(Icons.volume_off_rounded), findsOneWidget);
+
+        // Tap again to unmute
+        await tester.tap(volumeFinder);
+        await tester.pump(const Duration(milliseconds: 350));
+        expect(find.byIcon(Icons.volume_up_rounded), findsOneWidget);
+
+        // Verify Search button navigates to SearchScreen
+        await tester.tap(searchFinder);
+        await tester.pumpAndSettle();
+        expect(
+          find.text('Cari modifikasi, kendaraan, komponen...'),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }

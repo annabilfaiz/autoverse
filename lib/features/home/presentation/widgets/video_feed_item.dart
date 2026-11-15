@@ -233,73 +233,6 @@ class _VideoFeedItemState extends State<VideoFeedItem>
                   ),
                 ),
 
-              // Pending Video Integration Badge (e.g. for post_02 Mazda RX-7)
-              if (!hasVideo)
-                Positioned(
-                  top: 56,
-                  left: 16,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.voidBlack.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: AppColors.steel.withValues(alpha: 0.6),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.video_library_outlined,
-                          size: 13,
-                          color: AppColors.titanium,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          'Video Segera Hadir',
-                          style: AppTypography.micro.copyWith(
-                            color: AppColors.titanium,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-              // Audio Mute / Unmute Floating Toggle Button
-              if (hasVideo && _isInitialized)
-                Positioned(
-                  top: 56,
-                  right: 16,
-                  child: GestureDetector(
-                    onTap: _toggleMute,
-                    behavior: HitTestBehavior.opaque,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: AppColors.voidBlack.withValues(alpha: 0.65),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: AppColors.steel.withValues(alpha: 0.6),
-                        ),
-                      ),
-                      child: Icon(
-                        _isMuted
-                            ? Icons.volume_off_rounded
-                            : Icons.volume_up_rounded,
-                        size: 16,
-                        color: AppColors.iceWhite,
-                      ),
-                    ),
-                  ),
-                ),
-
               // Top vignette gradient (for top nav legibility)
               Positioned(
                 top: 0,
@@ -320,6 +253,84 @@ class _VideoFeedItemState extends State<VideoFeedItem>
                   ),
                 ),
               ),
+
+              // Pending Video Integration Badge (e.g. for placeholder videos)
+              if (!hasVideo)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16, top: 8),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.voidBlack.withValues(alpha: 0.7),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: AppColors.steel.withValues(alpha: 0.6),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.video_library_outlined,
+                              size: 13,
+                              color: AppColors.titanium,
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              'Video Segera Hadir',
+                              style: AppTypography.micro.copyWith(
+                                color: AppColors.titanium,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+              // Audio Mute / Unmute Floating Toggle Button (Top-Left)
+              if (hasVideo && _isInitialized)
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16, top: 8),
+                      child: GestureDetector(
+                        onTap: _toggleMute,
+                        behavior: HitTestBehavior.opaque,
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: AppColors.voidBlack.withValues(alpha: 0.35),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.1),
+                            ),
+                          ),
+                          child: Icon(
+                            _isMuted
+                                ? Icons.volume_off_rounded
+                                : Icons.volume_up_rounded,
+                            size: 20,
+                            color: AppColors.iceWhite,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
               // Bottom vignette gradient (for bottom overlay & nav legibility)
               Positioned(

@@ -181,8 +181,10 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Left placeholder for balanced centering
-                        const SizedBox(width: 40),
+                        // Left placeholder for symmetrical centering (passes touches to top-left Volume button below)
+                        const IgnorePointer(
+                          child: SizedBox(width: 40, height: 40),
+                        ),
 
                         // Center: Segmented Feed Switcher
                         Row(
