@@ -177,6 +177,7 @@ assets/
 │   │   ├── product_carbon_ceramic_brake.jpg            # Foto rem Brembo Carbon-Ceramic
 │   │   ├── product_forged_wheel.jpg                    # Foto velg BBS FI-R monoblock
 │   │   ├── product_performance_coilover.jpg            # Foto coilover KW Clubsport
+│   │   ├── product_placeholder.jpg                     # Placeholder netral suku cadang tanpa foto khusus
 │   │   └── product_titanium_exhaust.jpg                # Foto knalpot Akrapovic Titanium
 │   └── vehicles/
 │       ├── vehicle_honda_civic_type_r_fk8_hero.jpg     # Foto otentik Civic Type R FK8 putih
@@ -189,5 +190,5 @@ assets/
         └── fyp_porsche_gt3_tunnel.mp4                  # Video 9:16 Porsche GT3 tunnel drive (10s, 720x1280)
 ```
 
-Seluruh 14 aset di atas didaftarkan di bagian `flutter.assets` pada `pubspec.yaml`.
+Seluruh 15 aset di atas didaftarkan di bagian `flutter.assets` pada `pubspec.yaml`.
 Semua file sementara (*inbox* dan tangkapan layar eksperimental) telah dieliminasi dari repositori runtime.

@@ -54,7 +54,8 @@ Sebelum menjalankan proyek, pastikan perangkat pengembangan telah terpasang:
 
 1. **Clone repositori atau buka direktori proyek:**
    ```bash
-   cd "C:\Faiz\My project\autoverse"
+   git clone <repository_url>
+   cd autoverse
    ```
 
 2. **Unduh dependensi proyek:**
@@ -122,7 +123,7 @@ autoverse/
 └── pubspec.yaml           # Deklarasi dependensi dan aset
 ```
 
-Untuk rincian tanggung jawab setiap berkas dan folder, silakan baca [docs/PROJECT_STRUCTURE.md](file:///c:/Faiz/My project/autoverse/docs/PROJECT_STRUCTURE.md).
+Untuk rincian tanggung jawab setiap berkas dan folder, silakan baca [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md).
 
 ---
 
