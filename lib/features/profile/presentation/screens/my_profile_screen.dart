@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../home/state/feed_controller.dart';
 import '../../../marketplace/state/marketplace_controller.dart';
@@ -54,7 +55,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     } else {
       _savedController = SavedItemsController(
         feedController: _controller,
-        marketplaceController: widget.marketplaceController ?? MarketplaceController(),
+        marketplaceController:
+            widget.marketplaceController ?? MarketplaceController(),
       );
       _internalSavedController = true;
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -8,10 +9,7 @@ import '../../../../data/models/post_model.dart';
 class ProfilePostDetailModal extends StatelessWidget {
   final PostModel post;
 
-  const ProfilePostDetailModal({
-    super.key,
-    required this.post,
-  });
+  const ProfilePostDetailModal({super.key, required this.post});
 
   static void show(BuildContext context, PostModel post) {
     showModalBottomSheet(
@@ -64,23 +62,35 @@ class ProfilePostDetailModal extends StatelessWidget {
                         children: [
                           Text(
                             post.creatorName,
-                            style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite),
+                            style: AppTypography.bodyStrong.copyWith(
+                              color: AppColors.iceWhite,
+                            ),
                           ),
                           if (post.isVerified) ...[
                             const SizedBox(width: 4),
-                            const Icon(Icons.verified, size: 14, color: AppColors.performanceLime),
+                            const Icon(
+                              Icons.verified,
+                              size: 14,
+                              color: AppColors.performanceLime,
+                            ),
                           ],
                         ],
                       ),
                       Text(
                         '${post.creatorUsername} • ${post.timeAgo}',
-                        style: AppTypography.caption.copyWith(color: AppColors.titanium, fontSize: 11),
+                        style: AppTypography.caption.copyWith(
+                          color: AppColors.titanium,
+                          fontSize: 11,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.close_rounded, color: AppColors.titanium),
+                  icon: const Icon(
+                    Icons.close_rounded,
+                    color: AppColors.titanium,
+                  ),
                   onPressed: () => Navigator.pop(context),
                 ),
               ],
@@ -108,7 +118,10 @@ class ProfilePostDetailModal extends StatelessWidget {
                         post.mediaAsset,
                         fit: BoxFit.cover,
                         errorBuilder: (_, _, _) => const Center(
-                          child: Icon(Icons.image_not_supported, color: AppColors.titanium),
+                          child: Icon(
+                            Icons.image_not_supported,
+                            color: AppColors.titanium,
+                          ),
                         ),
                       ),
                     ),
@@ -118,16 +131,29 @@ class ProfilePostDetailModal extends StatelessWidget {
                   // Linked Vehicle Badge
                   if (post.linkedVehicleChip.isNotEmpty) ...[
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
-                        color: AppColors.performanceLime.withValues(alpha: 0.12),
+                        color: AppColors.performanceLime.withValues(
+                          alpha: 0.12,
+                        ),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColors.performanceLime.withValues(alpha: 0.4)),
+                        border: Border.all(
+                          color: AppColors.performanceLime.withValues(
+                            alpha: 0.4,
+                          ),
+                        ),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.directions_car_rounded, size: 14, color: AppColors.performanceLime),
+                          const Icon(
+                            Icons.directions_car_rounded,
+                            size: 14,
+                            color: AppColors.performanceLime,
+                          ),
                           const SizedBox(width: 6),
                           Text(
                             post.linkedVehicleChip,
@@ -156,11 +182,23 @@ class ProfilePostDetailModal extends StatelessWidget {
                   // Engagement Counters
                   Row(
                     children: [
-                      _modalStat(Icons.favorite_rounded, '${post.likeCount} Suka', AppColors.error),
+                      _modalStat(
+                        Icons.favorite_rounded,
+                        '${post.likeCount} Suka',
+                        AppColors.error,
+                      ),
                       const SizedBox(width: 20),
-                      _modalStat(Icons.chat_bubble_rounded, '${post.commentCount} Komentar', AppColors.titanium),
+                      _modalStat(
+                        Icons.chat_bubble_rounded,
+                        '${post.commentCount} Komentar',
+                        AppColors.titanium,
+                      ),
                       const SizedBox(width: 20),
-                      _modalStat(Icons.share_rounded, '${post.shareCount} Dibagikan', AppColors.titanium),
+                      _modalStat(
+                        Icons.share_rounded,
+                        '${post.shareCount} Dibagikan',
+                        AppColors.titanium,
+                      ),
                     ],
                   ),
                 ],
@@ -177,7 +215,13 @@ class ProfilePostDetailModal extends StatelessWidget {
       children: [
         Icon(icon, size: 16, color: color),
         const SizedBox(width: 6),
-        Text(text, style: AppTypography.caption.copyWith(color: AppColors.titanium, fontSize: 12)),
+        Text(
+          text,
+          style: AppTypography.caption.copyWith(
+            color: AppColors.titanium,
+            fontSize: 12,
+          ),
+        ),
       ],
     );
   }

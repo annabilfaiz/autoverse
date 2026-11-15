@@ -105,7 +105,8 @@ class PostModel {
       hashtags: hashtags ?? this.hashtags,
       musicTitle: musicTitle ?? this.musicTitle,
       linkedVehicleName: linkedVehicleName ?? this.linkedVehicleName,
-      linkedVehicleGeneration: linkedVehicleGeneration ?? this.linkedVehicleGeneration,
+      linkedVehicleGeneration:
+          linkedVehicleGeneration ?? this.linkedVehicleGeneration,
       linkedVehicleChip: linkedVehicleChip ?? this.linkedVehicleChip,
       linkedVehicleId: linkedVehicleId ?? this.linkedVehicleId,
       createdAt: createdAt ?? this.createdAt,

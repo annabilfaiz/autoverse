@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/vehicles_data.dart';
@@ -39,7 +40,9 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: widget.controller.activePostIndex);
+    _pageController = PageController(
+      initialPage: widget.controller.activePostIndex,
+    );
   }
 
   @override
@@ -49,7 +52,8 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
   }
 
   void _navigateToVehicleShowcase([String? vehicleId]) {
-    final vId = vehicleId ??
+    final vId =
+        vehicleId ??
         widget.controller.currentPost?.linkedVehicleId ??
         'veh_porsche_gt3';
     final vehicle = VehiclesData.getAdityaGarageVehicles().firstWhere(
@@ -114,11 +118,17 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.people_outline, size: 54, color: AppColors.mutedSteel),
+                          const Icon(
+                            Icons.people_outline,
+                            size: 54,
+                            color: AppColors.mutedSteel,
+                          ),
                           const SizedBox(height: 12),
                           Text(
                             'Belum ada postingan dari kreator yang Anda ikuti',
-                            style: AppTypography.headlineH3.copyWith(color: AppColors.titanium),
+                            style: AppTypography.headlineH3.copyWith(
+                              color: AppColors.titanium,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           ElevatedButton(
@@ -126,7 +136,8 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                               backgroundColor: AppColors.performanceLime,
                               foregroundColor: AppColors.voidBlack,
                             ),
-                            onPressed: () => widget.controller.setActiveTab(FeedTab.forYou),
+                            onPressed: () =>
+                                widget.controller.setActiveTab(FeedTab.forYou),
                             child: const Text('Jelajahi Beranda'),
                           ),
                         ],
@@ -141,7 +152,8 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                       },
                       itemBuilder: (context, index) {
                         final post = posts[index];
-                        final isCurrent = index == widget.controller.activePostIndex;
+                        final isCurrent =
+                            index == widget.controller.activePostIndex;
                         return VideoFeedItem(
                           key: ValueKey(post.id),
                           post: post,
@@ -162,7 +174,10 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                 right: 0,
                 child: SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -176,24 +191,38 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                             // Following Tab
                             GestureDetector(
                               onTap: () {
-                                widget.controller.setActiveTab(FeedTab.following);
+                                widget.controller.setActiveTab(
+                                  FeedTab.following,
+                                );
                                 _pageController.jumpToPage(0);
                               },
                               behavior: HitTestBehavior.opaque,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
                                 child: Text(
                                   'Mengikuti',
                                   style: AppTypography.headlineH3.copyWith(
                                     fontSize: 16,
-                                    fontWeight: widget.controller.activeTab == FeedTab.following
+                                    fontWeight:
+                                        widget.controller.activeTab ==
+                                            FeedTab.following
                                         ? FontWeight.w700
                                         : FontWeight.w500,
-                                    color: widget.controller.activeTab == FeedTab.following
+                                    color:
+                                        widget.controller.activeTab ==
+                                            FeedTab.following
                                         ? AppColors.iceWhite
-                                        : AppColors.titanium.withValues(alpha: 0.8),
+                                        : AppColors.titanium.withValues(
+                                            alpha: 0.8,
+                                          ),
                                     shadows: const [
-                                      Shadow(color: Colors.black87, blurRadius: 4),
+                                      Shadow(
+                                        color: Colors.black87,
+                                        blurRadius: 4,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -208,7 +237,10 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                               },
                               behavior: HitTestBehavior.opaque,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -216,25 +248,37 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                                       'Untuk Anda',
                                       style: AppTypography.headlineH3.copyWith(
                                         fontSize: 16,
-                                        fontWeight: widget.controller.activeTab == FeedTab.forYou
+                                        fontWeight:
+                                            widget.controller.activeTab ==
+                                                FeedTab.forYou
                                             ? FontWeight.w700
                                             : FontWeight.w500,
-                                        color: widget.controller.activeTab == FeedTab.forYou
+                                        color:
+                                            widget.controller.activeTab ==
+                                                FeedTab.forYou
                                             ? AppColors.iceWhite
-                                            : AppColors.titanium.withValues(alpha: 0.8),
+                                            : AppColors.titanium.withValues(
+                                                alpha: 0.8,
+                                              ),
                                         shadows: const [
-                                          Shadow(color: Colors.black87, blurRadius: 4),
+                                          Shadow(
+                                            color: Colors.black87,
+                                            blurRadius: 4,
+                                          ),
                                         ],
                                       ),
                                     ),
-                                    if (widget.controller.activeTab == FeedTab.forYou)
+                                    if (widget.controller.activeTab ==
+                                        FeedTab.forYou)
                                       Container(
                                         margin: const EdgeInsets.only(top: 4),
                                         width: 24,
                                         height: 2.5,
                                         decoration: BoxDecoration(
                                           color: AppColors.performanceLime,
-                                          borderRadius: BorderRadius.circular(2),
+                                          borderRadius: BorderRadius.circular(
+                                            2,
+                                          ),
                                         ),
                                       ),
                                   ],
@@ -251,9 +295,13 @@ class _HomeFypScreenState extends State<HomeFypScreen> {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: AppColors.voidBlack.withValues(alpha: 0.35),
+                              color: AppColors.voidBlack.withValues(
+                                alpha: 0.35,
+                              ),
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.1),
+                              ),
                             ),
                             child: const Icon(
                               Icons.search_rounded,

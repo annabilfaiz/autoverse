@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/vehicle_model.dart';
@@ -9,10 +10,7 @@ import 'component_detail_modal.dart';
 class ShowcaseSpecsInventory extends StatelessWidget {
   final VehicleModel vehicle;
 
-  const ShowcaseSpecsInventory({
-    super.key,
-    required this.vehicle,
-  });
+  const ShowcaseSpecsInventory({super.key, required this.vehicle});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,9 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    Expanded(child: _specItem('Pabrikan', vehicle.manufacturer)),
+                    Expanded(
+                      child: _specItem('Pabrikan', vehicle.manufacturer),
+                    ),
                     Expanded(child: _specItem('Model', vehicle.model)),
                   ],
                 ),
@@ -99,7 +99,8 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                 category: 'MESIN & KNALPOT',
                 title: 'Akrapovič Titanium Full System',
                 delta: '+22 HP · -11 kg',
-                imageAsset: 'assets/images/products/product_titanium_exhaust.jpg',
+                imageAsset:
+                    'assets/images/products/product_titanium_exhaust.jpg',
               ),
               const SizedBox(height: 8),
               _inventoryRow(
@@ -108,7 +109,8 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                 category: 'SUSPENSI & SASIS',
                 title: 'KW Clubsport 3-Way Coilovers',
                 delta: 'Setelan Seimbang untuk Lintasan',
-                imageAsset: 'assets/images/products/product_performance_coilover.jpg',
+                imageAsset:
+                    'assets/images/products/product_performance_coilover.jpg',
               ),
               const SizedBox(height: 8),
               _inventoryRow(
@@ -126,7 +128,8 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                 category: 'SISTEM PENGEREMAN',
                 title: 'Brembo Carbon-Ceramic 410mm',
                 delta: 'Rotor Karbon & Kaliper Monobloc',
-                imageAsset: 'assets/images/products/product_carbon_ceramic_brake.jpg',
+                imageAsset:
+                    'assets/images/products/product_carbon_ceramic_brake.jpg',
               ),
             ],
           ),
@@ -141,12 +144,18 @@ class ShowcaseSpecsInventory extends StatelessWidget {
       children: [
         Text(
           label,
-          style: AppTypography.caption.copyWith(color: AppColors.titanium, fontSize: 11),
+          style: AppTypography.caption.copyWith(
+            color: AppColors.titanium,
+            fontSize: 11,
+          ),
         ),
         const SizedBox(height: 2),
         Text(
           val,
-          style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite, fontSize: 13),
+          style: AppTypography.bodyStrong.copyWith(
+            color: AppColors.iceWhite,
+            fontSize: 13,
+          ),
         ),
       ],
     );
@@ -223,7 +232,11 @@ class ShowcaseSpecsInventory extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, size: 18, color: AppColors.titanium),
+            const Icon(
+              Icons.chevron_right,
+              size: 18,
+              color: AppColors.titanium,
+            ),
           ],
         ),
       ),

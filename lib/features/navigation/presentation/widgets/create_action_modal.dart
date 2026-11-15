@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../create/presentation/screens/create_post_screen.dart';
@@ -81,9 +82,8 @@ class CreateActionModal extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => CreatePostScreen(
-                        feedController: feedController,
-                      ),
+                      builder: (_) =>
+                          CreatePostScreen(feedController: feedController),
                     ),
                   );
                 },

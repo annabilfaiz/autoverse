@@ -83,10 +83,8 @@ class MarketplaceData {
           'Material': 'Anodized Aluminium Body',
           'Warranty': '1 Year HKS ID',
         },
-        compatibleVehicles: [
-          'Mazda RX-7 FD3S (1992–2002)',
-        ],
-        imageAsset: 'assets/images/feed_rx7_track.png',
+        compatibleVehicles: ['Mazda RX-7 FD3S (1992–2002)'],
+        imageAsset: 'assets/images/products/product_performance_coilover.jpg',
         condition: 'New',
         stock: 3,
       ),
@@ -114,7 +112,7 @@ class MarketplaceData {
           'Porsche 911 GT3 991 (2013–2019)',
           'Porsche 911 Turbo S 992 (2020–2024)',
         ],
-        imageAsset: 'assets/images/feed_porsche_gt3.png',
+        imageAsset: 'assets/images/products/product_carbon_ceramic_brake.jpg',
         condition: 'New',
         stock: 5,
       ),
@@ -138,10 +136,8 @@ class MarketplaceData {
           'Origin': 'Japan',
           'Install Time': '8–12 hours',
         },
-        compatibleVehicles: [
-          'Mazda RX-7 FD3S (1992–2002)',
-        ],
-        imageAsset: 'assets/images/feed_rx7_track.png',
+        compatibleVehicles: ['Mazda RX-7 FD3S (1992–2002)'],
+        imageAsset: 'assets/images/vehicles/vehicle_mazda_rx7_fd3s_hero.jpg',
         condition: 'New',
         stock: 2,
       ),
@@ -169,7 +165,8 @@ class MarketplaceData {
           'Honda Civic Type R FK8 (2017–2021)',
           'Honda Civic Type R FL5 (2022–2024)',
         ],
-        imageAsset: 'assets/images/feed_porsche_gt3.png',
+        imageAsset:
+            'assets/images/vehicles/vehicle_honda_civic_type_r_fk8_hero.jpg',
         condition: 'New',
         stock: 1,
       ),
@@ -192,10 +189,8 @@ class MarketplaceData {
           'Width (Hip)': '295mm',
           'Color': 'Black / Red',
         },
-        compatibleVehicles: [
-          'Universal (Bracket sold separately)',
-        ],
-        imageAsset: 'assets/images/feed_porsche_gt3.png',
+        compatibleVehicles: ['Universal (Bracket sold separately)'],
+        imageAsset: 'assets/images/products/product_forged_wheel.jpg',
         isSaved: true,
         condition: 'New',
         stock: 4,
@@ -218,14 +213,11 @@ class MarketplaceData {
           'Gains': '+8 HP, +12 Nm',
           'Install Time': '1–2 hours',
         },
-        compatibleVehicles: [
-          'Mazda RX-7 FD3S (1992–2002)',
-        ],
-        imageAsset: 'assets/images/feed_rx7_track.png',
+        compatibleVehicles: ['Mazda RX-7 FD3S (1992–2002)'],
+        imageAsset: 'assets/images/vehicles/vehicle_mazda_rx7_fd3s_hero.jpg',
         condition: 'Used',
         stock: 1,
       ),
     ];
   }
 }
-

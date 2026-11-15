@@ -78,216 +78,231 @@ void main() {
   });
 
   group('Phase 3: Profile Posts Grid View Counters', () {
-    testWidgets('Profile posts grid displays view count with eye icon and no like icons', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'Profile posts grid displays view count with eye icon and no like icons',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      final feedController = FeedController();
+        final feedController = FeedController();
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: MyProfileScreen(feedController: feedController),
-        ),
-      );
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: MyProfileScreen(feedController: feedController),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-      // Posts tab is active by default
-      expect(find.text('Postingan'), findsWidgets);
+        // Posts tab is active by default
+        expect(find.text('Postingan'), findsWidgets);
 
-      // Eye icons must be present in the grid for view counters
-      expect(find.byIcon(Icons.visibility_outlined), findsWidgets);
+        // Eye icons must be present in the grid for view counters
+        expect(find.byIcon(Icons.visibility_outlined), findsWidgets);
 
-      // Like icons (favorite/favorite_border) must NOT appear in the profile post grid
-      expect(find.byIcon(Icons.favorite), findsNothing);
-      expect(find.byIcon(Icons.favorite_border), findsNothing);
-    });
+        // Like icons (favorite/favorite_border) must NOT appear in the profile post grid
+        expect(find.byIcon(Icons.favorite), findsNothing);
+        expect(find.byIcon(Icons.favorite_border), findsNothing);
+      },
+    );
   });
 
   group('Phase 4: Unified Saved System in Profile Screen', () {
-    testWidgets('Saved tab displays 3 chips (Postingan, Marketplace, Kendaraan) with source-aware navigation', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'Saved tab displays 3 chips (Postingan, Marketplace, Kendaraan) with source-aware navigation',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      final feedController = FeedController();
-      final marketplaceController = MarketplaceController();
-      final savedController = SavedItemsController(
-        feedController: feedController,
-        marketplaceController: marketplaceController,
-      );
+        final feedController = FeedController();
+        final marketplaceController = MarketplaceController();
+        final savedController = SavedItemsController(
+          feedController: feedController,
+          marketplaceController: marketplaceController,
+        );
 
-      // Ensure a vehicle is saved
-      savedController.saveVehicle('veh_porsche_gt3');
+        // Ensure a vehicle is saved
+        savedController.saveVehicle('veh_porsche_gt3');
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: MyProfileScreen(
-            feedController: feedController,
-            marketplaceController: marketplaceController,
-            savedController: savedController,
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: MyProfileScreen(
+              feedController: feedController,
+              marketplaceController: marketplaceController,
+              savedController: savedController,
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Switch to Tersimpan (Saved) tab
-      await tester.tap(find.text('Tersimpan'));
-      await tester.pumpAndSettle();
+        // Switch to Tersimpan (Saved) tab
+        await tester.tap(find.text('Tersimpan'));
+        await tester.pumpAndSettle();
 
-      // Verify category chips exist
-      expect(find.text('Postingan'), findsWidgets);
-      expect(find.text('Marketplace'), findsOneWidget);
-      expect(find.text('Kendaraan'), findsOneWidget);
+        // Verify category chips exist
+        expect(find.text('Postingan'), findsWidgets);
+        expect(find.text('Marketplace'), findsOneWidget);
+        expect(find.text('Kendaraan'), findsOneWidget);
 
-      // Default category is Postingan
-      expect(savedController.selectedCategory, SavedCategory.posts);
+        // Default category is Postingan
+        expect(savedController.selectedCategory, SavedCategory.posts);
 
-      // Switch to Marketplace category
-      await tester.tap(find.text('Marketplace'));
-      await tester.pumpAndSettle();
-      expect(savedController.selectedCategory, SavedCategory.marketplace);
+        // Switch to Marketplace category
+        await tester.tap(find.text('Marketplace'));
+        await tester.pumpAndSettle();
+        expect(savedController.selectedCategory, SavedCategory.marketplace);
 
-      // Tap on first saved product to open ProductDetailScreen
-      final firstProductName = savedController.savedProducts.first.name;
-      await tester.tap(find.text(firstProductName));
-      await tester.pumpAndSettle();
-      expect(find.byType(ProductDetailScreen), findsOneWidget);
+        // Tap on first saved product to open ProductDetailScreen
+        final firstProductName = savedController.savedProducts.first.name;
+        await tester.tap(find.text(firstProductName));
+        await tester.pumpAndSettle();
+        expect(find.byType(ProductDetailScreen), findsOneWidget);
 
-      // Back to profile
-      Navigator.pop(tester.element(find.byType(ProductDetailScreen)));
-      await tester.pumpAndSettle();
+        // Back to profile
+        Navigator.pop(tester.element(find.byType(ProductDetailScreen)));
+        await tester.pumpAndSettle();
 
-      // Switch to Kendaraan category
-      await tester.tap(find.text('Kendaraan'));
-      await tester.pumpAndSettle();
-      expect(savedController.selectedCategory, SavedCategory.vehicles);
+        // Switch to Kendaraan category
+        await tester.tap(find.text('Kendaraan'));
+        await tester.pumpAndSettle();
+        expect(savedController.selectedCategory, SavedCategory.vehicles);
 
-      // Tap on saved vehicle card to open FeaturedVehicleShowcaseScreen
-      final savedVehicle = savedController.savedVehicles.first;
-      await tester.tap(find.text(savedVehicle.displayName));
-      await tester.pumpAndSettle();
-      expect(find.byType(FeaturedVehicleShowcaseScreen), findsOneWidget);
-    });
+        // Tap on saved vehicle card to open FeaturedVehicleShowcaseScreen
+        final savedVehicle = savedController.savedVehicles.first;
+        await tester.tap(find.text(savedVehicle.displayName));
+        await tester.pumpAndSettle();
+        expect(find.byType(FeaturedVehicleShowcaseScreen), findsOneWidget);
+      },
+    );
 
-    testWidgets('Unsaving item directly from saved tab removes it and updates empty state', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'Unsaving item directly from saved tab removes it and updates empty state',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      final feedController = FeedController();
-      final marketplaceController = MarketplaceController();
-      final savedController = SavedItemsController(
-        feedController: feedController,
-        marketplaceController: marketplaceController,
-      );
+        final feedController = FeedController();
+        final marketplaceController = MarketplaceController();
+        final savedController = SavedItemsController(
+          feedController: feedController,
+          marketplaceController: marketplaceController,
+        );
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: MyProfileScreen(
-            feedController: feedController,
-            marketplaceController: marketplaceController,
-            savedController: savedController,
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: MyProfileScreen(
+              feedController: feedController,
+              marketplaceController: marketplaceController,
+              savedController: savedController,
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Switch to Tersimpan tab
-      await tester.tap(find.text('Tersimpan'));
-      await tester.pumpAndSettle();
+        // Switch to Tersimpan tab
+        await tester.tap(find.text('Tersimpan'));
+        await tester.pumpAndSettle();
 
-      // Postingan category
-      expect(savedController.savedPosts.isNotEmpty, isTrue);
+        // Postingan category
+        expect(savedController.savedPosts.isNotEmpty, isTrue);
 
-      // Tap bookmark icon to unsave the item
-      final unsaveButton = find.byIcon(Icons.bookmark_rounded).first;
-      await tester.tap(unsaveButton);
-      await tester.pumpAndSettle();
+        // Tap bookmark icon to unsave the item
+        final unsaveButton = find.byIcon(Icons.bookmark_rounded).first;
+        await tester.tap(unsaveButton);
+        await tester.pumpAndSettle();
 
-      // If all posts unsaved, empty state message shows
-      if (savedController.savedPostsCount == 0) {
-        expect(find.text('Belum ada postingan tersimpan.'), findsOneWidget);
-      }
-    });
+        // If all posts unsaved, empty state message shows
+        if (savedController.savedPostsCount == 0) {
+          expect(find.text('Belum ada postingan tersimpan.'), findsOneWidget);
+        }
+      },
+    );
   });
 
   group('Phase 2: Vehicle Modification & Showcase Verification', () {
-    testWidgets('View Full Build Timeline button is completely removed from ShowcaseBuildPostsSection', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'View Full Build Timeline button is completely removed from ShowcaseBuildPostsSection',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      final feedController = FeedController();
-      final porsche = VehiclesData.getAdityaGarageVehicles().first;
-      final posts = feedController.getPostsForVehicle(porsche.id);
+        final feedController = FeedController();
+        final porsche = VehiclesData.getAdityaGarageVehicles().first;
+        final posts = feedController.getPostsForVehicle(porsche.id);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: Scaffold(
-            body: SingleChildScrollView(
-              child: ShowcaseBuildPostsSection(linkedPosts: posts),
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: Scaffold(
+              body: SingleChildScrollView(
+                child: ShowcaseBuildPostsSection(linkedPosts: posts),
+              ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Verify header in Indonesian
-      expect(find.text('POSTINGAN MODIFIKASI'), findsOneWidget);
-      expect(find.text('Catatan Modifikasi Terkini'), findsOneWidget);
+        // Verify header in Indonesian
+        expect(find.text('POSTINGAN MODIFIKASI'), findsOneWidget);
+        expect(find.text('Catatan Modifikasi Terkini'), findsOneWidget);
 
-      // Verify the broken timeline button is completely gone
-      expect(find.text('View Full Build Timeline'), findsNothing);
-      expect(find.text('Timeline lengkap akan segera hadir'), findsNothing);
-    });
+        // Verify the broken timeline button is completely gone
+        expect(find.text('View Full Build Timeline'), findsNothing);
+        expect(find.text('Timeline lengkap akan segera hadir'), findsNothing);
+      },
+    );
 
-    testWidgets('FeaturedVehicleShowcaseScreen vehicle bookmark saves to SavedItemsController', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'FeaturedVehicleShowcaseScreen vehicle bookmark saves to SavedItemsController',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      final feedController = FeedController();
-      final marketplaceController = MarketplaceController();
-      final savedController = SavedItemsController(
-        feedController: feedController,
-        marketplaceController: marketplaceController,
-      );
-      final porsche = VehiclesData.getAdityaGarageVehicles().first;
+        final feedController = FeedController();
+        final marketplaceController = MarketplaceController();
+        final savedController = SavedItemsController(
+          feedController: feedController,
+          marketplaceController: marketplaceController,
+        );
+        final porsche = VehiclesData.getAdityaGarageVehicles().first;
 
-      // Ensure unsaved initially for test
-      savedController.unsaveVehicle(porsche.id);
+        // Ensure unsaved initially for test
+        savedController.unsaveVehicle(porsche.id);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: FeaturedVehicleShowcaseScreen(
-            vehicle: porsche,
-            savedController: savedController,
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: FeaturedVehicleShowcaseScreen(
+              vehicle: porsche,
+              savedController: savedController,
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      expect(savedController.isVehicleSaved(porsche.id), isFalse);
+        expect(savedController.isVehicleSaved(porsche.id), isFalse);
 
-      // Tap vehicle bookmark button in app bar
-      await tester.tap(find.byIcon(Icons.bookmark_outline));
-      await tester.pumpAndSettle();
+        // Tap vehicle bookmark button in app bar
+        await tester.tap(find.byIcon(Icons.bookmark_outline));
+        await tester.pumpAndSettle();
 
-      expect(savedController.isVehicleSaved(porsche.id), isTrue);
-      expect(find.byIcon(Icons.bookmark), findsOneWidget);
+        expect(savedController.isVehicleSaved(porsche.id), isTrue);
+        expect(find.byIcon(Icons.bookmark), findsOneWidget);
 
-      // Tap again to unbookmark
-      await tester.tap(find.byIcon(Icons.bookmark));
-      await tester.pumpAndSettle();
+        // Tap again to unbookmark
+        await tester.tap(find.byIcon(Icons.bookmark));
+        await tester.pumpAndSettle();
 
-      expect(savedController.isVehicleSaved(porsche.id), isFalse);
-      expect(find.byIcon(Icons.bookmark_outline), findsOneWidget);
-    });
+        expect(savedController.isVehicleSaved(porsche.id), isFalse);
+        expect(find.byIcon(Icons.bookmark_outline), findsOneWidget);
+      },
+    );
   });
 }

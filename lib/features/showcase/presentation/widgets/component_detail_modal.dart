@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -85,7 +86,10 @@ class ComponentDetailModal extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.performanceLime.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(6),
@@ -100,18 +104,26 @@ class ComponentDetailModal extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                const Icon(Icons.verified, size: 16, color: AppColors.performanceLime),
+                const Icon(
+                  Icons.verified,
+                  size: 16,
+                  color: AppColors.performanceLime,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   'Modifikasi Terverifikasi',
-                  style: AppTypography.micro.copyWith(color: AppColors.titanium),
+                  style: AppTypography.micro.copyWith(
+                    color: AppColors.titanium,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 10),
             Text(
               title,
-              style: AppTypography.headlineH2.copyWith(color: AppColors.iceWhite),
+              style: AppTypography.headlineH2.copyWith(
+                color: AppColors.iceWhite,
+              ),
             ),
             const SizedBox(height: 6),
             Text(
@@ -140,7 +152,9 @@ class ComponentDetailModal extends StatelessWidget {
                           children: [
                             Text(
                               e.key,
-                              style: AppTypography.caption.copyWith(color: AppColors.titanium),
+                              style: AppTypography.caption.copyWith(
+                                color: AppColors.titanium,
+                              ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(

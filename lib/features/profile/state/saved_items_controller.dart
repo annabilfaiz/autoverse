@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../../data/models/post_model.dart';
 import '../../../../data/models/product_model.dart';
 import '../../../../data/models/vehicle_model.dart';
@@ -87,8 +88,7 @@ class SavedItemsController extends ChangeNotifier {
   }
 
   // ── 2. MARKETPLACE PRODUCTS ──
-  List<ProductModel> get savedProducts =>
-      marketplaceController.savedProducts;
+  List<ProductModel> get savedProducts => marketplaceController.savedProducts;
 
   int get savedProductsCount => savedProducts.length;
 
@@ -141,8 +141,9 @@ class SavedItemsController extends ChangeNotifier {
 
   VehicleModel? getVehicleById(String vehicleId) {
     try {
-      return VehiclesData.getAdityaGarageVehicles()
-          .firstWhere((v) => v.id == vehicleId);
+      return VehiclesData.getAdityaGarageVehicles().firstWhere(
+        (v) => v.id == vehicleId,
+      );
     } catch (_) {
       return null;
     }

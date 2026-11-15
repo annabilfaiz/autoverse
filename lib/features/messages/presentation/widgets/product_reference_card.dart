@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/product_model.dart';
@@ -7,11 +8,7 @@ class ProductReferenceCard extends StatelessWidget {
   final ProductModel product;
   final VoidCallback? onTap;
 
-  const ProductReferenceCard({
-    super.key,
-    required this.product,
-    this.onTap,
-  });
+  const ProductReferenceCard({super.key, required this.product, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +60,13 @@ class ProductReferenceCard extends StatelessWidget {
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 2),
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
-                              color: AppColors.performanceLime
-                                  .withValues(alpha: 0.15),
+                              color: AppColors.performanceLime.withValues(
+                                alpha: 0.15,
+                              ),
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
@@ -118,8 +118,10 @@ class ProductReferenceCard extends StatelessWidget {
 
                 // View Part Action
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.graphite,
                     borderRadius: BorderRadius.circular(8),

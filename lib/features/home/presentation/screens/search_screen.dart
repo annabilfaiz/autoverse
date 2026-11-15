@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -6,11 +7,7 @@ class SearchScreen extends StatefulWidget {
   final ValueChanged<String>? onSelectVehicle;
   final ValueChanged<String>? onSelectUser;
 
-  const SearchScreen({
-    super.key,
-    this.onSelectVehicle,
-    this.onSelectUser,
-  });
+  const SearchScreen({super.key, this.onSelectVehicle, this.onSelectUser});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -69,7 +66,11 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new, size: 20, color: AppColors.iceWhite),
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 20,
+                      color: AppColors.iceWhite,
+                    ),
                     onPressed: () => Navigator.pop(context),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
@@ -86,16 +87,26 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.search, size: 20, color: AppColors.titanium),
+                          const Icon(
+                            Icons.search,
+                            size: 20,
+                            color: AppColors.titanium,
+                          ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: TextField(
                               controller: _searchController,
                               autofocus: true,
-                              style: AppTypography.body.copyWith(color: AppColors.iceWhite),
+                              style: AppTypography.body.copyWith(
+                                color: AppColors.iceWhite,
+                              ),
                               decoration: InputDecoration(
-                                hintText: 'Cari modifikasi, kendaraan, komponen...',
-                                hintStyle: AppTypography.body.copyWith(color: AppColors.mutedSteel, fontSize: 13),
+                                hintText:
+                                    'Cari modifikasi, kendaraan, komponen...',
+                                hintStyle: AppTypography.body.copyWith(
+                                  color: AppColors.mutedSteel,
+                                  fontSize: 13,
+                                ),
                                 border: InputBorder.none,
                                 isDense: true,
                               ),
@@ -114,7 +125,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                   _query = '';
                                 });
                               },
-                              child: const Icon(Icons.cancel, size: 18, color: AppColors.titanium),
+                              child: const Icon(
+                                Icons.cancel,
+                                size: 18,
+                                color: AppColors.titanium,
+                              ),
                             ),
                         ],
                       ),
@@ -133,7 +148,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   // Trending Tags
                   Text(
                     'Tag Otomotif Populer',
-                    style: AppTypography.headlineH3.copyWith(fontSize: 15, color: AppColors.iceWhite),
+                    style: AppTypography.headlineH3.copyWith(
+                      fontSize: 15,
+                      color: AppColors.iceWhite,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Wrap(
@@ -148,7 +166,10 @@ class _SearchScreenState extends State<SearchScreen> {
                           });
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 7,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.graphite,
                             borderRadius: BorderRadius.circular(20),
@@ -171,7 +192,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   // Suggested Builds
                   Text(
                     'Rekomendasi Modifikasi Komunitas',
-                    style: AppTypography.headlineH3.copyWith(fontSize: 15, color: AppColors.iceWhite),
+                    style: AppTypography.headlineH3.copyWith(
+                      fontSize: 15,
+                      color: AppColors.iceWhite,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   ..._suggestedVehicles.map((v) {
@@ -193,7 +217,11 @@ class _SearchScreenState extends State<SearchScreen> {
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: AppColors.steel),
                             ),
-                            child: const Icon(Icons.directions_car, color: AppColors.performanceLime, size: 22),
+                            child: const Icon(
+                              Icons.directions_car,
+                              color: AppColors.performanceLime,
+                              size: 22,
+                            ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
@@ -205,11 +233,17 @@ class _SearchScreenState extends State<SearchScreen> {
                                     Expanded(
                                       child: Text(
                                         v['title']!,
-                                        style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite),
+                                        style: AppTypography.bodyStrong
+                                            .copyWith(
+                                              color: AppColors.iceWhite,
+                                            ),
                                       ),
                                     ),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 6,
+                                        vertical: 2,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: AppColors.limeSoft,
                                         borderRadius: BorderRadius.circular(4),
@@ -228,7 +262,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                 const SizedBox(height: 2),
                                 Text(
                                   v['subtitle']!,
-                                  style: AppTypography.caption.copyWith(color: AppColors.titanium),
+                                  style: AppTypography.caption.copyWith(
+                                    color: AppColors.titanium,
+                                  ),
                                 ),
                               ],
                             ),

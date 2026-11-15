@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/vehicle_model.dart';
@@ -26,10 +27,12 @@ class FeaturedVehicleShowcaseScreen extends StatefulWidget {
   });
 
   @override
-  State<FeaturedVehicleShowcaseScreen> createState() => _FeaturedVehicleShowcaseScreenState();
+  State<FeaturedVehicleShowcaseScreen> createState() =>
+      _FeaturedVehicleShowcaseScreenState();
 }
 
-class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseScreen> {
+class _FeaturedVehicleShowcaseScreenState
+    extends State<FeaturedVehicleShowcaseScreen> {
   late final FeedController _controller;
   late final bool _internalController;
   late final SavedItemsController _savedController;
@@ -71,8 +74,11 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
 
   @override
   Widget build(BuildContext context) {
-    final currentVehicle = widget.vehicle ?? VehiclesData.getAdityaGarageVehicles().first;
-    final isPorsche = currentVehicle.model.contains('911') || currentVehicle.model.contains('GT3');
+    final currentVehicle =
+        widget.vehicle ?? VehiclesData.getAdityaGarageVehicles().first;
+    final isPorsche =
+        currentVehicle.model.contains('911') ||
+        currentVehicle.model.contains('GT3');
     final linkedPosts = _controller.getPostsForVehicle(currentVehicle.id);
 
     return Scaffold(
@@ -92,7 +98,11 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: AppColors.steel),
                 ),
-                child: const Icon(Icons.chevron_left, size: 22, color: AppColors.iceWhite),
+                child: const Icon(
+                  Icons.chevron_left,
+                  size: 22,
+                  color: AppColors.iceWhite,
+                ),
               ),
               onPressed: () => Navigator.pop(context),
             ),
@@ -109,7 +119,9 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
               ListenableBuilder(
                 listenable: _savedController,
                 builder: (context, _) {
-                  final isSaved = _savedController.isVehicleSaved(currentVehicle.id);
+                  final isSaved = _savedController.isVehicleSaved(
+                    currentVehicle.id,
+                  );
                   return IconButton(
                     icon: Container(
                       width: 36,
@@ -117,20 +129,32 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                       decoration: BoxDecoration(
                         color: AppColors.graphite,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: isSaved ? AppColors.performanceLime : AppColors.steel),
+                        border: Border.all(
+                          color: isSaved
+                              ? AppColors.performanceLime
+                              : AppColors.steel,
+                        ),
                       ),
                       child: Icon(
                         isSaved ? Icons.bookmark : Icons.bookmark_outline,
                         size: 18,
-                        color: isSaved ? AppColors.performanceLime : AppColors.iceWhite,
+                        color: isSaved
+                            ? AppColors.performanceLime
+                            : AppColors.iceWhite,
                       ),
                     ),
                     onPressed: () {
                       _savedController.toggleSaveVehicle(currentVehicle.id);
-                      final nowSaved = _savedController.isVehicleSaved(currentVehicle.id);
+                      final nowSaved = _savedController.isVehicleSaved(
+                        currentVehicle.id,
+                      );
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(nowSaved ? 'Kendaraan disimpan ke favorit' : 'Kendaraan dihapus dari favorit'),
+                          content: Text(
+                            nowSaved
+                                ? 'Kendaraan disimpan ke favorit'
+                                : 'Kendaraan dihapus dari favorit',
+                          ),
                           backgroundColor: AppColors.carbon,
                           duration: const Duration(seconds: 2),
                         ),
@@ -183,7 +207,10 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                   // Telemetry Specification Pill
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.carbon,
                       borderRadius: BorderRadius.circular(12),
@@ -203,7 +230,10 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                   const SizedBox(height: 8),
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.carbon,
                       borderRadius: BorderRadius.circular(12),
@@ -217,7 +247,8 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
                           Text(
                             isPorsche
                                 ? '502 HP • Akrapovič Race'
-                                : (currentVehicle.specs['Power'] ?? '300+ HP Track Tune'),
+                                : (currentVehicle.specs['Power'] ??
+                                      '300+ HP Track Tune'),
                             style: AppTypography.bodyStrong.copyWith(
                               color: AppColors.performanceLime,
                               fontSize: 13,
@@ -253,9 +284,7 @@ class _FeaturedVehicleShowcaseScreenState extends State<FeaturedVehicleShowcaseS
 
           // Safe area bottom inset spacing
           SliverToBoxAdapter(
-            child: SizedBox(
-              height: MediaQuery.of(context).padding.bottom + 24,
-            ),
+            child: SizedBox(height: MediaQuery.of(context).padding.bottom + 24),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../data/models/conversation_model.dart';
 import '../../../data/models/message_model.dart';
 import '../../../data/models/product_model.dart';
@@ -65,10 +66,7 @@ class MessagesController extends ChangeNotifier {
 
   /// Sends a new message in the specified conversation.
   /// Rejects empty or whitespace-only messages.
-  bool sendMessage({
-    required String conversationId,
-    required String text,
-  }) {
+  bool sendMessage({required String conversationId, required String text}) {
     final trimmed = text.trim();
     if (trimmed.isEmpty) {
       return false;

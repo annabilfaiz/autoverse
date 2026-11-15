@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/conversation_model.dart';
@@ -77,7 +78,10 @@ class ConversationListTile extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.success,
                         shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.voidBlack, width: 2),
+                        border: Border.all(
+                          color: AppColors.voidBlack,
+                          width: 2,
+                        ),
                       ),
                     ),
                   ),
@@ -143,7 +147,9 @@ class ConversationListTile extends StatelessWidget {
                       const SizedBox(height: 6),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.carbon,
                           borderRadius: BorderRadius.circular(6),
@@ -187,8 +193,8 @@ class ConversationListTile extends StatelessWidget {
                           child: Text(
                             lastMessage != null
                                 ? (lastMessage.isMe
-                                    ? 'Anda: ${lastMessage.text}'
-                                    : lastMessage.text)
+                                      ? 'Anda: ${lastMessage.text}'
+                                      : lastMessage.text)
                                 : 'Belum ada pesan',
                             style: AppTypography.body.copyWith(
                               color: hasUnread
@@ -207,7 +213,9 @@ class ConversationListTile extends StatelessWidget {
                           const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 7, vertical: 2),
+                              horizontal: 7,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: AppColors.performanceLime,
                               borderRadius: BorderRadius.circular(10),

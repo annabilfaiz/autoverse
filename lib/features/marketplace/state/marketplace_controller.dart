@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../data/models/product_model.dart';
 import '../../../data/marketplace_data.dart';
 
@@ -17,7 +18,15 @@ class MarketplaceController extends ChangeNotifier {
   MarketplaceSortOrder get sortOrder => _sortOrder;
   String get compatibilityFilter => _compatibilityFilter;
 
-  List<String> get categories => ['All', 'Engine', 'Exhaust', 'Wheels', 'Suspension', 'Brakes', 'Exterior'];
+  List<String> get categories => [
+    'All',
+    'Engine',
+    'Exhaust',
+    'Wheels',
+    'Suspension',
+    'Brakes',
+    'Exterior',
+  ];
 
   List<ProductModel> get filteredProducts {
     var products = List<ProductModel>.from(_allProducts);
@@ -25,23 +34,33 @@ class MarketplaceController extends ChangeNotifier {
     // Search filter
     if (_searchQuery.isNotEmpty) {
       final q = _searchQuery.toLowerCase();
-      products = products.where((p) =>
-          p.name.toLowerCase().contains(q) ||
-          p.brand.toLowerCase().contains(q) ||
-          p.description.toLowerCase().contains(q) ||
-          p.category.toLowerCase().contains(q)).toList();
+      products = products
+          .where(
+            (p) =>
+                p.name.toLowerCase().contains(q) ||
+                p.brand.toLowerCase().contains(q) ||
+                p.description.toLowerCase().contains(q) ||
+                p.category.toLowerCase().contains(q),
+          )
+          .toList();
     }
 
     // Category filter
     if (_selectedCategory != 'All') {
-      products = products.where((p) => p.category == _selectedCategory).toList();
+      products = products
+          .where((p) => p.category == _selectedCategory)
+          .toList();
     }
 
     // Compatibility filter
     if (_compatibilityFilter.isNotEmpty) {
       final cf = _compatibilityFilter.toLowerCase();
-      products = products.where((p) =>
-          p.compatibleVehicles.any((v) => v.toLowerCase().contains(cf))).toList();
+      products = products
+          .where(
+            (p) =>
+                p.compatibleVehicles.any((v) => v.toLowerCase().contains(cf)),
+          )
+          .toList();
     }
 
     // Sort
@@ -53,7 +72,9 @@ class MarketplaceController extends ChangeNotifier {
         products.sort((a, b) => b.priceIdr.compareTo(a.priceIdr));
         break;
       case MarketplaceSortOrder.newest:
-        products.sort((a, b) => (b.isNewListing ? 1 : 0).compareTo(a.isNewListing ? 1 : 0));
+        products.sort(
+          (a, b) => (b.isNewListing ? 1 : 0).compareTo(a.isNewListing ? 1 : 0),
+        );
         break;
     }
 
@@ -121,4 +142,3 @@ class MarketplaceController extends ChangeNotifier {
     }
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -41,11 +42,7 @@ class GlobalBottomNavBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               // 1. Beranda
-              _navItem(
-                index: 0,
-                icon: Icons.home_rounded,
-                label: 'Beranda',
-              ),
+              _navItem(index: 0, icon: Icons.home_rounded, label: 'Beranda'),
 
               // 2. Marketplace
               _navItem(
@@ -91,11 +88,7 @@ class GlobalBottomNavBar extends StatelessWidget {
               ),
 
               // 5. Profil
-              _navItem(
-                index: 4,
-                icon: Icons.person_rounded,
-                label: 'Profil',
-              ),
+              _navItem(index: 4, icon: Icons.person_rounded, label: 'Profil'),
             ],
           ),
         ),
@@ -123,11 +116,7 @@ class GlobalBottomNavBar extends StatelessWidget {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Icon(
-                  icon,
-                  size: 22,
-                  color: color,
-                ),
+                Icon(icon, size: 22, color: color),
                 if (badgeCount > 0)
                   Positioned(
                     right: -8,

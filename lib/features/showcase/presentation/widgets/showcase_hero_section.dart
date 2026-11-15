@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/vehicle_model.dart';
@@ -9,17 +10,21 @@ import 'component_detail_modal.dart';
 class ShowcaseHeroSection extends StatelessWidget {
   final VehicleModel vehicle;
 
-  const ShowcaseHeroSection({
-    super.key,
-    required this.vehicle,
-  });
+  const ShowcaseHeroSection({super.key, required this.vehicle});
 
   @override
   Widget build(BuildContext context) {
-    final isPorsche = vehicle.model.contains('911') || vehicle.model.contains('GT3');
-    final wheelsTitle = isPorsche ? 'BBS FI-R Monobloc 20"' : 'Volk Racing TE37 Ultra 18"';
-    final exhaustTitle = isPorsche ? 'Akrapovič Titanium Race' : 'HKS Hi-Power Spec-L';
-    final brakesTitle = isPorsche ? 'Brembo Carbon 410mm' : 'AP Racing Radi-CAL 6-Pot';
+    final isPorsche =
+        vehicle.model.contains('911') || vehicle.model.contains('GT3');
+    final wheelsTitle = isPorsche
+        ? 'BBS FI-R Monobloc 20"'
+        : 'Volk Racing TE37 Ultra 18"';
+    final exhaustTitle = isPorsche
+        ? 'Akrapovič Titanium Race'
+        : 'HKS Hi-Power Spec-L';
+    final brakesTitle = isPorsche
+        ? 'Brembo Carbon 410mm'
+        : 'AP Racing Radi-CAL 6-Pot';
 
     return SliverToBoxAdapter(
       child: Container(
@@ -37,7 +42,11 @@ class ShowcaseHeroSection extends StatelessWidget {
                 errorBuilder: (_, _, _) => Container(
                   color: AppColors.carbon,
                   child: const Center(
-                    child: Icon(Icons.directions_car, size: 64, color: AppColors.steel),
+                    child: Icon(
+                      Icons.directions_car,
+                      size: 64,
+                      color: AppColors.steel,
+                    ),
                   ),
                 ),
               ),
@@ -170,18 +179,22 @@ class ShowcaseHeroSection extends StatelessWidget {
           color: AppColors.graphite.withValues(alpha: 0.92),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: AppColors.steel),
-          boxShadow: const [
-            BoxShadow(color: Colors.black45, blurRadius: 8),
-          ],
+          boxShadow: const [BoxShadow(color: Colors.black45, blurRadius: 8)],
         ),
         child: Column(
-          crossAxisAlignment: alignRight ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          crossAxisAlignment: alignRight
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (!alignRight) ...[
-                  const Icon(Icons.touch_app_rounded, size: 10, color: AppColors.performanceLime),
+                  const Icon(
+                    Icons.touch_app_rounded,
+                    size: 10,
+                    color: AppColors.performanceLime,
+                  ),
                   const SizedBox(width: 4),
                 ],
                 Text(
@@ -194,7 +207,11 @@ class ShowcaseHeroSection extends StatelessWidget {
                 ),
                 if (alignRight) ...[
                   const SizedBox(width: 4),
-                  const Icon(Icons.touch_app_rounded, size: 10, color: AppColors.performanceLime),
+                  const Icon(
+                    Icons.touch_app_rounded,
+                    size: 10,
+                    color: AppColors.performanceLime,
+                  ),
                 ],
               ],
             ),

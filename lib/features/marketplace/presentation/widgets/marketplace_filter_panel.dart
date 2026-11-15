@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../state/marketplace_controller.dart';
@@ -7,14 +8,16 @@ import '../../state/marketplace_controller.dart';
 class MarketplaceFilterPanel extends StatelessWidget {
   final MarketplaceController controller;
 
-  const MarketplaceFilterPanel({
-    super.key,
-    required this.controller,
-  });
+  const MarketplaceFilterPanel({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    final compatOptions = ['', 'Porsche 911', 'Mazda RX-7', 'Honda Civic Type R'];
+    final compatOptions = [
+      '',
+      'Porsche 911',
+      'Mazda RX-7',
+      'Honda Civic Type R',
+    ];
 
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 14, 20, 0),
@@ -45,20 +48,27 @@ class MarketplaceFilterPanel extends StatelessWidget {
                 onTap: () => controller.setCompatibilityFilter(opt),
                 behavior: HitTestBehavior.opaque,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: isSelected
                         ? AppColors.performanceLime.withValues(alpha: 0.15)
                         : AppColors.graphite,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: isSelected ? AppColors.performanceLime : AppColors.steel,
+                      color: isSelected
+                          ? AppColors.performanceLime
+                          : AppColors.steel,
                     ),
                   ),
                   child: Text(
                     label,
                     style: AppTypography.caption.copyWith(
-                      color: isSelected ? AppColors.performanceLime : AppColors.iceWhite,
+                      color: isSelected
+                          ? AppColors.performanceLime
+                          : AppColors.iceWhite,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

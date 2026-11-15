@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/message_model.dart';
@@ -102,8 +103,9 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     return ListenableBuilder(
       listenable: widget.controller,
       builder: (context, _) {
-        final conversation =
-            widget.controller.getConversationById(widget.conversationId);
+        final conversation = widget.controller.getConversationById(
+          widget.conversationId,
+        );
 
         if (conversation == null) {
           return Scaffold(
@@ -111,8 +113,11 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
             appBar: AppBar(
               backgroundColor: AppColors.carbon,
               leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                    color: AppColors.iceWhite, size: 20),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: AppColors.iceWhite,
+                  size: 20,
+                ),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -164,11 +169,14 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                       : ListView.builder(
                           controller: _scrollController,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
                           itemCount: messages.length,
                           itemBuilder: (context, index) {
                             final message = messages[index];
-                            final showDateHeader = index == 0 ||
+                            final showDateHeader =
+                                index == 0 ||
                                 _shouldShowDateHeader(
                                   messages[index - 1],
                                   message,
@@ -196,11 +204,7 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar(
-    String name,
-    String username,
-    String role,
-  ) {
+  PreferredSizeWidget _buildAppBar(String name, String username, String role) {
     return AppBar(
       backgroundColor: AppColors.carbon,
       elevation: 0,

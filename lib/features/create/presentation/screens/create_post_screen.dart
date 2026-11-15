@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -113,7 +114,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       id: 'post_${DateTime.now().millisecondsSinceEpoch}',
       creatorName: 'Aditya Pratama',
       creatorUsername: '@aditya_gt3',
-      creatorAvatarAsset: 'assets/images/avatar_aditya.png',
+      creatorAvatarAsset: 'assets/images/avatars/avatar_aditya.png',
       isVerified: true,
       isFollowing: false,
       timeAgo: 'Baru saja',
@@ -258,8 +259,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               // Error banner if any
               if (_errorMessage != null) ...[
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
                     color: AppColors.error.withValues(alpha: 0.15),
@@ -369,8 +372,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               height: 1.4,
             ),
             decoration: InputDecoration(
-              hintText:
-                  'Bagikan modifikasi terbaru, catatan sirkuit, atau proyek garasi Anda... #Porsche #GT3 #Sentul',
+              hintText: 'Bagikan modifikasi terbaru, catatan sirkuit, atau proyek garasi Anda... #Porsche #GT3 #Sentul',
               hintStyle: AppTypography.body.copyWith(
                 color: AppColors.mutedSteel,
                 fontSize: 13,

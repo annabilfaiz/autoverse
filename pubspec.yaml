@@ -60,7 +60,6 @@ flutter:
 
   # Assets for AutoVerse application
   assets:
-    - assets/images/
     - assets/images/vehicles/
     - assets/images/products/
     - assets/images/posts/video_thumbnail/

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -37,21 +38,27 @@ class MarketplaceCategoryChip extends StatelessWidget {
                     : AppColors.carbon,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: isSelected ? AppColors.performanceLime : AppColors.steel,
+                  color: isSelected
+                      ? AppColors.performanceLime
+                      : AppColors.steel,
                   width: isSelected ? 1.5 : 1,
                 ),
               ),
               child: Icon(
                 icon,
                 size: 24,
-                color: isSelected ? AppColors.performanceLime : AppColors.titanium,
+                color: isSelected
+                    ? AppColors.performanceLime
+                    : AppColors.titanium,
               ),
             ),
             const SizedBox(height: 6),
             Text(
               label,
               style: AppTypography.micro.copyWith(
-                color: isSelected ? AppColors.performanceLime : AppColors.titanium,
+                color: isSelected
+                    ? AppColors.performanceLime
+                    : AppColors.titanium,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
               ),
             ),

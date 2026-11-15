@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -20,9 +21,7 @@ class ChatMessageComposer extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
       decoration: const BoxDecoration(
         color: AppColors.carbon,
-        border: Border(
-          top: BorderSide(color: AppColors.steel, width: 0.8),
-        ),
+        border: Border(top: BorderSide(color: AppColors.steel, width: 0.8)),
       ),
       child: Row(
         children: [
@@ -68,14 +67,10 @@ class ChatMessageComposer extends StatelessWidget {
               width: 42,
               height: 42,
               decoration: BoxDecoration(
-                color: canSend
-                    ? AppColors.performanceLime
-                    : AppColors.graphite,
+                color: canSend ? AppColors.performanceLime : AppColors.graphite,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: canSend
-                      ? AppColors.performanceLime
-                      : AppColors.steel,
+                  color: canSend ? AppColors.performanceLime : AppColors.steel,
                 ),
               ),
               child: Center(

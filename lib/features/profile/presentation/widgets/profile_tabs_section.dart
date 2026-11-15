@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -88,7 +89,9 @@ class ProfileTabsSection extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: isSelected ? AppColors.performanceLime : Colors.transparent,
+                color: isSelected
+                    ? AppColors.performanceLime
+                    : Colors.transparent,
                 width: 2,
               ),
             ),
@@ -99,13 +102,17 @@ class ProfileTabsSection extends StatelessWidget {
               Icon(
                 icon,
                 size: 16,
-                color: isSelected ? AppColors.performanceLime : AppColors.titanium,
+                color: isSelected
+                    ? AppColors.performanceLime
+                    : AppColors.titanium,
               ),
               const SizedBox(width: 6),
               Text(
                 label,
                 style: AppTypography.caption.copyWith(
-                  color: isSelected ? AppColors.performanceLime : AppColors.titanium,
+                  color: isSelected
+                      ? AppColors.performanceLime
+                      : AppColors.titanium,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   fontSize: 12,
                 ),
@@ -139,8 +146,18 @@ class ProfileTabsSection extends StatelessWidget {
 
     // Explicit dummy view counts for fallback tiles (separate from likes)
     final fallbackViewCounts = [
-      94200, 82500, 76100, 64800, 55300, 48900,
-      41200, 37600, 29400, 22800, 18500, 14200,
+      94200,
+      82500,
+      76100,
+      64800,
+      55300,
+      48900,
+      41200,
+      37600,
+      29400,
+      22800,
+      18500,
+      14200,
     ];
 
     final displayCount = authorPosts.length > 12 ? authorPosts.length : 12;
@@ -168,7 +185,9 @@ class ProfileTabsSection extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: AppColors.steel.withValues(alpha: 0.5)),
+                  border: Border.all(
+                    color: AppColors.steel.withValues(alpha: 0.5),
+                  ),
                   image: DecorationImage(
                     image: AssetImage(post.mediaAsset),
                     fit: BoxFit.cover,
@@ -181,7 +200,10 @@ class ProfileTabsSection extends StatelessWidget {
                       bottom: 5,
                       left: 5,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.voidBlack.withValues(alpha: 0.75),
                           borderRadius: BorderRadius.circular(4),
@@ -230,7 +252,8 @@ class ProfileTabsSection extends StatelessWidget {
             );
           }
 
-          final fallbackIdx = (index - authorPosts.length) % fallbackImages.length;
+          final fallbackIdx =
+              (index - authorPosts.length) % fallbackImages.length;
           final img = fallbackImages[fallbackIdx];
           final viewCount = fallbackViewCounts[fallbackIdx];
 
@@ -238,10 +261,7 @@ class ProfileTabsSection extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: AppColors.steel.withValues(alpha: 0.5)),
-              image: DecorationImage(
-                image: AssetImage(img),
-                fit: BoxFit.cover,
-              ),
+              image: DecorationImage(image: AssetImage(img), fit: BoxFit.cover),
             ),
             child: Stack(
               children: [
@@ -249,7 +269,10 @@ class ProfileTabsSection extends StatelessWidget {
                   bottom: 5,
                   left: 5,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 4,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.voidBlack.withValues(alpha: 0.75),
                       borderRadius: BorderRadius.circular(4),
@@ -322,18 +345,25 @@ class ProfileTabsSection extends StatelessWidget {
                         children: [
                           Text(
                             v.displayName,
-                            style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite),
+                            style: AppTypography.bodyStrong.copyWith(
+                              color: AppColors.iceWhite,
+                            ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             'Generasi ${v.generation} · ${v.nickname}',
-                            style: AppTypography.caption.copyWith(color: AppColors.titanium),
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.titanium,
+                            ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.limeSoft,
                         borderRadius: BorderRadius.circular(6),
@@ -375,7 +405,9 @@ class ProfileTabsSection extends StatelessWidget {
                     },
                     child: Text(
                       'Lihat Detail Kendaraan',
-                      style: AppTypography.caption.copyWith(color: AppColors.iceWhite),
+                      style: AppTypography.caption.copyWith(
+                        color: AppColors.iceWhite,
+                      ),
                     ),
                   ),
                 ),
@@ -425,21 +457,27 @@ class ProfileTabsSection extends StatelessWidget {
                     label: 'Postingan',
                     count: savedController!.savedPostsCount,
                     isSelected: currentCat == SavedCategory.posts,
-                    onTap: () => savedController!.setSelectedCategory(SavedCategory.posts),
+                    onTap: () => savedController!.setSelectedCategory(
+                      SavedCategory.posts,
+                    ),
                   ),
                   const SizedBox(width: 8),
                   _categoryChip(
                     label: 'Marketplace',
                     count: savedController!.savedProductsCount,
                     isSelected: currentCat == SavedCategory.marketplace,
-                    onTap: () => savedController!.setSelectedCategory(SavedCategory.marketplace),
+                    onTap: () => savedController!.setSelectedCategory(
+                      SavedCategory.marketplace,
+                    ),
                   ),
                   const SizedBox(width: 8),
                   _categoryChip(
                     label: 'Kendaraan',
                     count: savedController!.savedVehiclesCount,
                     isSelected: currentCat == SavedCategory.vehicles,
-                    onTap: () => savedController!.setSelectedCategory(SavedCategory.vehicles),
+                    onTap: () => savedController!.setSelectedCategory(
+                      SavedCategory.vehicles,
+                    ),
                   ),
                 ],
               ),
@@ -485,7 +523,9 @@ class ProfileTabsSection extends StatelessWidget {
               Text(
                 label,
                 style: AppTypography.caption.copyWith(
-                  color: isSelected ? AppColors.performanceLime : AppColors.titanium,
+                  color: isSelected
+                      ? AppColors.performanceLime
+                      : AppColors.titanium,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   fontSize: 11,
                 ),
@@ -494,13 +534,17 @@ class ProfileTabsSection extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.performanceLime : AppColors.graphite,
+                  color: isSelected
+                      ? AppColors.performanceLime
+                      : AppColors.graphite,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   '$count',
                   style: AppTypography.micro.copyWith(
-                    color: isSelected ? AppColors.voidBlack : AppColors.titanium,
+                    color: isSelected
+                        ? AppColors.voidBlack
+                        : AppColors.titanium,
                     fontWeight: FontWeight.w700,
                     fontSize: 9,
                   ),
@@ -545,7 +589,9 @@ class ProfileTabsSection extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.steel.withValues(alpha: 0.5)),
+                border: Border.all(
+                  color: AppColors.steel.withValues(alpha: 0.5),
+                ),
                 image: DecorationImage(
                   image: AssetImage(post.mediaAsset),
                   fit: BoxFit.cover,
@@ -613,7 +659,8 @@ class ProfileTabsSection extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => ProductDetailScreen(
                       productId: product.id,
-                      controller: marketplaceController ?? MarketplaceController(),
+                      controller:
+                          marketplaceController ?? MarketplaceController(),
                       messagesController: messagesController,
                     ),
                   ),
@@ -678,7 +725,8 @@ class ProfileTabsSection extends StatelessWidget {
                       color: AppColors.performanceLime,
                       size: 20,
                     ),
-                    onPressed: () => savedController!.toggleSaveProduct(product.id),
+                    onPressed: () =>
+                        savedController!.toggleSaveProduct(product.id),
                   ),
                 ],
               ),
@@ -824,7 +872,8 @@ class ProfileTabsSection extends StatelessWidget {
 
   // Fallback if savedController is not provided
   Widget _buildLegacySavedGrid(BuildContext context) {
-    final savedPosts = feedController?.allPosts.where((p) => p.isSaved).toList() ?? [];
+    final savedPosts =
+        feedController?.allPosts.where((p) => p.isSaved).toList() ?? [];
 
     if (savedPosts.isEmpty) {
       return _buildEmptyState(
@@ -854,7 +903,9 @@ class ProfileTabsSection extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.steel.withValues(alpha: 0.5)),
+                border: Border.all(
+                  color: AppColors.steel.withValues(alpha: 0.5),
+                ),
                 image: DecorationImage(
                   image: AssetImage(post.mediaAsset),
                   fit: BoxFit.cover,
@@ -871,7 +922,11 @@ class ProfileTabsSection extends StatelessWidget {
                         color: AppColors.voidBlack.withValues(alpha: 0.8),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.bookmark_rounded, size: 10, color: AppColors.performanceLime),
+                      child: const Icon(
+                        Icons.bookmark_rounded,
+                        size: 10,
+                        color: AppColors.performanceLime,
+                      ),
                     ),
                   ),
                 ],

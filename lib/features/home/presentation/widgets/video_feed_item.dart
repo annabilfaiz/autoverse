@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -49,14 +50,17 @@ class _VideoFeedItemState extends State<VideoFeedItem>
       vsync: this,
       duration: const Duration(milliseconds: 600),
     );
-    _heartScale = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.2), weight: 40),
-      TweenSequenceItem(tween: Tween(begin: 1.2, end: 1.0), weight: 20),
-      TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.0), weight: 40),
-    ]).animate(CurvedAnimation(
-      parent: _heartAnimController,
-      curve: Curves.easeInOut,
-    ));
+    _heartScale =
+        TweenSequence<double>([
+          TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.2), weight: 40),
+          TweenSequenceItem(tween: Tween(begin: 1.2, end: 1.0), weight: 20),
+          TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.0), weight: 40),
+        ]).animate(
+          CurvedAnimation(
+            parent: _heartAnimController,
+            curve: Curves.easeInOut,
+          ),
+        );
 
     _heartAnimController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -78,22 +82,25 @@ class _VideoFeedItemState extends State<VideoFeedItem>
     final controller = VideoPlayerController.asset(assetPath);
     _videoPlayerController = controller;
 
-    controller.initialize().then((_) {
-      if (!mounted) return;
-      controller.setLooping(true);
-      controller.setVolume(_isMuted ? 0.0 : 1.0);
-      setState(() {
-        _isInitialized = true;
-      });
-      _syncPlayback();
-    }).catchError((err) {
-      debugPrint('VideoFeedItem: error initializing $assetPath: $err');
-      if (mounted) {
-        setState(() {
-          _hasError = true;
+    controller
+        .initialize()
+        .then((_) {
+          if (!mounted) return;
+          controller.setLooping(true);
+          controller.setVolume(_isMuted ? 0.0 : 1.0);
+          setState(() {
+            _isInitialized = true;
+          });
+          _syncPlayback();
+        })
+        .catchError((err) {
+          debugPrint('VideoFeedItem: error initializing $assetPath: $err');
+          if (mounted) {
+            setState(() {
+              _hasError = true;
+            });
+          }
         });
-      }
-    });
   }
 
   void _syncPlayback() {
@@ -117,7 +124,8 @@ class _VideoFeedItemState extends State<VideoFeedItem>
       _videoPlayerController = null;
       _isInitialized = false;
       _hasError = false;
-      if (widget.post.videoAsset != null && widget.post.videoAsset!.isNotEmpty) {
+      if (widget.post.videoAsset != null &&
+          widget.post.videoAsset!.isNotEmpty) {
         _initVideoController();
       }
       return;
@@ -131,7 +139,8 @@ class _VideoFeedItemState extends State<VideoFeedItem>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
       _videoPlayerController?.pause();
     } else if (state == AppLifecycleState.resumed) {
       _syncPlayback();
@@ -176,7 +185,11 @@ class _VideoFeedItemState extends State<VideoFeedItem>
   Widget build(BuildContext context) {
     final post = widget.post;
     final hasVideo = post.videoAsset != null && post.videoAsset!.isNotEmpty;
-    final canRenderVideo = hasVideo && _isInitialized && !_hasError && _videoPlayerController != null;
+    final canRenderVideo =
+        hasVideo &&
+        _isInitialized &&
+        !_hasError &&
+        _videoPlayerController != null;
 
     return Stack(
       fit: StackFit.expand,
@@ -211,7 +224,11 @@ class _VideoFeedItemState extends State<VideoFeedItem>
                   errorBuilder: (context, error, stackTrace) => Container(
                     color: AppColors.carbon,
                     child: const Center(
-                      child: Icon(Icons.directions_car, size: 64, color: AppColors.steel),
+                      child: Icon(
+                        Icons.directions_car,
+                        size: 64,
+                        color: AppColors.steel,
+                      ),
                     ),
                   ),
                 ),
@@ -222,16 +239,25 @@ class _VideoFeedItemState extends State<VideoFeedItem>
                   top: 56,
                   left: 16,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.voidBlack.withValues(alpha: 0.7),
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: AppColors.steel.withValues(alpha: 0.6)),
+                      border: Border.all(
+                        color: AppColors.steel.withValues(alpha: 0.6),
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.video_library_outlined, size: 13, color: AppColors.titanium),
+                        const Icon(
+                          Icons.video_library_outlined,
+                          size: 13,
+                          color: AppColors.titanium,
+                        ),
                         const SizedBox(width: 5),
                         Text(
                           'Video Segera Hadir',
@@ -259,10 +285,14 @@ class _VideoFeedItemState extends State<VideoFeedItem>
                       decoration: BoxDecoration(
                         color: AppColors.voidBlack.withValues(alpha: 0.65),
                         shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.steel.withValues(alpha: 0.6)),
+                        border: Border.all(
+                          color: AppColors.steel.withValues(alpha: 0.6),
+                        ),
                       ),
                       child: Icon(
-                        _isMuted ? Icons.volume_off_rounded : Icons.volume_up_rounded,
+                        _isMuted
+                            ? Icons.volume_off_rounded
+                            : Icons.volume_up_rounded,
                         size: 16,
                         color: AppColors.iceWhite,
                       ),
@@ -323,7 +353,9 @@ class _VideoFeedItemState extends State<VideoFeedItem>
                     decoration: BoxDecoration(
                       color: AppColors.voidBlack.withValues(alpha: 0.6),
                       shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.2),
+                      ),
                     ),
                     child: const Icon(
                       Icons.play_arrow_rounded,
@@ -342,9 +374,7 @@ class _VideoFeedItemState extends State<VideoFeedItem>
                       Icons.favorite,
                       size: 110,
                       color: AppColors.error,
-                      shadows: [
-                        Shadow(color: Colors.black, blurRadius: 16),
-                      ],
+                      shadows: [Shadow(color: Colors.black, blurRadius: 16)],
                     ),
                   ),
                 ),

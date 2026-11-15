@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/vehicles_data.dart';
@@ -41,7 +42,10 @@ class ProfileGarageSection extends StatelessWidget {
                   ),
                   Text(
                     'Modifikasi Utama',
-                    style: AppTypography.caption.copyWith(color: AppColors.titanium, fontSize: 11),
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.titanium,
+                      fontSize: 11,
+                    ),
                   ),
                 ],
               ),
@@ -80,7 +84,9 @@ class ProfileGarageSection extends StatelessWidget {
                           const SizedBox(height: 2),
                           Text(
                             '4.0L Flat-6 · 6-Speed GT Sport · Track Spec',
-                            style: AppTypography.caption.copyWith(color: AppColors.titanium),
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.titanium,
+                            ),
                           ),
                           const SizedBox(height: 14),
                           SizedBox(
@@ -98,10 +104,11 @@ class ProfileGarageSection extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => FeaturedVehicleShowcaseScreen(
-                                      feedController: feedController,
-                                      savedController: savedController,
-                                    ),
+                                    builder: (_) =>
+                                        FeaturedVehicleShowcaseScreen(
+                                          feedController: feedController,
+                                          savedController: savedController,
+                                        ),
                                   ),
                                 );
                               },
@@ -116,7 +123,11 @@ class ProfileGarageSection extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 6),
-                                  const Icon(Icons.arrow_forward_rounded, size: 16, color: AppColors.voidBlack),
+                                  const Icon(
+                                    Icons.arrow_forward_rounded,
+                                    size: 16,
+                                    color: AppColors.voidBlack,
+                                  ),
                                 ],
                               ),
                             ),
@@ -139,7 +150,10 @@ class ProfileGarageSection extends StatelessWidget {
             children: [
               Text(
                 'Garasi Saya',
-                style: AppTypography.headlineH3.copyWith(fontSize: 16, color: AppColors.iceWhite),
+                style: AppTypography.headlineH3.copyWith(
+                  fontSize: 16,
+                  color: AppColors.iceWhite,
+                ),
               ),
               const SizedBox(height: 10),
               _garageRow(
@@ -147,8 +161,9 @@ class ProfileGarageSection extends StatelessWidget {
                 'Twin-Turbo 13B-REW · Dalam Proses',
                 'Dalam Proses',
                 onTap: () {
-                  final rx7 = VehiclesData.getAdityaGarageVehicles()
-                      .firstWhere((v) => v.id == 'veh_mazda_rx7');
+                  final rx7 = VehiclesData.getAdityaGarageVehicles().firstWhere(
+                    (v) => v.id == 'veh_mazda_rx7',
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -188,7 +203,12 @@ class ProfileGarageSection extends StatelessWidget {
     );
   }
 
-  Widget _garageRow(String title, String subtitle, String status, {VoidCallback? onTap}) {
+  Widget _garageRow(
+    String title,
+    String subtitle,
+    String status, {
+    VoidCallback? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
@@ -208,16 +228,32 @@ class ProfileGarageSection extends StatelessWidget {
                 color: AppColors.graphite,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.directions_car, size: 18, color: AppColors.titanium),
+              child: const Icon(
+                Icons.directions_car,
+                size: 18,
+                color: AppColors.titanium,
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite, fontSize: 13)),
+                  Text(
+                    title,
+                    style: AppTypography.bodyStrong.copyWith(
+                      color: AppColors.iceWhite,
+                      fontSize: 13,
+                    ),
+                  ),
                   const SizedBox(height: 2),
-                  Text(subtitle, style: AppTypography.caption.copyWith(color: AppColors.titanium, fontSize: 11)),
+                  Text(
+                    subtitle,
+                    style: AppTypography.caption.copyWith(
+                      color: AppColors.titanium,
+                      fontSize: 11,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -237,7 +273,11 @@ class ProfileGarageSection extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            const Icon(Icons.chevron_right, size: 16, color: AppColors.titanium),
+            const Icon(
+              Icons.chevron_right,
+              size: 16,
+              color: AppColors.titanium,
+            ),
           ],
         ),
       ),

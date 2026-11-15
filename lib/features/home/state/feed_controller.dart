@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../data/dummy_data.dart';
 import '../../../data/models/comment_model.dart';
 import '../../../data/models/post_model.dart';
@@ -29,7 +30,8 @@ class FeedController extends ChangeNotifier {
     if (vehicleId.isEmpty) return [];
     final vLower = vehicleId.toLowerCase();
     return _allPosts.where((p) {
-      if (p.linkedVehicleId != null && p.linkedVehicleId!.toLowerCase() == vLower) {
+      if (p.linkedVehicleId != null &&
+          p.linkedVehicleId!.toLowerCase() == vLower) {
         return true;
       }
       if (p.linkedVehicleName.isNotEmpty) {
@@ -44,7 +46,9 @@ class FeedController extends ChangeNotifier {
 
   List<PostModel> getPostsForAuthor(String username) {
     final normalized = username.toLowerCase();
-    return _allPosts.where((p) => p.creatorUsername.toLowerCase() == normalized).toList();
+    return _allPosts
+        .where((p) => p.creatorUsername.toLowerCase() == normalized)
+        .toList();
   }
 
   List<PostModel> get currentPosts {

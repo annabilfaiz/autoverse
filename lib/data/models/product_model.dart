@@ -34,10 +34,10 @@ class ProductModel {
   });
 
   String get formattedPrice {
-    final formatted = priceIdr
-        .toString()
-        .replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+(?!\d))'), (m) => '${m[1]}.');
+    final formatted = priceIdr.toString().replaceAllMapped(
+      RegExp(r'(\d)(?=(\d{3})+(?!\d))'),
+      (m) => '${m[1]}.',
+    );
     return 'Rp $formatted';
   }
 }
-

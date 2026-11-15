@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/product_model.dart';
@@ -96,17 +97,22 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
           behavior: SnackBarBehavior.floating,
           margin: const EdgeInsets.fromLTRB(16, 0, 16, 90),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: const BorderSide(color: AppColors.steel)),
+            borderRadius: BorderRadius.circular(10),
+            side: const BorderSide(color: AppColors.steel),
+          ),
           content: Row(
             children: [
-              const Icon(Icons.check_circle_rounded,
-                  size: 18, color: AppColors.performanceLime),
+              const Icon(
+                Icons.check_circle_rounded,
+                size: 18,
+                color: AppColors.performanceLime,
+              ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text('Iklan komponen Anda berhasil diterbitkan!',
-                    style: AppTypography.body
-                        .copyWith(color: AppColors.iceWhite)),
+                child: Text(
+                  'Iklan komponen Anda berhasil diterbitkan!',
+                  style: AppTypography.body.copyWith(color: AppColors.iceWhite),
+                ),
               ),
             ],
           ),
@@ -123,8 +129,10 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.fromLTRB(16, 0, 16, 90),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        content: Text(msg,
-            style: AppTypography.body.copyWith(color: Colors.white)),
+        content: Text(
+          msg,
+          style: AppTypography.body.copyWith(color: Colors.white),
+        ),
         duration: const Duration(seconds: 2),
       ),
     );
@@ -146,13 +154,17 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.steel),
             ),
-            child: const Icon(Icons.close_rounded,
-                size: 18, color: AppColors.iceWhite),
+            child: const Icon(
+              Icons.close_rounded,
+              size: 18,
+              color: AppColors.iceWhite,
+            ),
           ),
         ),
-        title: Text('Buat Iklan Komponen',
-            style: AppTypography.headlineH3
-                .copyWith(color: AppColors.iceWhite)),
+        title: Text(
+          'Buat Iklan Komponen',
+          style: AppTypography.headlineH3.copyWith(color: AppColors.iceWhite),
+        ),
         centerTitle: true,
       ),
       body: Form(
@@ -167,25 +179,34 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                 color: AppColors.carbon,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                    color: AppColors.steel,
-                    style: BorderStyle.solid),
+                  color: AppColors.steel,
+                  style: BorderStyle.solid,
+                ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.photo_library_outlined,
-                      size: 32, color: AppColors.mutedSteel),
+                  const Icon(
+                    Icons.photo_library_outlined,
+                    size: 32,
+                    color: AppColors.mutedSteel,
+                  ),
                   const SizedBox(height: 8),
-                  Text('Foto Komponen (Katalog Bawaan)',
-                      style: AppTypography.bodyStrong
-                          .copyWith(color: AppColors.titanium, fontSize: 13)),
+                  Text(
+                    'Foto Komponen (Katalog Bawaan)',
+                    style: AppTypography.bodyStrong.copyWith(
+                      color: AppColors.titanium,
+                      fontSize: 13,
+                    ),
+                  ),
                   const SizedBox(height: 4),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Text(
                       'Unggah foto kustom belum tersedia. Foto katalog akan disematkan secara otomatis saat diterbitkan.',
-                      style: AppTypography.micro
-                          .copyWith(color: AppColors.mutedSteel),
+                      style: AppTypography.micro.copyWith(
+                        color: AppColors.mutedSteel,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -205,24 +226,29 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                   onTap: () => setState(() => _selectedCategory = cat['key']!),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 7),
+                      horizontal: 14,
+                      vertical: 7,
+                    ),
                     decoration: BoxDecoration(
                       color: sel
-                          ? AppColors.performanceLime
-                          .withValues(alpha: 0.15)
+                          ? AppColors.performanceLime.withValues(alpha: 0.15)
                           : AppColors.carbon,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                          color: sel
-                              ? AppColors.performanceLime
-                              : AppColors.steel),
+                        color: sel
+                            ? AppColors.performanceLime
+                            : AppColors.steel,
+                      ),
                     ),
-                    child: Text(cat['label']!,
-                        style: AppTypography.caption.copyWith(
-                            color: sel
-                                ? AppColors.performanceLime
-                                : AppColors.iceWhite,
-                            fontWeight: FontWeight.w600)),
+                    child: Text(
+                      cat['label']!,
+                      style: AppTypography.caption.copyWith(
+                        color: sel
+                            ? AppColors.performanceLime
+                            : AppColors.iceWhite,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 );
               }).toList(),
@@ -241,24 +267,29 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                         setState(() => _selectedCondition = cond['key']!),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 18, vertical: 8),
+                        horizontal: 18,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: sel
-                            ? AppColors.performanceLime
-                            .withValues(alpha: 0.15)
+                            ? AppColors.performanceLime.withValues(alpha: 0.15)
                             : AppColors.carbon,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                            color: sel
-                                ? AppColors.performanceLime
-                                : AppColors.steel),
+                          color: sel
+                              ? AppColors.performanceLime
+                              : AppColors.steel,
+                        ),
                       ),
-                      child: Text(cond['label']!,
-                          style: AppTypography.body.copyWith(
-                              color: sel
-                                  ? AppColors.performanceLime
-                                  : AppColors.iceWhite,
-                              fontWeight: FontWeight.w600)),
+                      child: Text(
+                        cond['label']!,
+                        style: AppTypography.body.copyWith(
+                          color: sel
+                              ? AppColors.performanceLime
+                              : AppColors.iceWhite,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -290,9 +321,13 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
               hint: 'Contoh: 48500000',
               keyboardType: TextInputType.number,
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'Wajib diisi';
+                if (v == null || v.trim().isEmpty) {
+                  return 'Wajib diisi';
+                }
                 final raw = v.replaceAll(RegExp(r'[^0-9]'), '');
-                if (int.tryParse(raw) == null) return 'Masukkan angka yang valid';
+                if (int.tryParse(raw) == null) {
+                  return 'Masukkan angka yang valid';
+                }
                 return null;
               },
             ),
@@ -350,10 +385,13 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                           color: AppColors.voidBlack,
                         ),
                       )
-                    : Text('Terbitkan Iklan',
+                    : Text(
+                        'Terbitkan Iklan',
                         style: AppTypography.button.copyWith(
-                            color: AppColors.voidBlack,
-                            fontWeight: FontWeight.w700)),
+                          color: AppColors.voidBlack,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
               ),
             ),
           ),
@@ -362,9 +400,13 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     );
   }
 
-  Widget _sectionLabel(String text) => Text(text,
-      style: AppTypography.caption.copyWith(
-          color: AppColors.titanium, fontWeight: FontWeight.w600));
+  Widget _sectionLabel(String text) => Text(
+    text,
+    style: AppTypography.caption.copyWith(
+      color: AppColors.titanium,
+      fontWeight: FontWeight.w600,
+    ),
+  );
 
   Widget _field({
     required String label,
@@ -378,24 +420,27 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
-            style: AppTypography.caption.copyWith(
-                color: AppColors.titanium, fontWeight: FontWeight.w600)),
+        Text(
+          label,
+          style: AppTypography.caption.copyWith(
+            color: AppColors.titanium,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         const SizedBox(height: 6),
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
           maxLines: maxLines,
-          style:
-              AppTypography.body.copyWith(color: AppColors.iceWhite),
+          style: AppTypography.body.copyWith(color: AppColors.iceWhite),
           validator: validator,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: AppTypography.body
-                .copyWith(color: AppColors.mutedSteel),
+            hintStyle: AppTypography.body.copyWith(color: AppColors.mutedSteel),
             helperText: hint2,
             helperStyle: AppTypography.micro.copyWith(
-                color: AppColors.mutedSteel),
+              color: AppColors.mutedSteel,
+            ),
             filled: true,
             fillColor: AppColors.carbon,
             border: OutlineInputBorder(
@@ -409,20 +454,19 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
-                  color: AppColors.performanceLime, width: 1.5),
+                color: AppColors.performanceLime,
+                width: 1.5,
+              ),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: AppColors.error, width: 1.5),
+              borderSide: const BorderSide(color: AppColors.error, width: 1.5),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide:
-                  const BorderSide(color: AppColors.error, width: 1.5),
+              borderSide: const BorderSide(color: AppColors.error, width: 1.5),
             ),
-            errorStyle:
-                const TextStyle(color: AppColors.error, fontSize: 11),
+            errorStyle: const TextStyle(color: AppColors.error, fontSize: 11),
           ),
         ),
       ],

@@ -1,6 +1,8 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -80,7 +82,9 @@ class _RightActionRailState extends State<RightActionRail>
               ),
               Text(
                 'Bagikan Postingan',
-                style: AppTypography.headlineH3.copyWith(color: AppColors.iceWhite),
+                style: AppTypography.headlineH3.copyWith(
+                  color: AppColors.iceWhite,
+                ),
               ),
               const SizedBox(height: 16),
               Row(
@@ -95,9 +99,15 @@ class _RightActionRailState extends State<RightActionRail>
                         SnackBar(
                           content: Row(
                             children: const [
-                              Icon(Icons.check_circle_rounded, color: AppColors.performanceLime, size: 18),
+                              Icon(
+                                Icons.check_circle_rounded,
+                                color: AppColors.performanceLime,
+                                size: 18,
+                              ),
                               SizedBox(width: 8),
-                              Text('Tautan postingan berhasil disalin ke papan klip!'),
+                              Text(
+                                'Tautan postingan berhasil disalin ke papan klip!',
+                              ),
                             ],
                           ),
                           backgroundColor: AppColors.carbon,
@@ -225,7 +235,8 @@ class _RightActionRailState extends State<RightActionRail>
           icon: Icons.chat_bubble_outline_rounded,
           color: AppColors.iceWhite,
           label: _formatCount(post.commentCount),
-          onTap: () => CommentsBottomSheet.show(context, post, widget.controller),
+          onTap: () =>
+              CommentsBottomSheet.show(context, post, widget.controller),
         ),
 
         const SizedBox(height: 16),
@@ -333,7 +344,11 @@ class _RightActionRailState extends State<RightActionRail>
               fontWeight: FontWeight.w600,
               color: AppColors.iceWhite,
               shadows: const [
-                Shadow(color: Colors.black, blurRadius: 4, offset: Offset(0, 1)),
+                Shadow(
+                  color: Colors.black,
+                  blurRadius: 4,
+                  offset: Offset(0, 1),
+                ),
               ],
             ),
           ),

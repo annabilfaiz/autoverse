@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -44,7 +45,11 @@ class _ContentOverlayState extends State<ContentOverlay> {
                   fontWeight: FontWeight.w700,
                   color: AppColors.iceWhite,
                   shadows: const [
-                    Shadow(color: Colors.black, blurRadius: 4, offset: Offset(0, 1)),
+                    Shadow(
+                      color: Colors.black,
+                      blurRadius: 4,
+                      offset: Offset(0, 1),
+                    ),
                   ],
                 ),
               ),
@@ -63,7 +68,11 @@ class _ContentOverlayState extends State<ContentOverlay> {
                   fontSize: 12,
                   color: AppColors.titanium,
                   shadows: const [
-                    Shadow(color: Colors.black, blurRadius: 4, offset: Offset(0, 1)),
+                    Shadow(
+                      color: Colors.black,
+                      blurRadius: 4,
+                      offset: Offset(0, 1),
+                    ),
                   ],
                 ),
               ),
@@ -82,7 +91,9 @@ class _ContentOverlayState extends State<ContentOverlay> {
               decoration: BoxDecoration(
                 color: AppColors.carbon.withValues(alpha: 0.85),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.steel.withValues(alpha: 0.8)),
+                border: Border.all(
+                  color: AppColors.steel.withValues(alpha: 0.8),
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.3),
@@ -132,7 +143,11 @@ class _ContentOverlayState extends State<ContentOverlay> {
                     fontSize: 13,
                     color: AppColors.iceWhite,
                     shadows: const [
-                      Shadow(color: Colors.black, blurRadius: 4, offset: Offset(0, 1)),
+                      Shadow(
+                        color: Colors.black,
+                        blurRadius: 4,
+                        offset: Offset(0, 1),
+                      ),
                     ],
                   ),
                 ),
@@ -142,7 +157,11 @@ class _ContentOverlayState extends State<ContentOverlay> {
                     fontSize: 13,
                     color: AppColors.performanceLime,
                     shadows: const [
-                      Shadow(color: Colors.black, blurRadius: 4, offset: Offset(0, 1)),
+                      Shadow(
+                        color: Colors.black,
+                        blurRadius: 4,
+                        offset: Offset(0, 1),
+                      ),
                     ],
                   ),
                 ),
@@ -172,7 +191,11 @@ class _ContentOverlayState extends State<ContentOverlay> {
                   fontSize: 12,
                   color: AppColors.titanium,
                   shadows: const [
-                    Shadow(color: Colors.black, blurRadius: 4, offset: Offset(0, 1)),
+                    Shadow(
+                      color: Colors.black,
+                      blurRadius: 4,
+                      offset: Offset(0, 1),
+                    ),
                   ],
                 ),
               ),

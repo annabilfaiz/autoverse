@@ -35,7 +35,8 @@ void main() {
       controller.setSearchQuery('Akrapovič');
       expect(controller.filteredProducts.isNotEmpty, true);
       for (final p in controller.filteredProducts) {
-        final matches = p.name.toLowerCase().contains('akrapovič') ||
+        final matches =
+            p.name.toLowerCase().contains('akrapovič') ||
             p.brand.toLowerCase().contains('akrapovič');
         expect(matches, true);
       }
@@ -46,9 +47,11 @@ void main() {
       expect(controller.compatibilityFilter, 'Porsche 911');
       expect(controller.filteredProducts.isNotEmpty, true);
       for (final p in controller.filteredProducts) {
-        final matches = p.compatibleVehicles.any((v) =>
-            v.toLowerCase().contains('porsche') ||
-            v.toLowerCase().contains('911'));
+        final matches = p.compatibleVehicles.any(
+          (v) =>
+              v.toLowerCase().contains('porsche') ||
+              v.toLowerCase().contains('911'),
+        );
         expect(matches, true);
       }
     });
@@ -129,9 +132,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: AppTheme.darkTheme,
-          home: Scaffold(
-            body: MarketplaceHomeScreen(controller: controller),
-          ),
+          home: Scaffold(body: MarketplaceHomeScreen(controller: controller)),
         ),
       );
       await tester.pumpAndSettle();
@@ -148,8 +149,9 @@ void main() {
       expect(find.text('Komponen Unggulan'), findsOneWidget);
     });
 
-    testWidgets('ProductDetailScreen renders product info and specifications',
-        (tester) async {
+    testWidgets('ProductDetailScreen renders product info and specifications', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() => tester.view.resetPhysicalSize());

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -7,10 +8,7 @@ import '../../../../data/models/post_model.dart';
 class ShowcaseBuildPostsSection extends StatelessWidget {
   final List<PostModel> linkedPosts;
 
-  const ShowcaseBuildPostsSection({
-    super.key,
-    required this.linkedPosts,
-  });
+  const ShowcaseBuildPostsSection({super.key, required this.linkedPosts});
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +67,16 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                           const SizedBox(height: 2),
                           Text(
                             'Akrapovič Titanium Race Exhaust (+22 HP, -11 kg)',
-                            style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite),
+                            style: AppTypography.bodyStrong.copyWith(
+                              color: AppColors.iceWhite,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Pemasangan header titanium dan race cat di Sentul Speed Lab. Hasil dyno terverifikasi.',
-                            style: AppTypography.caption.copyWith(color: AppColors.titanium),
+                            style: AppTypography.caption.copyWith(
+                              color: AppColors.titanium,
+                            ),
                           ),
                         ],
                       ),
@@ -108,7 +110,10 @@ class ShowcaseBuildPostsSection extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.performanceLime.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(10),

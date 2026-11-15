@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/post_model.dart';
@@ -14,7 +15,11 @@ class CommentsBottomSheet extends StatefulWidget {
     required this.controller,
   });
 
-  static void show(BuildContext context, PostModel post, FeedController controller) {
+  static void show(
+    BuildContext context,
+    PostModel post,
+    FeedController controller,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -82,7 +87,10 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
 
               // Header
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -94,7 +102,11 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close, size: 20, color: AppColors.titanium),
+                      icon: const Icon(
+                        Icons.close,
+                        size: 20,
+                        color: AppColors.titanium,
+                      ),
                       onPressed: () => Navigator.pop(context),
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
@@ -111,11 +123,16 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                     ? Center(
                         child: Text(
                           'Belum ada komentar. Jadilah yang pertama berkomentar!',
-                          style: AppTypography.caption.copyWith(color: AppColors.mutedSteel),
+                          style: AppTypography.caption.copyWith(
+                            color: AppColors.mutedSteel,
+                          ),
                         ),
                       )
                     : ListView.separated(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
                         itemCount: comments.length,
                         separatorBuilder: (_, _) => const SizedBox(height: 16),
                         itemBuilder: (context, index) {
@@ -126,7 +143,9 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                               CircleAvatar(
                                 radius: 18,
                                 backgroundColor: AppColors.graphite,
-                                backgroundImage: AssetImage(comment.authorAvatarUrl),
+                                backgroundImage: AssetImage(
+                                  comment.authorAvatarUrl,
+                                ),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -137,10 +156,11 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                                       children: [
                                         Text(
                                           comment.authorName,
-                                          style: AppTypography.bodyStrong.copyWith(
-                                            fontSize: 13,
-                                            color: AppColors.iceWhite,
-                                          ),
+                                          style: AppTypography.bodyStrong
+                                              .copyWith(
+                                                fontSize: 13,
+                                                color: AppColors.iceWhite,
+                                              ),
                                         ),
                                         const SizedBox(width: 6),
                                         Text(
@@ -173,15 +193,21 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                                 child: Column(
                                   children: [
                                     Icon(
-                                      comment.isLiked ? Icons.favorite : Icons.favorite_border,
+                                      comment.isLiked
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
                                       size: 16,
-                                      color: comment.isLiked ? AppColors.error : AppColors.mutedSteel,
+                                      color: comment.isLiked
+                                          ? AppColors.error
+                                          : AppColors.mutedSteel,
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
                                       '${comment.likeCount}',
                                       style: AppTypography.micro.copyWith(
-                                        color: comment.isLiked ? AppColors.error : AppColors.mutedSteel,
+                                        color: comment.isLiked
+                                            ? AppColors.error
+                                            : AppColors.mutedSteel,
                                       ),
                                     ),
                                   ],
@@ -195,10 +221,15 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
 
               // Comment Composer
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 decoration: const BoxDecoration(
                   color: AppColors.voidBlack,
-                  border: Border(top: BorderSide(color: AppColors.steel, width: 1)),
+                  border: Border(
+                    top: BorderSide(color: AppColors.steel, width: 1),
+                  ),
                 ),
                 child: SafeArea(
                   top: false,
@@ -207,7 +238,9 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                       const CircleAvatar(
                         radius: 16,
                         backgroundColor: AppColors.graphite,
-                        backgroundImage: AssetImage('assets/images/avatar_aditya.png'),
+                        backgroundImage: AssetImage(
+                          'assets/images/avatar_aditya.png',
+                        ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -221,13 +254,19 @@ class _CommentsBottomSheetState extends State<CommentsBottomSheet> {
                           child: TextField(
                             controller: _textController,
                             focusNode: _focusNode,
-                            style: AppTypography.body.copyWith(color: AppColors.iceWhite),
+                            style: AppTypography.body.copyWith(
+                              color: AppColors.iceWhite,
+                            ),
                             decoration: InputDecoration(
                               hintText: 'Tulis komentar...',
-                              hintStyle: AppTypography.body.copyWith(color: AppColors.mutedSteel),
+                              hintStyle: AppTypography.body.copyWith(
+                                color: AppColors.mutedSteel,
+                              ),
                               border: InputBorder.none,
                               isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                              ),
                             ),
                             onSubmitted: (_) => _submitComment(),
                           ),

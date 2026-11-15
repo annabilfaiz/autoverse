@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../home/presentation/screens/home_fyp_screen.dart';
 import '../../home/state/feed_controller.dart';
@@ -16,10 +17,7 @@ import 'widgets/global_bottom_nav_bar.dart';
 class MainShell extends StatefulWidget {
   final int initialIndex;
 
-  const MainShell({
-    super.key,
-    this.initialIndex = 0,
-  });
+  const MainShell({super.key, this.initialIndex = 0});
 
   @override
   State<MainShell> createState() => _MainShellState();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/product_model.dart';
@@ -83,13 +84,16 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                         Expanded(
                           child: Text(
                             'Marketplace',
-                            style: AppTypography.headlineH1.copyWith(letterSpacing: -0.5),
+                            style: AppTypography.headlineH1.copyWith(
+                              letterSpacing: -0.5,
+                            ),
                           ),
                         ),
                         _iconButton(
                           icon: Icons.tune_rounded,
                           isActive: hasFilters,
-                          onTap: () => setState(() => _showFilters = !_showFilters),
+                          onTap: () =>
+                              setState(() => _showFilters = !_showFilters),
                           tooltip: 'Filter',
                         ),
                         const SizedBox(width: 10),
@@ -115,14 +119,26 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                       ),
                       child: TextField(
                         controller: _searchCtrl,
-                        style: AppTypography.body.copyWith(color: AppColors.iceWhite),
+                        style: AppTypography.body.copyWith(
+                          color: AppColors.iceWhite,
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Cari komponen, merek, kendaraan...',
-                          hintStyle: AppTypography.body.copyWith(color: AppColors.titanium),
-                          prefixIcon: const Icon(Icons.search, color: AppColors.titanium, size: 20),
+                          hintStyle: AppTypography.body.copyWith(
+                            color: AppColors.titanium,
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: AppColors.titanium,
+                            size: 20,
+                          ),
                           suffixIcon: _searchCtrl.text.isNotEmpty
                               ? IconButton(
-                                  icon: const Icon(Icons.clear, color: AppColors.titanium, size: 18),
+                                  icon: const Icon(
+                                    Icons.clear,
+                                    color: AppColors.titanium,
+                                    size: 18,
+                                  ),
                                   onPressed: () {
                                     _searchCtrl.clear();
                                     widget.controller.setSearchQuery('');
@@ -131,7 +147,10 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                                 )
                               : null,
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 12,
+                          ),
                         ),
                         onChanged: (val) {
                           widget.controller.setSearchQuery(val);
@@ -197,11 +216,14 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                 // ── Compatibility Filter Panel (Collapsible) ──
                 if (_showFilters)
                   SliverToBoxAdapter(
-                    child: MarketplaceFilterPanel(controller: widget.controller),
+                    child: MarketplaceFilterPanel(
+                      controller: widget.controller,
+                    ),
                   ),
 
                 // ── Featured Parts Section ──
-                if (featured.isNotEmpty && !widget.controller.hasActiveFilters) ...[
+                if (featured.isNotEmpty &&
+                    !widget.controller.hasActiveFilters) ...[
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
@@ -239,7 +261,9 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                           widget.controller.hasActiveFilters
                               ? 'Hasil Filter (${products.length})'
                               : 'Semua Komponen',
-                          style: AppTypography.headlineH3.copyWith(fontSize: 18),
+                          style: AppTypography.headlineH3.copyWith(
+                            fontSize: 18,
+                          ),
                         ),
                         GestureDetector(
                           onTap: () => _showSortSheet(context),
@@ -248,10 +272,16 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                             children: [
                               Text(
                                 _sortLabel(widget.controller.sortOrder),
-                                style: AppTypography.caption.copyWith(color: AppColors.titanium),
+                                style: AppTypography.caption.copyWith(
+                                  color: AppColors.titanium,
+                                ),
                               ),
                               const SizedBox(width: 4),
-                              const Icon(Icons.sort_rounded, size: 16, color: AppColors.titanium),
+                              const Icon(
+                                Icons.sort_rounded,
+                                size: 16,
+                                color: AppColors.titanium,
+                              ),
                             ],
                           ),
                         ),
@@ -276,7 +306,8 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                           child: MarketplaceProductCard(
                             product: products[i],
                             onTap: () => _openProduct(products[i]),
-                            onToggleSave: () => widget.controller.toggleSave(products[i].id),
+                            onToggleSave: () =>
+                                widget.controller.toggleSave(products[i].id),
                           ),
                         ),
                         childCount: products.length,
@@ -285,9 +316,7 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                   ),
 
                 // Bottom padding for persistent nav
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 100),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 100)),
               ],
             ),
           ),
@@ -324,7 +353,9 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: isActive ? AppColors.performanceLime.withValues(alpha: 0.15) : AppColors.carbon,
+          color: isActive
+              ? AppColors.performanceLime.withValues(alpha: 0.15)
+              : AppColors.carbon,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isActive ? AppColors.performanceLime : AppColors.steel,
@@ -361,8 +392,16 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                 ),
               ),
               _sortTile(context, 'Terbaru', MarketplaceSortOrder.newest),
-              _sortTile(context, 'Harga: Terendah ke Tertinggi', MarketplaceSortOrder.priceLowToHigh),
-              _sortTile(context, 'Harga: Tertinggi ke Terendah', MarketplaceSortOrder.priceHighToLow),
+              _sortTile(
+                context,
+                'Harga: Terendah ke Tertinggi',
+                MarketplaceSortOrder.priceLowToHigh,
+              ),
+              _sortTile(
+                context,
+                'Harga: Tertinggi ke Terendah',
+                MarketplaceSortOrder.priceHighToLow,
+              ),
               const SizedBox(height: 8),
             ],
           ),
@@ -371,7 +410,11 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
     );
   }
 
-  Widget _sortTile(BuildContext context, String label, MarketplaceSortOrder opt) {
+  Widget _sortTile(
+    BuildContext context,
+    String label,
+    MarketplaceSortOrder opt,
+  ) {
     final isSelected = widget.controller.sortOrder == opt;
     return ListTile(
       title: Text(
@@ -381,7 +424,9 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
           fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
         ),
       ),
-      trailing: isSelected ? const Icon(Icons.check, color: AppColors.performanceLime) : null,
+      trailing: isSelected
+          ? const Icon(Icons.check, color: AppColors.performanceLime)
+          : null,
       onTap: () {
         widget.controller.setSortOrder(opt);
         Navigator.pop(context);
@@ -407,11 +452,17 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.search_off_rounded, size: 54, color: AppColors.mutedSteel),
+            const Icon(
+              Icons.search_off_rounded,
+              size: 54,
+              color: AppColors.mutedSteel,
+            ),
             const SizedBox(height: 16),
             Text(
               'Tidak ada komponen ditemukan',
-              style: AppTypography.headlineH3.copyWith(color: AppColors.titanium),
+              style: AppTypography.headlineH3.copyWith(
+                color: AppColors.titanium,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
@@ -427,7 +478,10 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                 setState(() => _showFilters = false);
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.graphite,
                   borderRadius: BorderRadius.circular(10),
@@ -435,7 +489,9 @@ class _MarketplaceHomeScreenState extends State<MarketplaceHomeScreen> {
                 ),
                 child: Text(
                   'Hapus Filter',
-                  style: AppTypography.bodyStrong.copyWith(color: AppColors.iceWhite),
+                  style: AppTypography.bodyStrong.copyWith(
+                    color: AppColors.iceWhite,
+                  ),
                 ),
               ),
             ),

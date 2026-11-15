@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -42,10 +43,7 @@ class CreatePostMediaPicker extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.carbon,
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: AppColors.steel,
-              width: 1.2,
-            ),
+            border: Border.all(color: AppColors.steel, width: 1.2),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -219,13 +217,12 @@ class CreatePostMediaPicker extends StatelessWidget {
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      Image.asset(
-                        asset,
-                        fit: BoxFit.cover,
-                      ),
+                      Image.asset(asset, fit: BoxFit.cover),
                       if (isSelected)
                         Container(
-                          color: AppColors.performanceLime.withValues(alpha: 0.2),
+                          color: AppColors.performanceLime.withValues(
+                            alpha: 0.2,
+                          ),
                           child: const Center(
                             child: Icon(
                               Icons.check_circle_rounded,

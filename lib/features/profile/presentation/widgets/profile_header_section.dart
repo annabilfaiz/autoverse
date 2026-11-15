@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -26,7 +27,11 @@ class ProfileHeaderSection extends StatelessWidget {
             children: [
               if (onBackToHome != null)
                 IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.iceWhite),
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 18,
+                    color: AppColors.iceWhite,
+                  ),
                   onPressed: onBackToHome,
                   padding: const EdgeInsets.only(right: 8),
                   constraints: const BoxConstraints(),
@@ -39,7 +44,11 @@ class ProfileHeaderSection extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 4),
-              const Icon(Icons.verified, size: 16, color: AppColors.performanceLime),
+              const Icon(
+                Icons.verified,
+                size: 16,
+                color: AppColors.performanceLime,
+              ),
             ],
           ),
         ),
@@ -60,7 +69,9 @@ class ProfileHeaderSection extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.steel, width: 2),
                       image: const DecorationImage(
-                        image: AssetImage('assets/images/avatar_aditya.png'),
+                        image: AssetImage(
+                          'assets/images/avatars/avatar_aditya.png',
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -94,12 +105,17 @@ class ProfileHeaderSection extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 'Jakarta, Indonesia',
-                style: AppTypography.caption.copyWith(color: AppColors.titanium),
+                style: AppTypography.caption.copyWith(
+                  color: AppColors.titanium,
+                ),
               ),
               const SizedBox(height: 6),
               Text(
                 '992 GT3 track build and vintage air-cooled projects. Driving fast, wrenching slow.',
-                style: AppTypography.body.copyWith(fontSize: 13, color: AppColors.iceWhite),
+                style: AppTypography.body.copyWith(
+                  fontSize: 13,
+                  color: AppColors.iceWhite,
+                ),
               ),
             ],
           ),

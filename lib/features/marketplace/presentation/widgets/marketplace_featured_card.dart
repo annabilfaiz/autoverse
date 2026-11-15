@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/product_model.dart';
@@ -37,7 +38,11 @@ class MarketplaceFeaturedCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) => Container(
                   color: AppColors.graphite,
-                  child: const Icon(Icons.directions_car, size: 36, color: AppColors.steel),
+                  child: const Icon(
+                    Icons.directions_car,
+                    size: 36,
+                    color: AppColors.steel,
+                  ),
                 ),
               ),
             ),

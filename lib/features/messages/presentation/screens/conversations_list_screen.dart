@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../data/models/conversation_model.dart';
@@ -56,8 +57,9 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
             : allConversations.where((c) {
                 final q = _filterQuery.toLowerCase();
                 final nameMatch = c.participantName.toLowerCase().contains(q);
-                final userMatch =
-                    c.participantUsername.toLowerCase().contains(q);
+                final userMatch = c.participantUsername.toLowerCase().contains(
+                  q,
+                );
                 final msgMatch =
                     c.lastMessage?.text.toLowerCase().contains(q) ?? false;
                 final prodMatch =
@@ -103,14 +105,18 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                         if (unreadCount > 0)
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
-                              color: AppColors.performanceLime
-                                  .withValues(alpha: 0.15),
+                              color: AppColors.performanceLime.withValues(
+                                alpha: 0.15,
+                              ),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: AppColors.performanceLime
-                                    .withValues(alpha: 0.5),
+                                color: AppColors.performanceLime.withValues(
+                                  alpha: 0.5,
+                                ),
                               ),
                             ),
                             child: Row(
@@ -158,7 +164,8 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                           fontSize: 14,
                         ),
                         decoration: InputDecoration(
-                          hintText: 'Cari percakapan, penjual, atau komponen...',
+                          hintText:
+                              'Cari percakapan, penjual, atau komponen...',
                           hintStyle: AppTypography.body.copyWith(
                             color: AppColors.mutedSteel,
                             fontSize: 14,
@@ -183,7 +190,9 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                               : null,
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
                         ),
                         onChanged: (q) => setState(() => _filterQuery = q),
                       ),
@@ -201,16 +210,13 @@ class _ConversationsListScreenState extends State<ConversationsListScreen> {
                   SliverPadding(
                     padding: const EdgeInsets.only(bottom: 120),
                     sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          final conversation = filtered[index];
-                          return ConversationListTile(
-                            conversation: conversation,
-                            onTap: () => _openChat(conversation),
-                          );
-                        },
-                        childCount: filtered.length,
-                      ),
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final conversation = filtered[index];
+                        return ConversationListTile(
+                          conversation: conversation,
+                          onTap: () => _openChat(conversation),
+                        );
+                      }, childCount: filtered.length),
                     ),
                   ),
               ],

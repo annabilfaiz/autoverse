@@ -16,7 +16,8 @@ PostModel _buildTestPost({
   String caption = 'Test caption',
   String? linkedVehicleId,
   String linkedVehicleChip = '',
-  String mediaAsset = 'assets/images/feed_porsche_dusk.png',
+  String mediaAsset =
+      'assets/images/posts/video_thumbnail/post_porsche_gt3_thumbnail.jpg',
   int likeCount = 0,
   int viewCount = 0,
 }) {
@@ -24,7 +25,7 @@ PostModel _buildTestPost({
     id: id,
     creatorName: creatorName,
     creatorUsername: creatorUsername,
-    creatorAvatarAsset: 'assets/images/avatar_aditya.png',
+    creatorAvatarAsset: 'assets/images/avatars/avatar_aditya.png',
     timeAgo: 'Just now',
     caption: caption,
     hashtags: ['#trackday', '#porsche'],
@@ -55,44 +56,53 @@ void main() {
       expect(controller.authorPostCount, greaterThanOrEqualTo(38));
     });
 
-    test('addPost prepends post to top of feed and increments author count', () {
-      final initialCount = controller.allPosts.length;
-      final initialAuthorCount = controller.authorPostCount;
+    test(
+      'addPost prepends post to top of feed and increments author count',
+      () {
+        final initialCount = controller.allPosts.length;
+        final initialAuthorCount = controller.authorPostCount;
 
-      final newPost = _buildTestPost(
-        id: 'post_test_01',
-        caption: 'Testing cold start with new titanium headers!',
-        linkedVehicleId: 'veh_porsche_gt3',
-        linkedVehicleChip: '🏎️ Porsche 911 GT3 (992)',
-      );
+        final newPost = _buildTestPost(
+          id: 'post_test_01',
+          caption: 'Testing cold start with new titanium headers!',
+          linkedVehicleId: 'veh_porsche_gt3',
+          linkedVehicleChip: '🏎️ Porsche 911 GT3 (992)',
+        );
 
-      controller.addPost(newPost);
+        controller.addPost(newPost);
 
-      expect(controller.allPosts.length, initialCount + 1);
-      expect(controller.allPosts.first.id, 'post_test_01');
-      expect(controller.authorPostCount, initialAuthorCount + 1);
-    });
+        expect(controller.allPosts.length, initialCount + 1);
+        expect(controller.allPosts.first.id, 'post_test_01');
+        expect(controller.authorPostCount, initialAuthorCount + 1);
+      },
+    );
 
-    test('getPostsForAuthor returns only posts created by specified author', () {
-      final adityaPosts = controller.getPostsForAuthor('@aditya_gt3');
-      for (final p in adityaPosts) {
-        expect(p.creatorUsername, '@aditya_gt3');
-      }
-    });
+    test(
+      'getPostsForAuthor returns only posts created by specified author',
+      () {
+        final adityaPosts = controller.getPostsForAuthor('@aditya_gt3');
+        for (final p in adityaPosts) {
+          expect(p.creatorUsername, '@aditya_gt3');
+        }
+      },
+    );
 
-    test('getPostsForVehicle returns only posts linked to specified vehicle', () {
-      final gt3Posts = controller.getPostsForVehicle('veh_porsche_gt3');
-      expect(gt3Posts.isNotEmpty, true);
-      for (final p in gt3Posts) {
-        expect(p.linkedVehicleId, 'veh_porsche_gt3');
-      }
+    test(
+      'getPostsForVehicle returns only posts linked to specified vehicle',
+      () {
+        final gt3Posts = controller.getPostsForVehicle('veh_porsche_gt3');
+        expect(gt3Posts.isNotEmpty, true);
+        for (final p in gt3Posts) {
+          expect(p.linkedVehicleId, 'veh_porsche_gt3');
+        }
 
-      final rx7Posts = controller.getPostsForVehicle('veh_mazda_rx7');
-      expect(rx7Posts.isNotEmpty, true);
-      for (final p in rx7Posts) {
-        expect(p.linkedVehicleId, 'veh_mazda_rx7');
-      }
-    });
+        final rx7Posts = controller.getPostsForVehicle('veh_mazda_rx7');
+        expect(rx7Posts.isNotEmpty, true);
+        for (final p in rx7Posts) {
+          expect(p.linkedVehicleId, 'veh_mazda_rx7');
+        }
+      },
+    );
 
     test('getPostsForVehicle does not return posts for unrelated vehicle', () {
       final nonExistentPosts = controller.getPostsForVehicle('veh_unknown_999');
@@ -110,19 +120,37 @@ void main() {
       expect(civicPosts.any((p) => p.id == 'post_gt3_exclusive'), false);
     });
 
-    test('Post unlinked to vehicle has null linkedVehicleId and empty chip', () {
-      final unlinkedPost = _buildTestPost(
-        id: 'post_unlinked',
-        caption: 'Saturday morning coffee run with the crew',
-        linkedVehicleChip: '',
-        linkedVehicleId: null,
-      );
-      controller.addPost(unlinkedPost);
+    test(
+      'Post unlinked to vehicle has null linkedVehicleId and empty chip',
+      () {
+        final unlinkedPost = _buildTestPost(
+          id: 'post_unlinked',
+          caption: 'Saturday morning coffee run with the crew',
+          linkedVehicleChip: '',
+          linkedVehicleId: null,
+        );
+        controller.addPost(unlinkedPost);
 
-      expect(controller.getPostsForVehicle('veh_porsche_gt3').any((p) => p.id == 'post_unlinked'), false);
-      expect(controller.getPostsForVehicle('veh_mazda_rx7').any((p) => p.id == 'post_unlinked'), false);
-      expect(controller.getPostsForVehicle('veh_civic_fk8').any((p) => p.id == 'post_unlinked'), false);
-    });
+        expect(
+          controller
+              .getPostsForVehicle('veh_porsche_gt3')
+              .any((p) => p.id == 'post_unlinked'),
+          false,
+        );
+        expect(
+          controller
+              .getPostsForVehicle('veh_mazda_rx7')
+              .any((p) => p.id == 'post_unlinked'),
+          false,
+        );
+        expect(
+          controller
+              .getPostsForVehicle('veh_civic_fk8')
+              .any((p) => p.id == 'post_unlinked'),
+          false,
+        );
+      },
+    );
 
     test('Like and Save interactions remain functional on posts', () {
       final firstPostId = controller.allPosts.first.id;
@@ -172,7 +200,9 @@ void main() {
       expect(find.textContaining('Civic Type R'), findsOneWidget);
     });
 
-    testWidgets('Rejects submission with empty or whitespace-only caption', (tester) async {
+    testWidgets('Rejects submission with empty or whitespace-only caption', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() => tester.view.resetPhysicalSize());
@@ -192,17 +222,25 @@ void main() {
       await tester.pumpAndSettle();
 
       // Validation error message appears
-      expect(find.text('Masukkan keterangan untuk postingan Anda.'), findsOneWidget);
+      expect(
+        find.text('Masukkan keterangan untuk postingan Anda.'),
+        findsOneWidget,
+      );
 
       // Enter only whitespace
       await tester.enterText(find.byType(TextField), '    ');
       await tester.tap(find.text('Bagikan'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Masukkan keterangan untuk postingan Anda.'), findsOneWidget);
+      expect(
+        find.text('Masukkan keterangan untuk postingan Anda.'),
+        findsOneWidget,
+      );
     });
 
-    testWidgets('Allows selecting and deselecting garage vehicle', (tester) async {
+    testWidgets('Allows selecting and deselecting garage vehicle', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() => tester.view.resetPhysicalSize());
@@ -231,7 +269,9 @@ void main() {
       expect(find.text('Hapus Tautan'), findsNothing);
     });
 
-    testWidgets('Publishing creates a valid post and invokes callback', (tester) async {
+    testWidgets('Publishing creates a valid post and invokes callback', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() => tester.view.resetPhysicalSize());
@@ -257,7 +297,10 @@ void main() {
       await tester.pumpAndSettle();
 
       // Enter caption
-      await tester.enterText(find.byType(TextField), 'Apex seals renewed! Ready for Sentul hot laps.');
+      await tester.enterText(
+        find.byType(TextField),
+        'Apex seals renewed! Ready for Sentul hot laps.',
+      );
       await tester.pumpAndSettle();
 
       // Tap Bagikan
@@ -268,164 +311,187 @@ void main() {
       expect(callbackFired, true);
 
       // FeedController now has the post at the top
-      expect(controller.allPosts.first.caption, 'Apex seals renewed! Ready for Sentul hot laps.');
+      expect(
+        controller.allPosts.first.caption,
+        'Apex seals renewed! Ready for Sentul hot laps.',
+      );
       expect(controller.allPosts.first.linkedVehicleId, 'veh_mazda_rx7');
       expect(controller.allPosts.first.linkedVehicleName, '1994 Mazda RX-7');
     });
   });
 
   group('Cross-Module Integration Widget Tests', () {
-    testWidgets('Vehicle-linked post appears in FeaturedVehicleShowcaseScreen', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'Vehicle-linked post appears in FeaturedVehicleShowcaseScreen',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      final controller = FeedController();
-      final porsche = VehiclesData.getAdityaGarageVehicles()
-          .firstWhere((v) => v.id == 'veh_porsche_gt3');
+        final controller = FeedController();
+        final porsche = VehiclesData.getAdityaGarageVehicles().firstWhere(
+          (v) => v.id == 'veh_porsche_gt3',
+        );
 
-      // Add a custom GT3 post
-      final gt3Post = _buildTestPost(
-        id: 'post_gt3_integration_test',
-        caption: 'Akrapovič evolution full titanium exhaust installed!',
-        linkedVehicleId: 'veh_porsche_gt3',
-        linkedVehicleChip: '🏎️ Porsche 911 GT3 (992)',
-        likeCount: 142,
-      );
-      controller.addPost(gt3Post);
+        // Add a custom GT3 post
+        final gt3Post = _buildTestPost(
+          id: 'post_gt3_integration_test',
+          caption: 'Akrapovič evolution full titanium exhaust installed!',
+          linkedVehicleId: 'veh_porsche_gt3',
+          linkedVehicleChip: '🏎️ Porsche 911 GT3 (992)',
+          likeCount: 142,
+        );
+        controller.addPost(gt3Post);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: FeaturedVehicleShowcaseScreen(
-            vehicle: porsche,
-            feedController: controller,
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: FeaturedVehicleShowcaseScreen(
+              vehicle: porsche,
+              feedController: controller,
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Scroll down until the POSTINGAN MODIFIKASI section is visible
-      await tester.scrollUntilVisible(
-        find.text('POSTINGAN MODIFIKASI'),
-        400,
-        scrollable: find.byType(Scrollable).first,
-      );
-      await tester.pumpAndSettle();
+        // Scroll down until the POSTINGAN MODIFIKASI section is visible
+        await tester.scrollUntilVisible(
+          find.text('POSTINGAN MODIFIKASI'),
+          400,
+          scrollable: find.byType(Scrollable).first,
+        );
+        await tester.pumpAndSettle();
 
-      // Verify section header and post caption are rendered
-      expect(find.text('POSTINGAN MODIFIKASI'), findsOneWidget);
-      expect(find.text('Akrapovič evolution full titanium exhaust installed!'), findsOneWidget);
-    });
+        // Verify section header and post caption are rendered
+        expect(find.text('POSTINGAN MODIFIKASI'), findsOneWidget);
+        expect(
+          find.text('Akrapovič evolution full titanium exhaust installed!'),
+          findsOneWidget,
+        );
+      },
+    );
 
-    testWidgets('Published post updates MyProfileScreen post count and posts grid', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'Published post updates MyProfileScreen post count and posts grid',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      final controller = FeedController();
-      final initialCount = controller.authorPostCount;
+        final controller = FeedController();
+        final initialCount = controller.authorPostCount;
 
-      final testPost = _buildTestPost(
-        id: 'post_profile_test',
-        caption: 'Sentul Circuit Lap Time: 1:41.22 on Cup 2R tires!',
-        linkedVehicleId: 'veh_porsche_gt3',
-        linkedVehicleChip: '🏎️ Porsche 911 GT3 (992)',
-        likeCount: 520,
-        viewCount: 1540,
-      );
-      controller.addPost(testPost);
+        final testPost = _buildTestPost(
+          id: 'post_profile_test',
+          caption: 'Sentul Circuit Lap Time: 1:41.22 on Cup 2R tires!',
+          linkedVehicleId: 'veh_porsche_gt3',
+          linkedVehicleChip: '🏎️ Porsche 911 GT3 (992)',
+          likeCount: 520,
+          viewCount: 1540,
+        );
+        controller.addPost(testPost);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: MyProfileScreen(
-            feedController: controller,
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.darkTheme,
+            home: MyProfileScreen(feedController: controller),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Post count in profile header updated
-      expect(find.text('${initialCount + 1}'), findsOneWidget);
+        // Post count in profile header updated
+        expect(find.text('${initialCount + 1}'), findsOneWidget);
 
-      // Verify the first item in the grid represents our post with 1.5k views
-      expect(find.text('1.5k'), findsOneWidget);
+        // Verify the first item in the grid represents our post with 1.5k views
+        expect(find.text('1.5k'), findsOneWidget);
 
-      // Tap on the post item in the grid to open post detail modal
-      await tester.tap(find.text('1.5k'));
-      await tester.pumpAndSettle();
+        // Tap on the post item in the grid to open post detail modal
+        await tester.tap(find.text('1.5k'));
+        await tester.pumpAndSettle();
 
-      // Verify detail modal opened showing full caption and stats
-      expect(find.text('Sentul Circuit Lap Time: 1:41.22 on Cup 2R tires!'), findsOneWidget);
-      expect(find.text('520 Suka'), findsOneWidget);
-    });
+        // Verify detail modal opened showing full caption and stats
+        expect(
+          find.text('Sentul Circuit Lap Time: 1:41.22 on Cup 2R tires!'),
+          findsOneWidget,
+        );
+        expect(find.text('520 Suka'), findsOneWidget);
+      },
+    );
 
-    testWidgets('MainShell Create flow navigates to CreatePostScreen and preserves state across tabs', (tester) async {
-      tester.view.physicalSize = const Size(1080, 2400);
-      tester.view.devicePixelRatio = 2.0;
-      addTearDown(() => tester.view.resetPhysicalSize());
+    testWidgets(
+      'MainShell Create flow navigates to CreatePostScreen and preserves state across tabs',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 2400);
+        tester.view.devicePixelRatio = 2.0;
+        addTearDown(() => tester.view.resetPhysicalSize());
 
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: const MainShell(),
-        ),
-      );
-      await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpWidget(
+          MaterialApp(theme: AppTheme.darkTheme, home: const MainShell()),
+        );
+        await tester.pump(const Duration(milliseconds: 200));
 
-      // Tap center Create button (Plus icon)
-      await tester.tap(find.byIcon(Icons.add_rounded));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 500));
+        // Tap center Create button (Plus icon)
+        await tester.tap(find.byIcon(Icons.add_rounded));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 500));
 
-      // Modal bottom sheet opens
-      expect(find.text('Buat di AutoVerse'), findsOneWidget);
-      expect(find.text('Buat Postingan'), findsOneWidget);
+        // Modal bottom sheet opens
+        expect(find.text('Buat di AutoVerse'), findsOneWidget);
+        expect(find.text('Buat Postingan'), findsOneWidget);
 
-      // Tap "Buat Postingan"
-      await tester.tap(find.text('Buat Postingan'));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 500));
+        // Tap "Buat Postingan"
+        await tester.tap(find.text('Buat Postingan'));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 500));
 
-      // CreatePostScreen opens
-      expect(find.text('Buat Postingan'), findsOneWidget);
-      expect(find.text('HUBUNGKAN KE KENDARAAN'), findsOneWidget);
+        // CreatePostScreen opens
+        expect(find.text('Buat Postingan'), findsOneWidget);
+        expect(find.text('HUBUNGKAN KE KENDARAAN'), findsOneWidget);
 
-      // Enter caption and link Porsche
-      await tester.enterText(find.byType(TextField), 'Full carbon bucket seats installed today.');
-      await tester.tap(find.textContaining('Porsche 911 GT3'));
-      await tester.pump(const Duration(milliseconds: 200));
+        // Enter caption and link Porsche
+        await tester.enterText(
+          find.byType(TextField),
+          'Full carbon bucket seats installed today.',
+        );
+        await tester.tap(find.textContaining('Porsche 911 GT3'));
+        await tester.pump(const Duration(milliseconds: 200));
 
-      // Share post
-      await tester.tap(find.text('Bagikan'));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 500));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 500));
+        // Share post
+        await tester.tap(find.text('Bagikan'));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 500));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 500));
 
-      // Returned to Home tab with new post
-      expect(
-        find.textContaining('Full carbon bucket seats installed today.', findRichText: true),
-        findsOneWidget,
-      );
+        // Returned to Home tab with new post
+        expect(
+          find.textContaining(
+            'Full carbon bucket seats installed today.',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
 
-      // Switch to Profile tab (Index 4)
-      await tester.tap(find.text('Profil'));
-      await tester.pump(const Duration(milliseconds: 300));
+        // Switch to Profile tab (Index 4)
+        await tester.tap(find.text('Profil'));
+        await tester.pump(const Duration(milliseconds: 300));
 
-      // Profile shows updated post count and grid
-      expect(find.byType(MyProfileScreen), findsOneWidget);
+        // Profile shows updated post count and grid
+        expect(find.byType(MyProfileScreen), findsOneWidget);
 
-      // Switch back to Home tab (Index 0)
-      await tester.tap(find.text('Beranda'));
-      await tester.pump(const Duration(milliseconds: 300));
+        // Switch back to Home tab (Index 0)
+        await tester.tap(find.text('Beranda'));
+        await tester.pump(const Duration(milliseconds: 300));
 
-      // State is preserved in Home tab!
-      expect(
-        find.textContaining('Full carbon bucket seats installed today.', findRichText: true),
-        findsOneWidget,
-      );
-    });
+        // State is preserved in Home tab!
+        expect(
+          find.textContaining(
+            'Full carbon bucket seats installed today.',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }

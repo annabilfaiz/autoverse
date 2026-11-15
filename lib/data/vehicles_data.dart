@@ -44,7 +44,8 @@ class VehiclesData {
         year: 2018,
         generation: 'FK8',
         nickname: 'Daily Track Spec',
-        imageAsset: 'assets/images/vehicles/vehicle_honda_civic_type_r_fk8_hero.jpg',
+        imageAsset:
+            'assets/images/vehicles/vehicle_honda_civic_type_r_fk8_hero.jpg',
         status: 'Active Daily',
         specs: {
           'Engine': '2.0L Turbocharged K20C1',

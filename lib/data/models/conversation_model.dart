@@ -24,8 +24,7 @@ class ConversationModel {
     required this.updatedAt,
   });
 
-  MessageModel? get lastMessage =>
-      messages.isNotEmpty ? messages.last : null;
+  MessageModel? get lastMessage => messages.isNotEmpty ? messages.last : null;
 
   String get formattedLastMessageTime {
     if (messages.isEmpty) return '';

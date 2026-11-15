@@ -18,7 +18,9 @@ void main() {
 
     test('Initial state contains demo automotive conversations', () {
       expect(controller.conversations.isNotEmpty, true);
-      final names = controller.conversations.map((c) => c.participantName).toList();
+      final names = controller.conversations
+          .map((c) => c.participantName)
+          .toList();
       expect(names.contains('Kevin Mahendra'), true);
       expect(names.contains('Daniel Wijaya'), true);
       expect(names.contains('Adrian Kusuma'), true);
@@ -29,27 +31,30 @@ void main() {
       expect(controller.totalUnreadCount > 0, true);
     });
 
-    test('getOrCreateSellerConversation reuses existing seller conversation', () {
-      final initialCount = controller.conversations.length;
-      final product = ProductModel(
-        id: 'prod_99',
-        name: 'Porsche Sport Exhaust',
-        brand: 'Akrapovič',
-        category: 'Exhaust',
-        priceIdr: 45000000,
-        sellerName: 'Kevin Mahendra',
-        sellerUsername: '@ak_parts_jkt',
-        description: 'Titanium exhaust',
-        specifications: {},
-        compatibleVehicles: ['Porsche 911 GT3'],
-        imageAsset: 'assets/images/feed_porsche_dusk.png',
-      );
+    test(
+      'getOrCreateSellerConversation reuses existing seller conversation',
+      () {
+        final initialCount = controller.conversations.length;
+        final product = ProductModel(
+          id: 'prod_99',
+          name: 'Porsche Sport Exhaust',
+          brand: 'Akrapovič',
+          category: 'Exhaust',
+          priceIdr: 45000000,
+          sellerName: 'Kevin Mahendra',
+          sellerUsername: '@ak_parts_jkt',
+          description: 'Titanium exhaust',
+          specifications: {},
+          compatibleVehicles: ['Porsche 911 GT3'],
+          imageAsset: 'assets/images/feed_porsche_dusk.png',
+        );
 
-      final conv = controller.getOrCreateSellerConversation(product: product);
-      expect(controller.conversations.length, initialCount); // No duplicate!
-      expect(conv.participantUsername, '@ak_parts_jkt');
-      expect(conv.productContext?.id, 'prod_99');
-    });
+        final conv = controller.getOrCreateSellerConversation(product: product);
+        expect(controller.conversations.length, initialCount); // No duplicate!
+        expect(conv.participantUsername, '@ak_parts_jkt');
+        expect(conv.productContext?.id, 'prod_99');
+      },
+    );
 
     test('getOrCreateSellerConversation creates a new conversation for unknown seller', () {
       final initialCount = controller.conversations.length;
@@ -67,7 +72,9 @@ void main() {
         imageAsset: 'assets/images/feed_rx7_track.png',
       );
 
-      final conv = controller.getOrCreateSellerConversation(product: newProduct);
+      final conv = controller.getOrCreateSellerConversation(
+        product: newProduct,
+      );
       expect(controller.conversations.length, initialCount + 1);
       expect(conv.participantName, 'Billet Works Surabaya');
       expect(conv.participantUsername, '@billetworks_sby');
@@ -119,8 +126,9 @@ void main() {
     });
 
     test('markAsRead clears unread count for conversation', () {
-      final unreadConv =
-          controller.conversations.firstWhere((c) => c.unreadCount > 0);
+      final unreadConv = controller.conversations.firstWhere(
+        (c) => c.unreadCount > 0,
+      );
       expect(unreadConv.unreadCount > 0, true);
 
       controller.markAsRead(unreadConv.id);
@@ -129,8 +137,9 @@ void main() {
   });
 
   group('Messages Widget Tests', () {
-    testWidgets('ConversationsListScreen renders header, search, and items',
-        (tester) async {
+    testWidgets('ConversationsListScreen renders header, search, and items', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() => tester.view.resetPhysicalSize());
@@ -140,21 +149,23 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: AppTheme.darkTheme,
-          home: Scaffold(
-            body: ConversationsListScreen(controller: controller),
-          ),
+          home: Scaffold(body: ConversationsListScreen(controller: controller)),
         ),
       );
       await tester.pumpAndSettle();
 
       expect(find.text('Pesan'), findsOneWidget);
-      expect(find.text('Obrolan langsung sesama antusias & penjual komponen'), findsOneWidget);
+      expect(
+        find.text('Obrolan langsung sesama antusias & penjual komponen'),
+        findsOneWidget,
+      );
       expect(find.text('Kevin Mahendra'), findsOneWidget);
       expect(find.text('Daniel Wijaya'), findsOneWidget);
     });
 
-    testWidgets('ConversationsListScreen displays product context chip',
-        (tester) async {
+    testWidgets('ConversationsListScreen displays product context chip', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() => tester.view.resetPhysicalSize());
@@ -164,9 +175,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: AppTheme.darkTheme,
-          home: Scaffold(
-            body: ConversationsListScreen(controller: controller),
-          ),
+          home: Scaffold(body: ConversationsListScreen(controller: controller)),
         ),
       );
       await tester.pumpAndSettle();
@@ -175,22 +184,22 @@ void main() {
       expect(find.byIcon(Icons.storefront_rounded), findsWidgets);
     });
 
-    testWidgets('ChatRoomScreen renders product card, messages, and composer',
-        (tester) async {
+    testWidgets('ChatRoomScreen renders product card, messages, and composer', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1080, 2400);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() => tester.view.resetPhysicalSize());
 
       final controller = MessagesController();
-      final conv = controller.conversations.firstWhere((c) => c.productContext != null);
+      final conv = controller.conversations.firstWhere(
+        (c) => c.productContext != null,
+      );
 
       await tester.pumpWidget(
         MaterialApp(
           theme: AppTheme.darkTheme,
-          home: ChatRoomScreen(
-            conversationId: conv.id,
-            controller: controller,
-          ),
+          home: ChatRoomScreen(conversationId: conv.id, controller: controller),
         ),
       );
       await tester.pumpAndSettle();
@@ -221,10 +230,7 @@ void main() {
       addTearDown(() => tester.view.resetPhysicalSize());
 
       await tester.pumpWidget(
-        MaterialApp(
-          theme: AppTheme.darkTheme,
-          home: const MainShell(),
-        ),
+        MaterialApp(theme: AppTheme.darkTheme, home: const MainShell()),
       );
       await tester.pump(const Duration(milliseconds: 200));
 
